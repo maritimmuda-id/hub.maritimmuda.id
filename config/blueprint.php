@@ -98,7 +98,7 @@ return [
     | Work for projects running PHP v7.0 or higher.
     |
     */
-    'use_return_types' => true,
+    'use_return_types' => false,
 
     /*
     |--------------------------------------------------------------------------
