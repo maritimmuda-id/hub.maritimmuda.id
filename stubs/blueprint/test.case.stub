@@ -1,6 +1,4 @@
-    /**
-     * @test
-     */
+    /** @test */
     public function {{ method }}()
     {
         {{ body }}
