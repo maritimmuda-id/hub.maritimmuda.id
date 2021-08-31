@@ -30,6 +30,8 @@ return [
         'pdf' => 'PDF',
         'print' => 'Print',
         'colvis' => 'Columns',
+        'select-all' => 'Select All',
+        'deselect-all' => 'Deselect All',
         'delete' => 'Delete selected',
         'zero_selected' => 'No rows selected',
     ],

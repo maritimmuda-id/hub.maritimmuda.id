@@ -13,6 +13,8 @@ class GeneralProfileController
         /** @var \App\Models\User $user */
         $user = $request->user();
 
+        toast(trans('profile.update-profile-success'), 'success');
+
         return view('profile.general', compact('user'));
     }
 

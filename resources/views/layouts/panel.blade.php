@@ -84,7 +84,13 @@
                         </div>
                     @endif
 
-                    @yield('content')
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @yield('content')
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
             <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -92,6 +98,24 @@
             </form>
         </div>
     </div>
+    <script>
+        window.app_locale = '{{ app()->getLocale() }}';
+        window.trans = {
+            areYouSure: '{{ trans("global.are-you-sure") }}',
+            dt: {
+                zeroSelected: '{{ trans("global.datatables.zero_selected") }}',
+                copyButton: '{{ trans("global.datatables.copy") }}',
+                csvButton: '{{ trans("global.datatables.csv") }}',
+                excelButton: '{{ trans("global.datatables.excel") }}',
+                pdfButton: '{{ trans("global.datatables.pdf") }}',
+                printButton: '{{ trans("global.datatables.print") }}',
+                colvisButton: '{{ trans("global.datatables.colvis") }}',
+                selectAllButton: '{{ trans("global.datatables.select-all") }}',
+                selectNoneButton: '{{ trans("global.datatables.deselect-all") }}',
+                deleteButton: '{{ trans("global.datatables.delete") }}',
+            }
+        };
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -113,120 +137,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+    <script src="https://unpkg.com/sweetalert2@11.x/dist/sweetalert2.all.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script>
-        $(function() {
-            let copyButtonTrans = '{{ trans('global.datatables.copy') }}';
-            let csvButtonTrans = '{{ trans('global.datatables.csv') }}';
-            let excelButtonTrans = '{{ trans('global.datatables.excel') }}';
-            let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}';
-            let printButtonTrans = '{{ trans('global.datatables.print') }}';
-            let colvisButtonTrans = '{{ trans('global.datatables.colvis') }}';
-            let selectAllButtonTrans = '{{ trans('global.select_all') }}';
-            let selectNoneButtonTrans = '{{ trans('global.deselect_all') }}';
-
-            const dataTableLanguages = {
-                'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json',
-                'id': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Indonesian.json'
-            };
-
-            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' });
-            $.extend(true, $.fn.dataTable.defaults, {
-                language: {
-                    url: dataTableLanguages['{{ app()->getLocale() }}']
-                },
-                columnDefs: [{
-                    orderable: false,
-                    className: 'select-checkbox',
-                    targets: 0
-                }, {
-                    orderable: false,
-                    searchable: false,
-                    targets: -1
-                }],
-                select: {
-                    style: 'multi+shift',
-                    selector: 'td:first-child'
-                },
-                order: [],
-                scrollX: true,
-                pageLength: 100,
-                dom: 'lBfrtip<"actions">',
-                buttons: [
-                    {
-                        extend: 'selectAll',
-                        className: 'btn-primary',
-                        text: selectAllButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        },
-                        action: function(e, dt) {
-                            e.preventDefault()
-                            dt.rows().deselect();
-                            dt.rows({ search: 'applied' }).select();
-                        }
-                    },
-                    {
-                        extend: 'selectNone',
-                        className: 'btn-primary',
-                        text: selectNoneButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'copy',
-                        className: 'btn-default',
-                        text: copyButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        className: 'btn-default',
-                        text: csvButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn-default',
-                        text: excelButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        className: 'btn-default',
-                        text: pdfButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        className: 'btn-default',
-                        text: printButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'colvis',
-                        className: 'btn-default',
-                        text: colvisButtonTrans,
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    }
-                ]
-            });
-            $.fn.dataTable.ext.classes.sPageButton = '';
-        });
-    </script>
 
     @stack('scripts')
 </body>
