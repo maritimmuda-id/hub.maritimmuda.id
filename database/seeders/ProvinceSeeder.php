@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Province;
 use Illuminate\Database\Seeder;
 
 class ProvinceSeeder extends Seeder
@@ -9,10 +10,10 @@ class ProvinceSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->data() as $row) {
-            $province = [
+            Province::query()->insert([
                 'name' => $row[0],
                 'code' => $row[1],
-            ];
+            ]);
         }
     }
 

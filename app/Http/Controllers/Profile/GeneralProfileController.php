@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Http\Requests\GeneralProfileUpdateRequest;
+use App\Models\Expertise;
+use App\Models\Province;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,21 +16,20 @@ class GeneralProfileController
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-        toast(trans('profile.update-profile-success'), 'success');
+        $provinces = Province::query()->pluck('name', 'id');
+        $expertises = Expertise::query()->pluck('name', 'id');
 
-        return view('profile.general', compact('user'));
+        return view('profile.general', compact('user', 'provinces', 'expertises'));
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(GeneralProfileUpdateRequest $request): RedirectResponse
     {
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-        $validatedData = $request->validate([
-            'name' => ['required', 'min:2', 'max:200'],
-        ]);
+        $user->fill($request->validated())->save();
 
-        $user->update($validatedData);
+        toast(trans('profile.update-profile-success'), 'success');
 
         return redirect()->route('profile.edit');
     }

@@ -2,8 +2,8 @@
 @section('content')
     <div class="row mb-3">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('{{ view }}') }}">
-                Add {{ view }}
+            <a class="btn btn-success" href="#">
+                Action {{ view }}
             </a>
         </div>
     </div>

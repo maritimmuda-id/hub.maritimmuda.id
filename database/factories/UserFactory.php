@@ -2,46 +2,47 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Enums\Gender;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Expertise;
+use App\Models\Province;
+use App\Models\User;
 
 class UserFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = User::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    public function definition(): array
     {
         return [
+            'uid' => $this->faker->regexify('[A-Za-z0-9]{50}'),
             'name' => $this->faker->name(),
+            'gender' => Gender::getRandomValue(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'remember_token' => Str::random(60),
+            'linkedin_profile' => 'https://www.linkedin.com/in/user',
+            'instagram_profile' => 'https://instagram.com/user',
+            'province_id' => Province::factory(),
+            'first_expertise_id' => Expertise::factory(),
+            'second_expertise_id' => Expertise::factory(),
+            'bio' => $this->faker->text,
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
+    public function useExistingData(): self
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
+        return $this->state([
+            'province_id' => Province::query()->inRandomOrder()->first()->id,
+        ]);
+    }
+
+    public function admin(): self
+    {
+        return $this->state([
+            'is_admin' => true,
+        ]);
     }
 }

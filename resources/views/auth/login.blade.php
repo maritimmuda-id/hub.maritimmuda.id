@@ -13,7 +13,7 @@
                             </div>
                         @endif
 
-                        <x-form :action="route('login.store')">
+                        <x-form :action="route('login')">
                             <x-form-input
                                 name="email"
                                 :label="trans('login.identifier-label')"

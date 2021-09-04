@@ -17,3 +17,5 @@ yarn-error.log
 # Blueprint related files
 /draft.yaml
 /.blueprint
+
+_ide_helper_models.php
