@@ -114,12 +114,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     public function firstExpertise(): BelongsTo | Eloquent\Builder | Query\Builder
     {
-        return $this->belongsTo(Expertise::class);
+        return $this->belongsTo(Expertise::class)
+            ->withDefault(['name' => '-']);
     }
 
     public function secondExpertise(): BelongsTo | Eloquent\Builder | Query\Builder
     {
-        return $this->belongsTo(Expertise::class);
+        return $this->belongsTo(Expertise::class)
+            ->withDefault(['name' => '-']);
     }
 
     public function getPhotoLinkAttribute(): string

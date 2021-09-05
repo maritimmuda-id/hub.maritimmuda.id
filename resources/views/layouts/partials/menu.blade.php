@@ -16,6 +16,16 @@
                 />
             </li>
         @endauth
+        @can('viewAny', \App\Models\User::class)
+            <li class="c-sidebar-nav-item">
+                <x-nav-link
+                    :href="route('user.index')"
+                    :active="request()->routeIs('user.*')"
+                    :label="trans('navigation.user')"
+                    icon="fas fa-users"
+                />
+            </li>
+        @endcan
         @can('viewAny', \App\Models\Event::class)
             <li class="c-sidebar-nav-item">
                 <x-nav-link

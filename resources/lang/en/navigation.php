@@ -7,6 +7,8 @@ return [
 
     'logout' => 'Logout',
 
+    'user' => 'Users',
+
     'event' => 'Events',
 
     'scholarship' => 'Scholarships',

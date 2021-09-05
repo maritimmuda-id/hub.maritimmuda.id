@@ -11,6 +11,7 @@ use App\Http\Controllers\Profile\ViewPublicationController;
 use App\Http\Controllers\Profile\ViewResearchController;
 use App\Http\Controllers\Profile\ViewWorkExperienceController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'login');
@@ -48,6 +49,8 @@ Route::middleware('auth')->group(function () {
             ->name('profile.research');
     });
 
+    Route::resource('user', UserController::class)
+        ->only(['index', 'show', 'destroy']);
 
     Route::resource('event', EventController::class);
 
