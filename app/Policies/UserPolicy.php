@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
@@ -29,8 +30,12 @@ class UserPolicy
         return false;
     }
 
-    public function delete(?User $authenticatedUser, User $user): bool
+    public function delete(?User $authenticatedUser, User $user): Response | bool
     {
+        if ($user->id === $authenticatedUser->id) {
+            return Response::deny(trans('users.cannot-delete-current-user'));
+        }
+
         return $authenticatedUser->is_admin;
     }
 }

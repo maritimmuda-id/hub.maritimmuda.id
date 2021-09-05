@@ -14,4 +14,6 @@ return [
     'first-expertise-name-label' => 'First Expertise',
 
     'second-expertise-name-label' => 'Second Expertise',
+
+    'cannot-delete-current-user' => 'Can\'t delete current user',
 ];

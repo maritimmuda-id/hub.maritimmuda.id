@@ -43,6 +43,20 @@ class UserControllerTest extends TestCase
 
         $response->assertRedirect(route('user.index'));
 
-        $this->assertSoftDeleted($user);
+        $this->assertDeleted($user);
+    }
+
+    /** @test */
+    public function it_cannot_process_to_delete_current_user(): void
+    {
+        /** @var \App\Models\User $user */
+        $user = $this->admin();
+
+        $response = $this->actingAs($user)
+            ->delete(route('user.destroy', $user));
+
+        $response->assertForbidden();
+
+        $this->assertDatabaseCount($user->getTable(), 1);
     }
 }
