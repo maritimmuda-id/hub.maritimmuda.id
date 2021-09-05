@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\PublicationType;
+use App\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ use Spatie\EloquentSortable\SortableTrait;
 class Publication extends Model implements Sortable
 {
     use HasFactory;
+    use HasUuid;
     use SortableTrait;
 
     protected $fillable = [

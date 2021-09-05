@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Gender;
+use App\Models\Concerns\HasUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent;
 use Illuminate\Database\Query;
@@ -22,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
     use HasApiTokens;
     use HasFactory;
+    use HasUuid;
     use Notifiable;
     use Impersonate;
     use InteractsWithMedia;

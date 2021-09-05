@@ -13,6 +13,7 @@ return new class extends Migration
 
         Schema::create('work_experiences', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->nullable()->unique();
             $table->foreignIdFor(User::class)->constrained();
             $table->string('position_title', 200)->index();
             $table->string('company_name', 200)->index();

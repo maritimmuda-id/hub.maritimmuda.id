@@ -13,6 +13,7 @@ return new class extends Migration
 
         Schema::create('dedications', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->nullable()->unique();
             $table->foreignIdFor(User::class)->constrained();
             $table->string('name', 200);
             $table->string('role', 100);

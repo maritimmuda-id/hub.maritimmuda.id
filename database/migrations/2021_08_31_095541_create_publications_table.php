@@ -13,6 +13,7 @@ return new class extends Migration
 
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->nullable()->unique();
             $table->foreignIdFor(User::class)->constrained();
             $table->string('title', 200)->index();
             $table->string('author_name', 200)->index();

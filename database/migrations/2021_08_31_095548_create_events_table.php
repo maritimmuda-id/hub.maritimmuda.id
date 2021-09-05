@@ -12,6 +12,7 @@ return new class extends Migration
 
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->nullable()->unique();
             $table->string('name', 200)->index();
             $table->string('organizer_name', 200)->index();
             $table->string('external_url', 200)->nullable();

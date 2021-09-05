@@ -12,6 +12,7 @@ return new class extends Migration
 
         Schema::create('job_posts', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->nullable()->unique();
             $table->string('position_title', 200)->index();
             $table->string('company_name', 200)->index();
             $table->tinyInteger('type');

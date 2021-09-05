@@ -13,6 +13,7 @@ return new class extends Migration
 
         Schema::create('education_histories', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->nullable()->unique();
             $table->foreignIdFor(User::class)->constrained();
             $table->string('institution_name', 200)->index();
             $table->string('major', 200);

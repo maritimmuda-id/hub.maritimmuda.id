@@ -13,6 +13,7 @@ return new class extends Migration
 
         Schema::create('organization_histories', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->nullable()->unique();
             $table->foreignIdFor(User::class)->constrained();
             $table->string('organization_name', 200)->index();
             $table->string('role', 200);

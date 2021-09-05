@@ -12,6 +12,7 @@ return new class extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->nullable()->unique();
             $table->string('uid', 50)->nullable()->index();
             $table->string('name', 200)->index();
             $table->tinyInteger('gender')->default(0);

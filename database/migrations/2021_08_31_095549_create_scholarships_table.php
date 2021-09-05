@@ -13,6 +13,7 @@ return new class extends Migration
 
         Schema::create('scholarships', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->nullable()->unique();
             $table->string('name', 200)->index();
             $table->string('provider_name', 200)->index();
             $table->string('registration_link', 200);
