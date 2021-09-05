@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -22,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+    use Impersonate;
     use InteractsWithMedia;
 
     protected $fillable = [
@@ -132,6 +134,16 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function getPhotoThumbLinkAttribute(): string
     {
         return $this->getFirstMediaUrl('photo', 'thumb');
+    }
+
+    public function canImpersonate(): bool
+    {
+        return $this->is_admin;
+    }
+
+    public function canBeImpersonated(): bool
+    {
+        return ! $this->is_admin;
     }
 
     public static function attributes(): array

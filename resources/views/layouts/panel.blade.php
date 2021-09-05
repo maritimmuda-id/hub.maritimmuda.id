@@ -72,6 +72,12 @@
                             <i class="mfe-2 fas fa-user"></i>
                             @lang('navigation.profile')
                         </a>
+                        @impersonating
+                            <a href="{{ route('impersonate.leave') }}" class="dropdown-item">
+                                <i class="mfe-2 fas fa-sign-out-alt"></i>
+                                @lang('navigation.leave-impersonation')
+                            </a>
+                        @endImpersonating
                         <a href="javacript:void(0)" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logoutform').submit();">
                             <i class="mfe-2 fas fa-sign-out-alt"></i>
                             @lang('navigation.logout')

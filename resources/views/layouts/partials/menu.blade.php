@@ -56,6 +56,14 @@
                 />
             </li>
         @endcan
+        @impersonating
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route('impersonate.leave') }}" role="button" class="c-sidebar-nav-link">
+                    <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt"></i>
+                    @lang('navigation.leave-impersonation')
+                </a>
+            </li>
+        @endImpersonating
         @auth
             <li class="c-sidebar-nav-item">
                 <a href="javacript:void(0)" role="button" class="c-sidebar-nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">

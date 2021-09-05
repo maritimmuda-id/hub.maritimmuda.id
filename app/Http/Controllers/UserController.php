@@ -53,6 +53,8 @@ class UserController
 
             $table->addColumn('action', function (User $row) {
                 return view('includes.datatable-action', [
+                    'canImpersonate' => Gate::check('impersonate', $row),
+                    'impersonateLink' => route('impersonate', $row),
                     'canDelete' => Gate::check('delete', $row),
                     'deleteLink' => route('user.destroy', $row),
                 ]);

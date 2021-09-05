@@ -14,4 +14,6 @@ return [
     'scholarship' => 'Scholarships',
 
     'job-post' => 'Job Posts',
+
+    'leave-impersonation' => 'Leave Impersonation',
 ];
