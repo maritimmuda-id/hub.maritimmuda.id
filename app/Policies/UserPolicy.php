@@ -12,12 +12,12 @@ class UserPolicy
 
     public function viewAny(?User $authenticatedUser): bool
     {
-        return true;
+        return $authenticatedUser->is_admin;
     }
 
     public function view(?User $authenticatedUser, User $user): bool
     {
-        return true;
+        return $authenticatedUser->is_admin;
     }
 
     public function create(?User $authenticatedUser): bool

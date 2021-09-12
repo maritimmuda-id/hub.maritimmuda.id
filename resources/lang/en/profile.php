@@ -31,6 +31,8 @@ return [
         'major-label' => 'Major',
 
         'graduation-date-label' => 'Graduation Date',
+
+        'or-expected-graduation-date' => 'or expected graduation date',
     ],
 
     'organization-history' => [
@@ -128,6 +130,8 @@ return [
     'instagram-profile-label' => 'Instagram Profile',
 
     'gender-label' => 'Gender',
+
+    'photo-label' => 'Photo',
 
     'province-label' => 'Province',
 

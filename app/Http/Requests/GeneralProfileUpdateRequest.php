@@ -26,6 +26,7 @@ class GeneralProfileUpdateRequest extends FormRequest
             'linkedin_profile' => ['nullable', 'url', 'max:200', new LinkedinUrl()],
             'instagram_profile' => ['nullable', 'url', 'max:200'],
             'gender' => ['required', new EnumValue(Gender::class, false)],
+            'photo' => ['nullable', 'image', 'max:1024'],
             'province_id' => ['required', Rule::exists((new Province())->getTable(), 'id')],
             'first_expertise_id' => ['required', Rule::exists((new Expertise())->getTable(), 'id')],
             'second_expertise_id' => ['required', Rule::exists((new Expertise())->getTable(), 'id'), 'different:first_expertise_id'],

@@ -24,6 +24,14 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function attributes()
+    {
+        return [
+            'email' => trans('login.identifier-label'),
+            'password' => trans('login.password-label'),
+        ];
+    }
+
     /**
      * @throws \Illuminate\Validation\ValidationException
      */

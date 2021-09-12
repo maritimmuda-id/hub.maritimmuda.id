@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Gender;
 use App\Models\Concerns\HasUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent;
 use Illuminate\Database\Query;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +20,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable implements MustVerifyEmail, HasMedia
+class User extends Authenticatable implements HasMedia, HasLocalePreference, MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -41,6 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'first_expertise_id',
         'second_expertise_id',
         'bio',
+        'locale',
         'is_admin',
     ];
 
@@ -64,6 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
+        $this->addMediaConversion('photo')
+            ->performOnCollections('photo')
+            ->fit(Manipulations::FIT_CROP, 300, 400);
+
         $this->addMediaConversion('thumb')
             ->performOnCollections('photo')
             ->fit(Manipulations::FIT_CROP, 500, 500);
@@ -130,12 +136,17 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 
     public function getPhotoLinkAttribute(): string
     {
-        return $this->getFirstMediaUrl('photo');
+        return $this->getFirstMediaUrl('photo', 'photo');
     }
 
     public function getPhotoThumbLinkAttribute(): string
     {
         return $this->getFirstMediaUrl('photo', 'thumb');
+    }
+
+    public function preferredLocale(): string
+    {
+        return $this->locale ?? config('app.locale');
     }
 
     public function canImpersonate(): bool
@@ -153,6 +164,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         return [
             'name' => trans('profile.name-label'),
             'gender' => trans('profile.gender-label'),
+            'photo' => trans('profile.photo-label'),
             'password' => trans('profile.password-label'),
             'linkedin_profile' => trans('profile.linkedin-profile-label'),
             'instagram_profile' => trans('profile.instagram-profile-label'),

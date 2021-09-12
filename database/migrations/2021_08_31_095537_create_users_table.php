@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name', 200)->index();
             $table->tinyInteger('gender')->default(0);
             $table->string('email', 200)->index();
+            $table->string('locale', 10)->nullable();
             $table->dateTime('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('remember_token', 100)->nullable();

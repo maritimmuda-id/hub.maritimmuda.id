@@ -27,7 +27,14 @@ class GeneralProfileController
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-        $user->fill($request->validated())->save();
+        $user->fill(
+            collect($request->validated())->except('photo')->toArray()
+        )->save();
+
+        if ($request->hasFile('photo')) {
+            $user->addMediaFromRequest('photo')
+                ->toMediaCollection('photo');
+        }
 
         toast(trans('profile.update-profile-success'), 'success');
 

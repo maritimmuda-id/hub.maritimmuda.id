@@ -9,6 +9,22 @@
                     @bind($user)
                         <div class="col-md-8">
                             <div class="row">
+                                <div class="col-md-6 d-flex justify-content-center">
+                                    <img
+                                        src="{{ $user->photo_link }}"
+                                        class="img-thumbnail img-fluid my-4"
+                                        style="width:150px;height:200px;"
+                                        alt=""
+                                    >
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <x-form-input
+                                        type="file"
+                                        name="photo"
+                                        :label="trans('profile.photo-label')"
+                                    />
+                                </div>
+
                                 <div class="col-md-6">
                                     <x-form-input
                                         name="name"

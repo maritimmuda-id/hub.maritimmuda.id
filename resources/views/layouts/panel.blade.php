@@ -40,7 +40,7 @@
             <ul class="c-header-nav ml-auto">
                 <li class="c-header-nav-item dropdown mx-2">
                     <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="c-icon fas fa-language"></i>
+                        <i class="c-icon fas fa-globe"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pt-0">
                         <div class="dropdown-header bg-light py-2">
