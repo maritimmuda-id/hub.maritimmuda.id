@@ -7,7 +7,7 @@ return [
 
     'name-label' => 'Name',
 
-    'organizer-name-label' => 'Organizer Name',
+    'organizer-name-label' => 'Organizer',
 
     'external-url-label' => 'External URL',
 

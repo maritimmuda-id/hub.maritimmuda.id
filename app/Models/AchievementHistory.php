@@ -20,6 +20,7 @@ class AchievementHistory extends Model implements Sortable
     protected $fillable = [
         'user_id',
         'award_name',
+        'appreciator',
         'event_name',
         'event_level',
         'achieved_at',
@@ -49,5 +50,16 @@ class AchievementHistory extends Model implements Sortable
         }
 
         return $this->achieved_at->format('F Y');
+    }
+
+    public static function attributes(): array
+    {
+        return [
+            'award_name' => trans('profile.achievement-history.award-name-label'),
+            'appreciator' => trans('profile.achievement-history.appreciator-label'),
+            'event_name' => trans('profile.achievement-history.event-name-label'),
+            'event_level' => trans('profile.achievement-history.event-level-label'),
+            'achieved_at' => trans('profile.achievement-history.achieved-at-label'),
+        ];
     }
 }

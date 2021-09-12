@@ -16,6 +16,7 @@
         "livewire/livewire": "^2.5",
         "protonemedia/laravel-form-components": "^2.5",
         "realrashid/sweet-alert": "^4.0",
+        "rennokki/laravel-eloquent-query-cache": "^3.0",
         "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-medialibrary": "^9.7",
         "spatie/laravel-ray": "^1.25",

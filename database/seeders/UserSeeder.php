@@ -6,7 +6,6 @@ use App\Models\AchievementHistory;
 use App\Models\Dedication;
 use App\Models\EducationHistory;
 use App\Models\OrganizationHistory;
-use App\Models\Province;
 use App\Models\Publication;
 use App\Models\Research;
 use App\Models\User;
@@ -23,10 +22,14 @@ class UserSeeder extends Seeder
             'email' => 'mail@zhanang.id',
             'password' => Hash::make('123123123'),
             'is_admin' => true,
-            'province_id' => Province::first()->id,
+            'province_id' => 1,
+            'first_expertise_id' => 1,
+            'second_expertise_id' => 2,
         ]);
 
-        User::factory(4)->useExistingData()->create();
+        for ($i=0; $i < 2; $i++) {
+            User::factory()->useExistingData()->create();
+        }
 
         for ($i=0; $i < 10; $i++) {
             EducationHistory::factory()->useExistingData()->create();
@@ -36,6 +39,11 @@ class UserSeeder extends Seeder
             Publication::factory()->useExistingData()->create();
             AchievementHistory::factory()->useExistingData()->create();
             Research::factory()->useExistingData()->create();
+        }
+
+        // Generate fake user with general profile only
+        for ($i = 0; $i < 12; $i++) {
+            User::factory()->useExistingData()->create();
         }
     }
 }

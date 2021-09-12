@@ -29,6 +29,13 @@
                                 />
                             </div>
                             <div class="col-md-6">
+                                <x-form-select
+                                    name="level"
+                                    :label="trans('profile.education-history.level-label')"
+                                    :options="\App\Enums\EducationLevel::asSelectArray()"
+                                />
+                            </div>
+                            <div class="col-md-6">
                                 <x-form-input
                                     type="month"
                                     name="graduation_date"

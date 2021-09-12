@@ -12,7 +12,7 @@ return [
 
         'position-title-label' => 'Position Title',
 
-        'company-name-label' => 'Company Name',
+        'company-name-label' => 'Institution Name',
 
         'start-date-label' => 'Start Date',
 
@@ -30,6 +30,8 @@ return [
 
         'major-label' => 'Major',
 
+        'level-label' => 'Level',
+
         'graduation-date-label' => 'Graduation Date',
 
         'or-expected-graduation-date' => 'or expected graduation date',
@@ -44,7 +46,7 @@ return [
 
         'organization-name-label' => 'Organization Name',
 
-        'role-label' => 'Role',
+        'role-label' => 'Position',
 
         'period-start-date-label' => 'Period Start Date',
 
@@ -58,13 +60,15 @@ return [
 
         'singular-name' => 'Achievement History',
 
-        'award-name-label' => 'Award Name',
+        'award-name-label' => 'Award/Accomplishment',
+
+        'appreciator-label' => 'Appreciator',
 
         'event-name-label' => 'Event Name',
 
         'event-level-label' => 'Event Level',
 
-        'achieved-at-label' => 'Achieved At',
+        'achieved-at-label' => 'Date of Achievement',
     ],
 
     'publication' => [
@@ -76,15 +80,17 @@ return [
 
         'title-label' => 'Title',
 
-        'author-name-label' => 'Author Name',
+        'author-name-label' => 'Author(s)',
 
         'type-label' => 'Publication Type',
 
         'publisher-label' => 'Publisher',
 
-        'city-label' => 'City',
+        'first-page-label' => 'Title Page',
 
-        'publish-date-label' => 'Published At',
+        'city-label' => 'City of Publisher',
+
+        'publish-date-label' => 'Date of Publication',
     ],
 
     'dedication' => [
@@ -116,7 +122,7 @@ return [
 
         'role-label' => 'Role',
 
-        'institution-name-label' => 'Institution Name',
+        'institution-name-label' => 'Affiliation Name',
 
         'year-label' => 'Year',
     ],
@@ -130,6 +136,10 @@ return [
     'instagram-profile-label' => 'Instagram Profile',
 
     'gender-label' => 'Gender',
+
+    'place-of-birth-label' => 'Place of Birth',
+
+    'date-of-birth-label' => 'Date of Birth',
 
     'photo-label' => 'Photo',
 

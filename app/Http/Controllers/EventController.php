@@ -53,12 +53,12 @@ class EventController
             ->setTableId('events-table')
             ->columns([
                 ['data' => 'id', 'name' => 'id', 'title' => __('ID'), 'searchable' => false],
-                ['data' => 'name', 'name' => 'name', 'title' => __('events.name-label')],
-                ['data' => 'organizer_name', 'name' => 'organizer_name', 'title' => __('events.organizer-name-label')],
-                ['data' => 'type', 'name' => 'type', 'title' => __('events.type-label'), 'searchable' => false],
-                ['data' => 'start_date', 'name' => 'start_date', 'title' => __('events.start-date-label'), 'searchable' => false, 'orderable' => false],
-                ['data' => 'end_date', 'name' => 'end_date', 'title' => __('events.end-date-label'), 'searchable' => false, 'orderable' => false],
-                ['data' => 'poster', 'name' => 'poster', 'title' => __('events.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
+                ['data' => 'name', 'name' => 'name', 'title' => trans('events.name-label')],
+                ['data' => 'organizer_name', 'name' => 'organizer_name', 'title' => trans('events.organizer-name-label')],
+                ['data' => 'type', 'name' => 'type', 'title' => trans('events.type-label'), 'searchable' => false],
+                ['data' => 'start_date', 'name' => 'start_date', 'title' => trans('events.start-date-label'), 'searchable' => false, 'orderable' => false],
+                ['data' => 'end_date', 'name' => 'end_date', 'title' => trans('events.end-date-label'), 'searchable' => false, 'orderable' => false],
+                ['data' => 'poster', 'name' => 'poster', 'title' => trans('events.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
             ])
             ->addAction(['title' => __('Action')])
             ->minifiedAjax(route('event.index'))

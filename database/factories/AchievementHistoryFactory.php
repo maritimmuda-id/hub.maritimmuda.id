@@ -15,6 +15,7 @@ class AchievementHistoryFactory extends Factory
         return [
             'user_id' => User::factory(),
             'award_name' => $this->faker->realText(20),
+            'appreciator' => $this->faker->realText(20),
             'event_name' => $this->faker->realText(20),
             'event_level' => $this->faker->realText(20),
             'achieved_at' => $this->faker->date(),

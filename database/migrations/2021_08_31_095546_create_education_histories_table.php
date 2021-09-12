@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->string('institution_name', 200)->index();
             $table->string('major', 200);
+            $table->tinyInteger('level')->nullable();
             $table->date('graduation_date')->nullable();
             $table->tinyInteger('order_column')->default(1);
             $table->timestamps();

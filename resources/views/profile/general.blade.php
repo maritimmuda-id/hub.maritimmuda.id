@@ -12,7 +12,7 @@
                                 <div class="col-md-6 d-flex justify-content-center">
                                     <img
                                         src="{{ $user->photo_link }}"
-                                        class="img-thumbnail img-fluid my-4"
+                                        class="img-thumbnail img-fluid my-3"
                                         style="width:150px;height:200px;"
                                         alt=""
                                     >
@@ -25,22 +25,26 @@
                                     />
                                 </div>
 
+                                <div class="col-md-6 d-flex justify-content-center">
+                                    <img
+                                        src="{{ $user->identity_card_link }}"
+                                        class="img-thumbnail img-fluid my-3"
+                                        style="width:214px;height:135px;"
+                                        alt=""
+                                    >
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <x-form-input
+                                        type="file"
+                                        name="identity_card"
+                                        :label="trans('profile.identity-card-label')"
+                                    />
+                                </div>
+
                                 <div class="col-md-6">
                                     <x-form-input
                                         name="name"
                                         :label="trans('profile.name-label')"
-                                    />
-                                </div>
-                                <div class="col-md-6">
-                                    <x-form-input
-                                        name="linkedin_profile"
-                                        :label="trans('profile.linkedin-profile-label')"
-                                    />
-                                </div>
-                                <div class="col-md-6">
-                                    <x-form-input
-                                        name="instagram_profile"
-                                        :label="trans('profile.instagram-profile-label')"
                                     />
                                 </div>
                                 <div class="col-md-6">
@@ -62,6 +66,32 @@
                                         name="province_id"
                                         :options="$provinces"
                                         :label="trans('profile.province-label')"
+                                    />
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form-input
+                                        name="place_of_birth"
+                                        :label="trans('profile.place-of-birth-label')"
+                                    />
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form-input
+                                        type="date"
+                                        name="date_of_birth"
+                                        :label="trans('profile.date-of-birth-label')"
+                                        :value="old('date_of_birth') ?? $user->date_of_birth?->format('Y-m-d')"
+                                    />
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form-input
+                                        name="linkedin_profile"
+                                        :label="trans('profile.linkedin-profile-label')"
+                                    />
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form-input
+                                        name="instagram_profile"
+                                        :label="trans('profile.instagram-profile-label')"
                                     />
                                 </div>
                                 <div class="col-md-6">

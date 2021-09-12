@@ -16,7 +16,8 @@ return new class extends Migration
             $table->uuid('uuid')->nullable()->unique();
             $table->foreignIdFor(User::class)->constrained();
             $table->string('award_name', 200)->index();
-            $table->string('event_name', 200)->index();
+            $table->string('appreciator', 200);
+            $table->string('event_name', 200);
             $table->string('event_level', 200);
             $table->date('achieved_at');
             $table->tinyInteger('order_column')->default(1);

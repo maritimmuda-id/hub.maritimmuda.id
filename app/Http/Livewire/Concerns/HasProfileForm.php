@@ -3,9 +3,12 @@
 namespace App\Http\Livewire\Concerns;
 
 use App\Models\User;
+use Livewire\WithFileUploads;
 
 trait HasProfileForm
 {
+    use WithFileUploads;
+
     public ?string $resourceName = null;
 
     public ?User $user = null;

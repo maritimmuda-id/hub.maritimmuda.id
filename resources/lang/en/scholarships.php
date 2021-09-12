@@ -7,7 +7,7 @@ return [
 
     'name-label' => 'Name',
 
-    'provider-name-label' => 'Provider Name',
+    'provider-name-label' => 'Sponsor',
 
     'registration-link-label' => 'Registration Link',
 

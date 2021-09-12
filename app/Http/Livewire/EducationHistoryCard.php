@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\EducationLevel;
 use App\Http\Livewire\Concerns\HasProfileForm;
 use App\Models\EducationHistory;
+use BenSampo\Enum\Rules\EnumValue;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
@@ -19,6 +21,8 @@ class EducationHistoryCard extends Component
 
     public ?string $major = null;
 
+    public string|int|null $level = null;
+
     public Carbon|string|null $graduation_date = null;
 
     public function mount(): void
@@ -28,6 +32,7 @@ class EducationHistoryCard extends Component
 
     public function render(): View
     {
+        $this->level ??= EducationLevel::SeniorHighSchool;
         $this->resourceName = trans('profile.education-history.singular-name');
 
         return view('profile.education-history.card');
@@ -45,6 +50,7 @@ class EducationHistoryCard extends Component
                 'institution_name' => $this->institution_name,
                 'graduation_date' => $this->graduation_date,
                 'major' => $this->major,
+                'level' => $this->level,
             ]);
     }
 
@@ -54,6 +60,7 @@ class EducationHistoryCard extends Component
             ->firstWhere('id', $id);
         $this->institution_name = $this->model->institution_name;
         $this->major = $this->model->major;
+        $this->level = $this->model->level->value;
         $this->graduation_date = $this->model->graduation_date?->format('Y-m');
     }
 
@@ -72,7 +79,13 @@ class EducationHistoryCard extends Component
         return [
             'institution_name' => ['required', 'string', 'max:200'],
             'major' => ['required', 'string', 'max:200'],
+            'level' => ['required', new EnumValue(EducationLevel::class, false)],
             'graduation_date' => ['required', 'date'],
         ];
+    }
+
+    public function validationAttributes(): array
+    {
+        return EducationHistory::attributes();
     }
 }

@@ -56,4 +56,14 @@ class OrganizationHistory extends Model implements Sortable
 
         return $this->period_end_date->format('F Y');
     }
+
+    public static function attributes(): array
+    {
+        return [
+            'organization_name' => trans('profile.organization-history.organization-name-label'),
+            'role' => trans('profile.organization-history.role-label'),
+            'period_start_date' => trans('profile.organization-history.period-start-date-label'),
+            'period_end_date' => trans('profile.organization-history.period-end-date-label'),
+        ];
+    }
 }

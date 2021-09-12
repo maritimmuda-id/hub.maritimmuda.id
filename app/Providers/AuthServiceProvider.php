@@ -29,5 +29,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('impersonate', function (User $authenticatedUser, User $user) {
             return $authenticatedUser->is_admin && $authenticatedUser->id !== $user->id;
         });
+
+        Gate::define('view-member', function (User $authenticatedUser, User $user) {
+            return true;
+        });
     }
 }

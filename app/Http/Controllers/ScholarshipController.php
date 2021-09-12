@@ -46,10 +46,10 @@ class ScholarshipController
 
         $dataTable = $builder->addIndex()
             ->columns([
-                ['data' => 'name', 'name' => 'name', 'title' => 'Name'],
-                ['data' => 'provider_name', 'name' => 'provider_name', 'title' => 'Provider Name'],
-                ['data' => 'submission_deadline', 'name' => 'submission_deadline', 'title' => 'Submission Deadline', 'searchable' => false],
-                ['data' => 'poster', 'name' => 'poster', 'title' => 'Poster', 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
+                ['data' => 'name', 'name' => 'name', 'title' => trans('scholarships.name-label')],
+                ['data' => 'provider_name', 'name' => 'provider_name', 'title' => trans('scholarships.provider-name-label')],
+                ['data' => 'submission_deadline', 'name' => 'submission_deadline', 'title' => trans('scholarships.submission-deadline-label'), 'searchable' => false],
+                ['data' => 'poster', 'name' => 'poster', 'title' => trans('scholarships.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
             ])
             ->addAction(['title' => __('Action')])
             ->minifiedAjax(route('scholarship.index'))

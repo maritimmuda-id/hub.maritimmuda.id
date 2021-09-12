@@ -49,6 +49,7 @@ class JobPostController
 
         $dataTable = $builder->addIndex()
             ->columns([
+                ['data' => 'id', 'name' => 'id', 'title' => __('ID'), 'searchable' => false],
                 ['data' => 'position_title', 'name' => 'position_title', 'title' => trans('job-posts.position-title-label')],
                 ['data' => 'company_name', 'name' => 'company_name', 'title' => trans('job-posts.company-name-label')],
                 ['data' => 'type', 'name' => 'type', 'title' => trans('job-posts.type-label')],

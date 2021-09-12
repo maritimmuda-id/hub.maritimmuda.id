@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Livewire\Component;
+use Livewire\TemporaryUploadedFile;
 
 class PublicationCard extends Component
 {
@@ -24,6 +25,8 @@ class PublicationCard extends Component
     public string|int|null $type = null;
 
     public ?string $publisher = null;
+
+    public TemporaryUploadedFile|string|null $first_page = null;
 
     public ?string $city = null;
 
@@ -58,6 +61,11 @@ class PublicationCard extends Component
                 'city' => $this->city,
                 'publish_date' => $this->publish_date,
             ]);
+
+        if ($this->first_page) {
+            $this->model->addMedia($this->first_page->getRealPath())
+                ->toMediaCollection('first_page');
+        }
     }
 
     public function beforeEdit(?string $id): void
@@ -66,7 +74,7 @@ class PublicationCard extends Component
             ->firstWhere('id', $id);
         $this->title = $this->model->title;
         $this->author_name = $this->model->author_name;
-        $this->type = $this->model->type;
+        $this->type = $this->model->type->value;
         $this->publisher = $this->model->publisher;
         $this->city = $this->model->city;
         $this->publish_date = $this->model->publish_date?->format('Y-m');
@@ -91,6 +99,12 @@ class PublicationCard extends Component
             'publisher' => ['required', 'string', 'max:200'],
             'city' => ['required', 'string', 'max:200'],
             'publish_date' => ['required', 'date'],
+            'first_page' => ['nullable', 'image', 'max:1024'],
         ];
+    }
+
+    public function validationAttributes(): array
+    {
+        return Publication::attributes();
     }
 }

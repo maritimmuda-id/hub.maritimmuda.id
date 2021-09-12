@@ -8,7 +8,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use RealRashid\SweetAlert\Toaster;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html;
 

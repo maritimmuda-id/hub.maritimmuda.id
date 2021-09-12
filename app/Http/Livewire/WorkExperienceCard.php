@@ -57,8 +57,8 @@ class WorkExperienceCard extends Component
             ->firstWhere('id', $id);
         $this->position_title = $this->model->position_title;
         $this->company_name = $this->model->company_name;
-        $this->start_date = $this->model->start_date?->format('Y-m-d');
-        $this->end_date = $this->model->end_date?->format('Y-m-d');
+        $this->start_date = $this->model->start_date?->format('Y-m');
+        $this->end_date = $this->model->end_date?->format('Y-m');
     }
 
     public function reordering(array $data): void
@@ -79,5 +79,10 @@ class WorkExperienceCard extends Component
             'start_date' => ['required', 'date'],
             'end_date' => ['nullable', 'date', 'after:start_date'],
         ];
+    }
+
+    public function validationAttributes(): array
+    {
+        return WorkExperience::attributes();
     }
 }

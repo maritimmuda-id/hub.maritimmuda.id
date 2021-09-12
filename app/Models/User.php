@@ -36,6 +36,8 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         'email',
         'email_verified_at',
         'password',
+        'place_of_birth',
+        'date_of_birth',
         'linkedin_profile',
         'instagram_profile',
         'province_id',
@@ -54,6 +56,7 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
     protected $casts = [
         'gender' => Gender::class,
         'email_verified_at' => 'datetime',
+        'date_of_birth' => 'date',
         'is_admin' => 'boolean',
     ];
 
@@ -61,17 +64,35 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
     {
         $this->addMediaCollection('photo')
             ->singleFile()
-            ->useFallbackUrl("https://ui-avatars.com/api/?format=jpg&size=128&name={$this->name}");
+            ->useFallbackUrl("https://ui-avatars.com/api/?format=jpg&background=ebedef&size=128&name={$this->name}");
+
+        $this->addMediaCollection('identity_card')
+            ->singleFile()
+            ->useFallbackUrl("https://via.placeholder.com/856x540/fff/1f90ff?text=No%20Identity%20Card");
     }
 
     public function registerMediaConversions(Media $media = null): void
     {
+        $this->addMediaConversion('identity_card')
+            ->performOnCollections('identity_card')
+            ->setManipulations(
+                Manipulations::create()
+                    ->watermark(storage_path('app/watermark.png'))
+                    ->watermarkOpacity(30)
+                    ->watermarkPosition(Manipulations::POSITION_CENTER)
+                    ->watermarkHeight(50, Manipulations::UNIT_PERCENT)
+                    ->watermarkWidth(100, Manipulations::UNIT_PERCENT)
+            )
+            ->queued();
+
         $this->addMediaConversion('photo')
             ->performOnCollections('photo')
+            ->queued()
             ->fit(Manipulations::FIT_CROP, 300, 400);
 
         $this->addMediaConversion('thumb')
             ->performOnCollections('photo')
+            ->queued()
             ->fit(Manipulations::FIT_CROP, 500, 500);
     }
 
@@ -139,6 +160,11 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         return $this->getFirstMediaUrl('photo', 'photo');
     }
 
+    public function getIdentityCardLinkAttribute(): string
+    {
+        return $this->getFirstMediaUrl('identity_card', 'identity_card');
+    }
+
     public function getPhotoThumbLinkAttribute(): string
     {
         return $this->getFirstMediaUrl('photo', 'thumb');
@@ -166,6 +192,8 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
             'gender' => trans('profile.gender-label'),
             'photo' => trans('profile.photo-label'),
             'password' => trans('profile.password-label'),
+            'place_of_birth' => trans('profile.place-of-birth-label'),
+            'date_of_birth' => trans('profile.date-of-birth-label'),
             'linkedin_profile' => trans('profile.linkedin-profile-label'),
             'instagram_profile' => trans('profile.instagram-profile-label'),
             'province_id' => trans('profile.province-id-label'),

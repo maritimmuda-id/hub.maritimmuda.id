@@ -30,14 +30,14 @@
                             </div>
                             <div class="col-md-6">
                                 <x-form-input
-                                    type="date"
+                                    type="month"
                                     name="start_date"
                                     :label="trans('profile.work-experience.start-date-label')"
                                 />
                             </div>
                             <div class="col-md-6">
                                 <x-form-input
-                                    type="date"
+                                    type="month"
                                     name="end_date"
                                     :label="trans('profile.work-experience.end-date-label')"
                                 />

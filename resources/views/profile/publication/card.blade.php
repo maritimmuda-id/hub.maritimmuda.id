@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <form wire:submit.prevent="save" class="card border-primary">
+                <x-form wire:submit.prevent="save" class="card border-primary" files>
                     <div class="card-header">
                         @if ($model)
                             @lang('Edit :resource', [
@@ -54,13 +54,20 @@
                                     :label="trans('profile.publication.publish-date-label')"
                                 />
                             </div>
+                            <div class="col-md-6">
+                                <x-form-input
+                                    type="file"
+                                    name="first_page"
+                                    :label="trans('profile.publication.first-page-label')"
+                                />
+                            </div>
                         @endwire
                     </div>
                     <div class="card-footer">
                         <x-save-button />
                         <x-reset-button wire:click.prevent="resetForm" />
                     </div>
-                </form>
+                </x-form>
 
                 <div wire:sortable="reorder" class="list-group">
                     @foreach ($user->publications as $item)
@@ -69,14 +76,17 @@
                             wire:sortable.key="list-group-item-{{ $item->id }}"
                             class="list-group-item d-flex flex-row justify-content-between"
                         >
-                            <div>
-                                <h4>
-                                    {{ $item->title }}
-                                    <small>{{ $item->publisher }}</small>
-                                </h4>
-                                <strong class="inline">
-                                    {{ $item->publish_date_formatted }}
-                                </strong>
+                            <div class="d-flex flex-row justify-content-start align-items-center">
+                                <img style="width:70px" class="img-fluid img-thumbnail" src="{{ $item->first_page_link }}" alt="">
+                                <div class="ml-3">
+                                    <h4>
+                                        {{ $item->title }}
+                                        <small>{{ $item->publisher }}</small>
+                                    </h4>
+                                    <strong class="inline">
+                                        {{ $item->publish_date_formatted }}
+                                    </strong>
+                                </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-around" style="width:20%">
                                 <button class="btn btn-info" wire:click="edit('{{ $item->id }}')">

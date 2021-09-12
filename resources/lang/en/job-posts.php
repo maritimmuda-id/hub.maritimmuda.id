@@ -7,7 +7,7 @@ return [
 
     'position-title-label' => 'Position Title',
 
-    'company-name-label' => 'Company Name',
+    'company-name-label' => 'Institution Name',
 
     'type-label' => 'Type',
 

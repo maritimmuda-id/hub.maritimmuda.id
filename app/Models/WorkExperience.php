@@ -63,4 +63,14 @@ class WorkExperience extends Model implements Sortable
             2
         );
     }
+
+    public static function attributes(): array
+    {
+        return [
+            'position_title' => trans('profile.work-experience.position-title-label'),
+            'company_name' => trans('profile.work-experience.company-name-label'),
+            'start_date' => trans('profile.work-experience.start-date-label'),
+            'end_date' => trans('profile.work-experience.end-date-label'),
+        ];
+    }
 }

@@ -24,6 +24,12 @@
                             </div>
                             <div class="col-md-6">
                                 <x-form-input
+                                    name="appreciator"
+                                    :label="trans('profile.achievement-history.appreciator-label')"
+                                />
+                            </div>
+                            <div class="col-md-6">
+                                <x-form-input
                                     name="event_name"
                                     :label="trans('profile.achievement-history.event-name-label')"
                                 />

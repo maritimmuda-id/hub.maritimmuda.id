@@ -17,6 +17,8 @@ class AchievementHistoryCard extends Component
 
     public ?string $award_name = null;
 
+    public ?string $appreciator = null;
+
     public ?string $event_name = null;
 
     public ?string $event_level = null;
@@ -45,6 +47,7 @@ class AchievementHistoryCard extends Component
 
         $this->model->fill([
                 'award_name' => $this->award_name,
+                'appreciator' => $this->appreciator,
                 'event_name' => $this->event_name,
                 'event_level' => $this->event_level,
                 'achieved_at' => $this->achieved_at,
@@ -56,6 +59,7 @@ class AchievementHistoryCard extends Component
         $this->model = $this->user->achievementHistories
             ->firstWhere('id', $id);
         $this->award_name = $this->model->award_name;
+        $this->appreciator = $this->model->appreciator;
         $this->event_name = $this->model->event_name;
         $this->event_level = $this->model->event_level;
         $this->achieved_at = $this->model->achieved_at?->format('Y-m');
@@ -75,9 +79,15 @@ class AchievementHistoryCard extends Component
     {
         return [
             'award_name' => ['required', 'string', 'max:200'],
+            'appreciator' => ['required', 'string', 'max:200'],
             'event_name' => ['required', 'string', 'max:200'],
             'event_level' => ['required', 'string', 'max:200'],
             'achieved_at' => ['required', 'date'],
         ];
+    }
+
+    public function validationAttributes(): array
+    {
+        return AchievementHistory::attributes();
     }
 }

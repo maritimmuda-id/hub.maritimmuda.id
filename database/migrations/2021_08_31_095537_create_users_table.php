@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('email', 200)->index();
             $table->string('locale', 10)->nullable();
             $table->dateTime('email_verified_at')->nullable();
+            $table->string('place_of_birth', 200)->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->string('password')->nullable();
             $table->string('remember_token', 100)->nullable();
             $table->string('linkedin_profile', 200)->nullable();

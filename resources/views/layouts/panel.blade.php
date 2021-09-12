@@ -133,6 +133,7 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     @include('sweetalert::alert', ['cdn' => 'https://unpkg.com/sweetalert2@11.x/dist/sweetalert2.all.min.js'])
     <script src="https://unpkg.com/lightgallery@2.x/lightgallery.min.js"></script>
+    <script src="https://unpkg.com/jquery.dirty@0.8.3/dist/jquery.dirty.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
     @stack('scripts')

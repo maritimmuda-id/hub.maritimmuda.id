@@ -80,4 +80,9 @@ class OrganizationHistoryCard extends Component
             'period_end_date' => ['nullable', 'date', 'after:start_date'],
         ];
     }
+
+    public function validationAttributes(): array
+    {
+        return OrganizationHistory::attributes();
+    }
 }

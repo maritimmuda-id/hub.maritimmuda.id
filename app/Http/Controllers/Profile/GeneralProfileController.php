@@ -28,12 +28,17 @@ class GeneralProfileController
         $user = $request->user();
 
         $user->fill(
-            collect($request->validated())->except('photo')->toArray()
+            collect($request->validated())->except(['photo', 'identity_card'])->toArray()
         )->save();
 
         if ($request->hasFile('photo')) {
             $user->addMediaFromRequest('photo')
                 ->toMediaCollection('photo');
+        }
+
+        if ($request->hasFile('identity_card')) {
+            $user->addMediaFromRequest('identity_card')
+                ->toMediaCollection('identity_card');
         }
 
         toast(trans('profile.update-profile-success'), 'success');

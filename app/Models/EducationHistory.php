@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\EducationLevel;
 use App\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,11 +22,13 @@ class EducationHistory extends Model implements Sortable
         'user_id',
         'institution_name',
         'major',
+        'level',
         'graduation_date',
         'order_column',
     ];
 
     protected $casts = [
+        'level' => EducationLevel::class,
         'graduation_date' => 'date',
         'order_column' => 'integer',
     ];
@@ -44,5 +47,15 @@ class EducationHistory extends Model implements Sortable
     public function getGraduationDateFormattedAttribute(): ?string
     {
         return $this->graduation_date?->format('F Y');
+    }
+
+    public static function attributes(): array
+    {
+        return [
+            'institution_name' => trans('profile.education-history.institution-name-label'),
+            'major' => trans('profile.education-history.major-label'),
+            'level' => trans('profile.education-history.level-label'),
+            'graduation_date' => trans('profile.education-history.graduation-date-label'),
+        ];
     }
 }

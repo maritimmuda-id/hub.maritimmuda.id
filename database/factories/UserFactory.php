@@ -17,11 +17,13 @@ class UserFactory extends Factory
     {
         return [
             'uid' => $this->faker->regexify('[A-Za-z0-9]{50}'),
-            'name' => $this->faker->name(),
+            'name' => $this->faker->firstName() . ' ' . $this->faker->lastName(),
             'gender' => Gender::getRandomValue(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'place_of_birth' => $this->faker->randomElement([$this->faker->realText(), null]),
+            'date_of_birth' => $this->faker->randomElement([$this->faker->date(), null]),
             'remember_token' => Str::random(60),
             'linkedin_profile' => 'https://www.linkedin.com/in/user',
             'instagram_profile' => 'https://instagram.com/user',
@@ -34,8 +36,12 @@ class UserFactory extends Factory
 
     public function useExistingData(): self
     {
+        $expertises = Expertise::query()->dontCache()->inRandomOrder()->limit(2)->get();
+
         return $this->state([
-            'province_id' => Province::query()->inRandomOrder()->first()->id,
+            'province_id' => Province::query()->dontCache()->inRandomOrder()->first()->id,
+            'first_expertise_id' => $expertises[0]->id,
+            'second_expertise_id' => $expertises[1]->id,
         ]);
     }
 

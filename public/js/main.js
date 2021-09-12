@@ -104,4 +104,8 @@ $(document).ready(function () {
             $(this).addClass("active");
         }
     });
+
+    $("form").dirty({
+        preventLeaving: true,
+    });
 });
