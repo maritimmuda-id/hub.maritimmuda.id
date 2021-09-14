@@ -18,7 +18,7 @@ class ApplyLocale
     {
         $this->processRequestedLocaleChange();
 
-        App::setLocale($this->getCurrentUserLocale());
+        App::setLocale(self::getCurrentUserLocale());
 
         return $next($request);
     }
@@ -31,7 +31,7 @@ class ApplyLocale
             return;
         }
 
-        if ($requestedLocale === $this->getCurrentUserLocale()) {
+        if ($requestedLocale === self::getCurrentUserLocale()) {
             return;
         }
 
@@ -46,17 +46,18 @@ class ApplyLocale
         }
     }
 
-    private function getCurrentUserLocale(): string
+    public static function getCurrentUserLocale(): string
     {
-        if ($locale = Session::get(self::SessionLocaleName)) {
-            return $locale;
-        }
-
         /** @var \App\Models\User|null $user */
         $user = request()->user();
 
-        if ($user) {
-            return $user->preferredLocale();
+        if ($locale = $user?->preferredLocale()) {
+            return $locale;
+        }
+
+        if ($locale = Session::get(self::SessionLocaleName)) {
+            /** @var string $locale */
+            return $locale;
         }
 
         return request()->getPreferredLanguage(self::AvailableLocale);
