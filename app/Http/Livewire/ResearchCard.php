@@ -21,6 +21,8 @@ class ResearchCard extends Component
 
     public ?string $institution_name = null;
 
+    public ?string $sponsor_name = null;
+
     public Carbon|string|null $year = null;
 
     public function mount(): void
@@ -47,6 +49,7 @@ class ResearchCard extends Component
                 'name' => $this->name,
                 'role' => $this->role,
                 'institution_name' => $this->institution_name,
+                'sponsor_name' => $this->sponsor_name,
                 'year' => $this->year,
             ]);
     }
@@ -58,7 +61,9 @@ class ResearchCard extends Component
         $this->name = $this->model->name;
         $this->role = $this->model->role;
         $this->institution_name = $this->model->institution_name;
+        $this->sponsor_name = $this->model->sponsor_name;
         $this->year = $this->model->year?->format('Y-m');
+        $this->dispatchBrowserEvent('');
     }
 
     public function reordering(array $data): void
@@ -77,7 +82,13 @@ class ResearchCard extends Component
             'name' => ['required', 'string', 'max:200'],
             'role' => ['required', 'string', 'max:200'],
             'institution_name' => ['required', 'string', 'max:200'],
+            'sponsor_name' => ['required', 'string', 'max:200'],
             'year' => ['required', 'date'],
         ];
+    }
+
+    public function validationAttributes(): array
+    {
+        return Research::attributes();
     }
 }

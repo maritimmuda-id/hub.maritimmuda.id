@@ -15,9 +15,9 @@
         {!! $attributes->merge(['class' => 'form-control ' . ($hasError($name) ? 'is-invalid' : '')]) !!}
     >@unless($isWired()){!! $value !!}@endunless</textarea>
 
-    {!! $help ?? null !!}
-
     @if($hasErrorAndShow($name))
         <x-form-errors :name="$name" />
     @endif
+
+    {!! $help ?? null !!}
 </div>

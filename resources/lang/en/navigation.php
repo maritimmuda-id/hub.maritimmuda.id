@@ -9,6 +9,8 @@ return [
 
     'user' => 'Users',
 
+    'find-member' => 'Find Member',
+
     'event' => 'Events',
 
     'scholarship' => 'Scholarships',

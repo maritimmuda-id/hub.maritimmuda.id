@@ -26,6 +26,16 @@
                 />
             </li>
         @endcan
+        @can('find-member')
+            <li class="c-sidebar-nav-item">
+                <x-nav-link
+                    :href="route('find-member')"
+                    :active="request()->routeIs('find-member')"
+                    :label="trans('navigation.find-member')"
+                    icon="fas fa-user-friends"
+                />
+            </li>
+        @endcan
         @can('viewAny', \App\Models\Event::class)
             <li class="c-sidebar-nav-item">
                 <x-nav-link

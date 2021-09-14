@@ -34,7 +34,7 @@ return [
 
         'graduation-date-label' => 'Graduation Date',
 
-        'or-expected-graduation-date' => 'or expected graduation date',
+        'or-expected-graduation-date' => 'Or expected graduation date',
     ],
 
     'organization-history' => [
@@ -94,13 +94,13 @@ return [
     ],
 
     'dedication' => [
-        'navigation' => 'Dedications',
+        'navigation' => 'Social Activities',
 
-        'plural-name' => 'Dedications',
+        'plural-name' => 'Social Activities',
 
-        'singular-name' => 'Dedication',
+        'singular-name' => 'Social Activity',
 
-        'name-label' => 'Name',
+        'name-label' => 'Program Name',
 
         'role-label' => 'Role',
 
@@ -118,11 +118,13 @@ return [
 
         'singular-name' => 'Research',
 
-        'name-label' => 'Name',
+        'name-label' => 'Title of Research',
 
         'role-label' => 'Role',
 
         'institution-name-label' => 'Affiliation Name',
+
+        'sponsor-name-label' => 'Sponsor Name',
 
         'year-label' => 'Year',
     ],
@@ -143,11 +145,21 @@ return [
 
     'photo-label' => 'Photo',
 
+    'identity-card-label' => 'Identity Card',
+
     'province-label' => 'Province',
 
     'first-expertise-id-label' => 'First Expertise',
 
     'second-expertise-id-label' => 'Second Expertise',
+
+    'permanent-address-label' => 'Address',
+
+    'permanent-address-help-text' => 'Address on your identity card',
+
+    'residence-address-label' => 'Residence Address',
+
+    'residence-address-help-text' => 'Your current residence address',
 
     'bio-label' => 'Bio',
 

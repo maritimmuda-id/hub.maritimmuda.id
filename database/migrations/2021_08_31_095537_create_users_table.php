@@ -28,6 +28,8 @@ return new class extends Migration
             $table->foreignId('province_id')->nullable()->constrained();
             $table->foreignId('first_expertise_id')->nullable()->constrained('expertises');
             $table->foreignId('second_expertise_id')->nullable()->constrained('expertises');
+            $table->text('permanent_address')->nullable();
+            $table->text('residence_address')->nullable();
             $table->text('bio')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->timestamps();

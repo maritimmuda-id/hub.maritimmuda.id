@@ -26,9 +26,9 @@
         @endforelse
     </select>
 
-    {!! $help ?? null !!}
-
     @if($hasErrorAndShow($name))
         <x-form-errors :name="$name" />
     @endif
+
+    {!! $help ?? null !!}
 </div>

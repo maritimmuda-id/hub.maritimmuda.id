@@ -61,8 +61,8 @@ class DedicationCard extends Component
         $this->name = $this->model->name;
         $this->role = $this->model->role;
         $this->institution_name = $this->model->institution_name;
-        $this->start_date = $this->model->start_date?->format('Y-m');
-        $this->end_date = $this->model->end_date?->format('Y-m');
+        $this->start_date = $this->model->start_date?->format('Y-m-d');
+        $this->end_date = $this->model->end_date?->format('Y-m-d');
     }
 
     public function reordering(array $data): void
@@ -84,5 +84,10 @@ class DedicationCard extends Component
             'start_date' => ['required', 'date'],
             'end_date' => ['nullable', 'date'],
         ];
+    }
+
+    public function validationAttributes(): array
+    {
+        return Dedication::attributes();
     }
 }

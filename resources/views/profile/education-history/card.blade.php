@@ -40,7 +40,11 @@
                                     type="month"
                                     name="graduation_date"
                                     :label="trans('profile.education-history.graduation-date-label')"
-                                />
+                                >
+                                    <x-slot name="help">
+                                        <small class="form-text text-muted">@lang('profile.education-history.or-expected-graduation-date')</small>
+                                    </x-slot>
+                                </x-form-input>
                             </div>
                         @endwire
                     </div>

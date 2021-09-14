@@ -33,6 +33,9 @@ class GeneralProfileUpdateRequest extends FormRequest
             'province_id' => ['required', Rule::exists((new Province())->getTable(), 'id')],
             'first_expertise_id' => ['required', Rule::exists((new Expertise())->getTable(), 'id')],
             'second_expertise_id' => ['required', Rule::exists((new Expertise())->getTable(), 'id'), 'different:first_expertise_id'],
+            'permanent_address' => ['nullable', 'string', 'max:300'],
+            'residence_address' => ['nullable', 'string', 'max:300'],
+            'bio' => ['nullable', 'string', 'max:500'],
         ];
     }
 

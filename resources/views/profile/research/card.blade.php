@@ -36,6 +36,12 @@
                             </div>
                             <div class="col-md-6">
                                 <x-form-input
+                                    name="sponsor_name"
+                                    :label="trans('profile.research.sponsor-name-label')"
+                                />
+                            </div>
+                            <div class="col-md-6">
+                                <x-form-input
                                     type="month"
                                     name="year"
                                     :label="trans('profile.research.year-label')"
@@ -64,6 +70,8 @@
                                 <strong class="inline">
                                     {{ $item->institution_name }}
                                 </strong>
+                                <small>{{ $item->sponsor_name }}</small>
+                                <span>|</span>
                                 <small>{{ $item->year_formatted }}</small>
                             </div>
                             <div class="d-flex align-items-center justify-content-around" style="width:20%">

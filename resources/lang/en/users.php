@@ -15,5 +15,9 @@ return [
 
     'second-expertise-name-label' => 'Second Expertise',
 
+    'photo-label' => 'Photo',
+
+    'identity-card-label' => 'Identity Card',
+
     'cannot-delete-current-user' => 'Can\'t delete current user',
 ];

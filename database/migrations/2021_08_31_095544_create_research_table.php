@@ -16,8 +16,9 @@ return new class extends Migration
             $table->uuid('uuid')->nullable()->unique();
             $table->foreignIdFor(User::class)->constrained();
             $table->string('name', 200);
-            $table->string('role', 100);
-            $table->string('institution_name', 100);
+            $table->string('role', 200);
+            $table->string('institution_name', 200);
+            $table->string('sponsor_name', 200);
             $table->date('year');
             $table->tinyInteger('order_column')->default(1);
             $table->timestamps();

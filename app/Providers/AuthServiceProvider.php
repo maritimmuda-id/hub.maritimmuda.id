@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
             return $authenticatedUser->is_admin && $authenticatedUser->id !== $user->id;
         });
 
-        Gate::define('view-member', function (User $authenticatedUser, User $user) {
+        Gate::define('find-member', function (User $authenticatedUser) {
             return true;
         });
     }

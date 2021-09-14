@@ -21,9 +21,9 @@
 
    <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" class="form-check-label" />
 
-    {!! $help ?? null !!}
-
     @if($hasErrorAndShow($name))
-        <x-form-errors :name="$name" />
+       <x-form-errors :name="$name" />
     @endif
+
+    {!! $help ?? null !!}
 </div>

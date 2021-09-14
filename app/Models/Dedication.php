@@ -53,4 +53,15 @@ class Dedication extends Model implements Sortable
 
         return "{$startDate} - {$this->end_date->format('F Y')}";
     }
+
+    public static function attributes(): array
+    {
+        return [
+            'name' => trans('profile.dedication.name-label'),
+            'role' => trans('profile.dedication.role-label'),
+            'institution_name' => trans('profile.dedication.institution-name-label'),
+            'start_date' => trans('profile.dedication.start-date-label'),
+            'end_date' => trans('profile.dedication.end-date-label'),
+        ];
+    }
 }

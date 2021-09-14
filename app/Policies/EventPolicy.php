@@ -22,16 +22,16 @@ class EventPolicy
 
     public function create(?User $user): bool
     {
-        return $user->is_admin;
+        return $user?->is_admin ?? false;
     }
 
     public function update(?User $user, Event $event): bool
     {
-        return $user->is_admin;
+        return $user?->is_admin ?? false;
     }
 
     public function delete(?User $user, Event $event): bool
     {
-        return $user->is_admin;
+        return $user?->is_admin ?? false;
     }
 }

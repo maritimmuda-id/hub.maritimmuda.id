@@ -30,7 +30,9 @@ class UserFactory extends Factory
             'province_id' => Province::factory(),
             'first_expertise_id' => Expertise::factory(),
             'second_expertise_id' => Expertise::factory(),
-            'bio' => $this->faker->text,
+            'permanent_address' => $this->faker->text(100),
+            'residence_address' => $this->faker->text(100),
+            'bio' => $this->faker->text(),
         ];
     }
 

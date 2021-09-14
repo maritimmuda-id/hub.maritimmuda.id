@@ -43,6 +43,8 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         'province_id',
         'first_expertise_id',
         'second_expertise_id',
+        'permanent_address',
+        'residence_address',
         'bio',
         'locale',
         'is_admin',
@@ -170,9 +172,9 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         return $this->getFirstMediaUrl('photo', 'thumb');
     }
 
-    public function preferredLocale(): string
+    public function preferredLocale(): ?string
     {
-        return $this->locale ?? config('app.locale');
+        return $this->locale;
     }
 
     public function canImpersonate(): bool
@@ -199,6 +201,8 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
             'province_id' => trans('profile.province-id-label'),
             'first_expertise_id' => trans('profile.first-expertise-id-label'),
             'second_expertise_id' => trans('profile.second-expertise-id-label'),
+            'permanent_address' => trans('profile.permanent-address-label'),
+            'residence_address' => trans('profile.residence-address-label'),
             'bio' => trans('profile.bio-label'),
         ];
     }

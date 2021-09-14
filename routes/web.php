@@ -12,7 +12,7 @@ use App\Http\Controllers\Profile\ViewResearchController;
 use App\Http\Controllers\Profile\ViewWorkExperienceController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ViewMemberController;
+use App\Http\Controllers\FindMemberController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'login');
@@ -61,7 +61,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('job-post', JobPostController::class);
 
-    Route::get('member', [ViewMemberController::class, '__invoke']);
+    Route::get('find-member', [FindMemberController::class, '__invoke'])
+        ->name('find-member');
 });
 
 require __DIR__.'/auth.php';

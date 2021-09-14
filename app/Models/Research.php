@@ -21,6 +21,7 @@ class Research extends Model implements Sortable
         'name',
         'role',
         'institution_name',
+        'sponsor_name',
         'year',
         'order_column',
     ];
@@ -44,5 +45,16 @@ class Research extends Model implements Sortable
     public function getYearFormattedAttribute(): string
     {
         return $this->year?->format('F Y');
+    }
+
+    public static function attributes(): array
+    {
+        return [
+            'name' => trans('profile.research.name-label'),
+            'role' => trans('profile.research.role-label'),
+            'institution_name' => trans('profile.research.institution-name-label'),
+            'sponsor_name' => trans('profile.research.sponsor-name-label'),
+            'year' => trans('profile.research.year-label'),
+        ];
     }
 }

@@ -21,6 +21,7 @@
                                     <x-form-input
                                         type="file"
                                         name="photo"
+                                        class="w-100"
                                         :label="trans('profile.photo-label')"
                                     />
                                 </div>
@@ -107,6 +108,32 @@
                                         :options="$expertises"
                                         :label="trans('profile.second-expertise-id-label')"
                                     />
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form-textarea
+                                        name="permanent_address"
+                                        rows="5"
+                                        :label="trans('profile.permanent-address-label')"
+                                    >
+                                        <x-slot name="help">
+                                            <small class="form-text text-muted">
+                                                @lang('profile.permanent-address-help-text')
+                                            </small>
+                                        </x-slot>
+                                    </x-form-textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form-textarea
+                                        name="residence_address"
+                                        rows="5"
+                                        :label="trans('profile.residence-address-label')"
+                                    >
+                                        <x-slot name="help">
+                                            <small class="form-text text-muted">
+                                                @lang('profile.residence-address-help-text')
+                                            </small>
+                                        </x-slot>
+                                    </x-form-textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <x-form-textarea

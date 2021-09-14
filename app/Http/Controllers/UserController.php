@@ -27,6 +27,7 @@ class UserController
                         'province',
                         'firstExpertise',
                         'secondExpertise',
+                        'media',
                     ])
             );
 
@@ -46,9 +47,17 @@ class UserController
                 return $row->secondExpertise?->name ?? '-';
             });
 
+            $table->addColumn('photo', function (User $row) {
+                return view('includes.datatable-image', ['link' => $row->photo_thumb_link]);
+            }, false);
+
+            $table->addColumn('identity_card', function (User $row) {
+                return view('includes.datatable-image', ['link' => $row->identity_card_link]);
+            }, false);
+
             $table->addIndexColumn();
 
-            $table->rawColumns(['email'], true);
+            $table->rawColumns(['email', 'photo', 'identity_card'], true);
 
             $table->addColumn('action', function (User $row) {
                 return view('includes.datatable-action', [
@@ -66,11 +75,13 @@ class UserController
             ->setTableId('users-table')
             ->columns([
                 ['data' => 'id', 'title' => __('ID'), 'searchable' => false],
-                ['data' => 'name', 'title' => __('users.name-label')],
-                ['data' => 'email', 'title' => __('users.email-label')],
-                ['data' => 'province_name', 'name' => 'province.name', 'title' => __('users.province-name-label')],
-                ['data' => 'first_expertise_name', 'name' => 'firstExpertise.name', 'title' => __('users.first-expertise-name-label')],
-                ['data' => 'second_expertise_name', 'name' => 'secondExpertise.name', 'title' => __('users.second-expertise-name-label')],
+                ['data' => 'name', 'title' => trans('users.name-label')],
+                ['data' => 'email', 'title' => trans('users.email-label')],
+                ['data' => 'province_name', 'name' => 'province.name', 'title' => trans('users.province-name-label')],
+                ['data' => 'first_expertise_name', 'name' => 'firstExpertise.name', 'title' => trans('users.first-expertise-name-label')],
+                ['data' => 'second_expertise_name', 'name' => 'secondExpertise.name', 'title' => trans('users.second-expertise-name-label')],
+                ['data' => 'photo', 'name' => 'photo', 'title' => trans('users.photo-label')],
+                ['data' => 'identity_card', 'name' => 'identity_card', 'title' => trans('users.identity-card-label')],
             ])
             ->addAction(['title' => __('Action')])
             ->minifiedAjax(route('user.index'))

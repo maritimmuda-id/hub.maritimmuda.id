@@ -33,10 +33,10 @@
             </div>
         @endisset
 
-        {!! $help ?? null !!}
-
         @if($hasErrorAndShow($name))
             <x-form-errors :name="$name" />
         @endif
     </div>
+
+    {!! $help ?? null !!}
 </div>

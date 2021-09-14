@@ -17,6 +17,7 @@ class ResearchFactory extends Factory
             'name' => $this->faker->realText(10),
             'role' => $this->faker->realText(10),
             'institution_name' => $this->faker->realText(20),
+            'sponsor_name' => $this->faker->realText(20),
             'year' => $this->faker->date(),
             'order_column' => 1,
         ];

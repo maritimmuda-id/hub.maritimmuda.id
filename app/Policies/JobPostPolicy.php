@@ -22,16 +22,16 @@ class JobPostPolicy
 
     public function create(?User $user): bool
     {
-        return $user->is_admin;
+        return $user?->is_admin ?? false;
     }
 
     public function update(?User $user, JobPost $jobPost): bool
     {
-        return $user->is_admin;
+        return $user?->is_admin ?? false;
     }
 
     public function delete(?User $user, JobPost $jobPost): bool
     {
-        return $user->is_admin;
+        return $user?->is_admin ?? false;
     }
 }
