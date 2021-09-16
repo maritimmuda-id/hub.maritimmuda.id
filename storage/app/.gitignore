@@ -1,3 +1,5 @@
 *
 !public/
+!livewire-temp/
+!watermark.png
 !.gitignore
