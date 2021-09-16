@@ -80,7 +80,7 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
             ->setManipulations(
                 Manipulations::create()
                     ->watermark(storage_path('app/watermark.png'))
-                    ->watermarkOpacity(30)
+                    ->watermarkOpacity(50)
                     ->watermarkPosition(Manipulations::POSITION_CENTER)
                     ->watermarkHeight(50, Manipulations::UNIT_PERCENT)
                     ->watermarkWidth(100, Manipulations::UNIT_PERCENT)

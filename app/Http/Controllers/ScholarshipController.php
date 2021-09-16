@@ -33,7 +33,7 @@ class ScholarshipController
             $table->addColumn('action', function (Scholarship $row) {
                 return view('includes.datatable-action', [
                     'canView' => Gate::check('view', $row),
-                    'showLink' => $row->registration_link,
+                    'showLink' => route('scholarship.show', $row),
                     'canEdit' => Gate::check('update', $row),
                     'editLink' => route('scholarship.edit', $row),
                     'canDelete' => Gate::check('delete', $row),
@@ -95,7 +95,7 @@ class ScholarshipController
     {
         Gate::authorize('view', $scholarship);
 
-        return redirect($scholarship->external_url);
+        return redirect($scholarship->registration_link);
     }
 
     public function edit(Scholarship $scholarship): View

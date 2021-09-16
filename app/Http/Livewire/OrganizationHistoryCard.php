@@ -77,7 +77,7 @@ class OrganizationHistoryCard extends Component
             'organization_name' => ['required', 'string', 'max:200'],
             'role' => ['required', 'string', 'max:200'],
             'period_start_date' => ['required', 'date'],
-            'period_end_date' => ['nullable', 'date', 'after:start_date'],
+            'period_end_date' => ['required', 'date', 'after_or_equal:start_date'],
         ];
     }
 

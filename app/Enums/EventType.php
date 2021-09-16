@@ -7,7 +7,7 @@ use BenSampo\Enum\Enum;
 
 final class EventType extends Enum implements LocalizedEnum
 {
-    const Webinar = 1;
+    const Seminar = 1;
 
     const ScientificConference = 2;
 
@@ -15,9 +15,13 @@ final class EventType extends Enum implements LocalizedEnum
 
     const Competition = 4;
 
-    const Dedication = 5;
+    const CommunityDevelopment = 5;
 
     const Research = 6;
 
     const Training = 7;
+
+    const EnvironmentalAction = 8;
+
+    const YouthExchange = 9;
 }

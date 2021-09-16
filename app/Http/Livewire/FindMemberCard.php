@@ -5,8 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\Expertise;
 use App\Models\Province;
 use App\Models\User;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -94,6 +92,7 @@ class FindMemberCard extends Component
 
         if ($user) {
             $this->emit('openModal', [
+                'uid' => $user->uid,
                 'name' => $user->name,
                 'email' => $user->email,
                 'photo_link' => $user->photo_link,

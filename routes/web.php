@@ -45,10 +45,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/publications', [ViewPublicationController::class, '__invoke'])
             ->name('profile.publication');
 
-        Route::get('/dedications', [ViewDedicationController::class, '__invoke'])
+        Route::get('/social-activities', [ViewDedicationController::class, '__invoke'])
             ->name('profile.dedication');
 
-        Route::get('/researchs', [ViewResearchController::class, '__invoke'])
+        Route::get('/researches', [ViewResearchController::class, '__invoke'])
             ->name('profile.research');
     });
 

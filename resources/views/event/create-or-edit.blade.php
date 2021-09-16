@@ -54,14 +54,14 @@
                         <div class="col-md-6">
                             <x-form-input
                                 name="start_date"
-                                class="date"
+                                class="datetime"
                                 :label="trans('events.start-date-label')"
                             />
                         </div>
                         <div class="col-md-6">
                             <x-form-input
                                 name="end_date"
-                                class="date"
+                                class="datetime"
                                 :label="trans('events.end-date-label')"
                             />
                         </div>

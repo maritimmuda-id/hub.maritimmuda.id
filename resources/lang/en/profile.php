@@ -28,7 +28,7 @@ return [
 
         'institution-name-label' => 'Institution Name',
 
-        'major-label' => 'Major',
+        'major-label' => 'Major/Study Program',
 
         'level-label' => 'Level',
 
@@ -62,7 +62,7 @@ return [
 
         'award-name-label' => 'Award/Accomplishment',
 
-        'appreciator-label' => 'Appreciator',
+        'appreciator-label' => 'Appreciator/Organizer',
 
         'event-name-label' => 'Event Name',
 
@@ -104,6 +104,8 @@ return [
 
         'role-label' => 'Role',
 
+        'role-placeholder' => 'ex: PIC, Volunteer, Committee, etc.',
+
         'institution-name-label' => 'Institution Name',
 
         'start-date-label' => 'Start Date',
@@ -112,9 +114,9 @@ return [
     ],
 
     'research' => [
-        'navigation' => 'Researchs',
+        'navigation' => 'Researches',
 
-        'plural-name' => 'Researchs',
+        'plural-name' => 'Researches',
 
         'singular-name' => 'Research',
 
@@ -122,11 +124,15 @@ return [
 
         'role-label' => 'Role',
 
+        'role-placeholder' => 'ex: Research Manager, Enumerator, Surveyor, etc.',
+
         'institution-name-label' => 'Affiliation Name',
 
         'sponsor-name-label' => 'Sponsor Name',
 
-        'year-label' => 'Year',
+        'start-date-label' => 'Start Date',
+
+        'end-date-label' => 'End Date',
     ],
 
     'name-label' => 'Name',
@@ -145,9 +151,13 @@ return [
 
     'photo-label' => 'Photo',
 
+    'photo-help-text' => 'Photograph in ratio 3:4',
+
     'identity-card-label' => 'Identity Card',
 
-    'province-label' => 'Province',
+    'identity-card-help-text' => 'Identity card is needed to verify member’s data. System automatically apply a watermark to prevent identity card abuse. <a href=":href" target="_blank">Read more about this concept on this post.</a>',
+
+    'province-label' => 'Provincial Organization',
 
     'first-expertise-id-label' => 'First Expertise',
 

@@ -23,7 +23,9 @@ class ResearchCard extends Component
 
     public ?string $sponsor_name = null;
 
-    public Carbon|string|null $year = null;
+    public Carbon|string|null $start_date = null;
+
+    public Carbon|string|null $end_date = null;
 
     public function mount(): void
     {
@@ -50,7 +52,8 @@ class ResearchCard extends Component
                 'role' => $this->role,
                 'institution_name' => $this->institution_name,
                 'sponsor_name' => $this->sponsor_name,
-                'year' => $this->year,
+                'start_date' => $this->start_date,
+                'end_date' => $this->end_date,
             ]);
     }
 
@@ -62,7 +65,8 @@ class ResearchCard extends Component
         $this->role = $this->model->role;
         $this->institution_name = $this->model->institution_name;
         $this->sponsor_name = $this->model->sponsor_name;
-        $this->year = $this->model->year?->format('Y-m');
+        $this->start_date = $this->model->start_date?->format('Y-m');
+        $this->end_date = $this->model->end_date?->format('Y-m');
         $this->dispatchBrowserEvent('');
     }
 
@@ -83,7 +87,8 @@ class ResearchCard extends Component
             'role' => ['required', 'string', 'max:200'],
             'institution_name' => ['required', 'string', 'max:200'],
             'sponsor_name' => ['required', 'string', 'max:200'],
-            'year' => ['required', 'date'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['nullable', 'date'],
         ];
     }
 

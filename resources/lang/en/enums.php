@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\EducationLevel;
 use App\Enums\EventType;
 use App\Enums\Gender;
 use App\Enums\JobType;
@@ -21,12 +22,25 @@ return [
     ],
 
     EventType::class => [
-        EventType::Webinar => 'Webinar',
+        EventType::Seminar => 'Seminar/Webinar',
         EventType::ScientificConference => 'Scientific Conference',
         EventType::Forum => 'Forum',
         EventType::Competition => 'Competition',
-        EventType::Dedication => 'Dedication',
+        EventType::CommunityDevelopment => 'Community Development',
         EventType::Research => 'Research',
         EventType::Training => 'Training',
+        EventType::EnvironmentalAction => 'Environmental Action',
+        EventType::YouthExchange => 'Student/Youth Exchange',
+    ],
+
+    EducationLevel::class => [
+        EducationLevel::SeniorHighSchool => 'Senior High School',
+        EducationLevel::VocationalHighSchool => 'Vocational High School',
+        EducationLevel::IslamicBoardingSchool => 'Islamic Boarding School',
+        EducationLevel::D3 => 'Diploma III Degree',
+        EducationLevel::D4 => 'Diploma IV Degree',
+        EducationLevel::BachelorDegree => 'Bachelor\'s Degree',
+        EducationLevel::MasterDegree => 'Master\'s Degree',
+        EducationLevel::DoctorDegree => 'Doctoral Degree',
     ],
 ];

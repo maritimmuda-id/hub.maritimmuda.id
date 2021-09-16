@@ -18,7 +18,8 @@ class ResearchFactory extends Factory
             'role' => $this->faker->realText(10),
             'institution_name' => $this->faker->realText(20),
             'sponsor_name' => $this->faker->realText(20),
-            'year' => $this->faker->date(),
+            'start_date' => $this->faker->date(),
+            'end_date' => $this->faker->randomElement([$this->faker->date(), null]),
             'order_column' => 1,
         ];
     }

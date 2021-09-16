@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
         }
 
         // Generate fake user with general profile only
-        for ($i = 0; $i < 12; $i++) {
+        for ($i = 0; $i < 32; $i++) {
             User::factory()->useExistingData()->create();
         }
     }

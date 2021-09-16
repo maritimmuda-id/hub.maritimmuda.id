@@ -10,7 +10,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use RealRashid\SweetAlert\Toaster;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html;
 
@@ -38,7 +37,7 @@ class EventController
             $table->addColumn('action', function (Event $row) {
                 return view('includes.datatable-action', [
                     'canView' => Gate::check('view', $row),
-                    'showLink' => $row->external_url,
+                    'showLink' => route('event.show', $row),
                     'canEdit' => Gate::check('update', $row),
                     'editLink' => route('event.edit', $row),
                     'canDelete' => Gate::check('delete', $row),

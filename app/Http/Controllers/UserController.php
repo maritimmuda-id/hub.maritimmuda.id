@@ -92,13 +92,6 @@ class UserController
         return view('user.index', compact('dataTable'));
     }
 
-    public function show(User $user): RedirectResponse
-    {
-        Gate::authorize('view', $user);
-
-        return redirect($user->external_url);
-    }
-
     public function destroy(User $user): RedirectResponse
     {
         Gate::authorize('delete', $user);

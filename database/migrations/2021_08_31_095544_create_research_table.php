@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('role', 200);
             $table->string('institution_name', 200);
             $table->string('sponsor_name', 200);
-            $table->date('year');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
             $table->tinyInteger('order_column')->default(1);
             $table->timestamps();
         });

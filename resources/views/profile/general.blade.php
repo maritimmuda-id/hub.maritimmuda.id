@@ -23,7 +23,13 @@
                                         name="photo"
                                         class="w-100"
                                         :label="trans('profile.photo-label')"
-                                    />
+                                    >
+                                        <x-slot name="help">
+                                            <small class="form-text text-muted">
+                                                @lang('profile.photo-help-text')
+                                            </small>
+                                        </x-slot>
+                                    </x-form-input>
                                 </div>
 
                                 <div class="col-md-6 d-flex justify-content-center">
@@ -39,7 +45,15 @@
                                         type="file"
                                         name="identity_card"
                                         :label="trans('profile.identity-card-label')"
-                                    />
+                                    >
+                                        <x-slot name="help">
+                                            <small class="form-text text-muted">
+                                                @lang('profile.identity-card-help-text', [
+                                                    'href' => 'https://www.instagram.com/p/CTPPBLLhtVr/'
+                                                ])
+                                            </small>
+                                        </x-slot>
+                                    </x-form-input>
                                 </div>
 
                                 <div class="col-md-6">
@@ -77,10 +91,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <x-form-input
-                                        type="date"
+                                        class="date"
                                         name="date_of_birth"
                                         :label="trans('profile.date-of-birth-label')"
-                                        :value="old('date_of_birth') ?? $user->date_of_birth?->format('Y-m-d')"
                                     />
                                 </div>
                                 <div class="col-md-6">

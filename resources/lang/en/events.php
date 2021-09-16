@@ -9,7 +9,7 @@ return [
 
     'organizer-name-label' => 'Organizer',
 
-    'external-url-label' => 'External URL',
+    'external-url-label' => 'Registration Link',
 
     'type-label' => 'Type',
 

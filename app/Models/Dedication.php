@@ -45,13 +45,13 @@ class Dedication extends Model implements Sortable
 
     public function getPeriodDateAttribute(): string
     {
-        $startDate = $this->start_date->format('F Y');
+        $startDate = $this->start_date->format('d F Y');
 
         if (is_null($this->end_date)) {
             return $startDate;
         }
 
-        return "{$startDate} - {$this->end_date->format('F Y')}";
+        return "{$startDate} - {$this->end_date->format('d F Y')}";
     }
 
     public static function attributes(): array

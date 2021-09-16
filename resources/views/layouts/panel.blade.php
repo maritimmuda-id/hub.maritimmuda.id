@@ -31,7 +31,9 @@
                 <i class="fas fa-fw fa-bars"></i>
             </button>
 
-            <a class="c-header-brand d-lg-none" href="{{ config('app.url') }}">{{ config('app.name') }}</a>
+            <div class="c-header-brand d-lg-none">
+                <img class="img-fluid p-1" height="40" src="https://res.cloudinary.com/zhanang19/image/upload/q_auto,c_scale,h_40/v1630384690/11_nr53qu.png" alt="{{ config('app.name') }}">
+            </div>
 
             <button class="c-header-toggler mfs-3 d-md-down-none" type="button" responsive="true">
                 <i class="fas fa-fw fa-bars"></i>
@@ -114,6 +116,17 @@
                             </div>
                         </div>
                     </div>
+
+                    <footer class="text-center mb-3">
+                        <div>
+                            <span>Copyright &copy;</span>
+                            <a href="https://maritimmuda.id">Maritim Muda Nusantara</a>
+                            <span>{{ date('Y') }}</span>
+                        </div>
+                        <div>
+                            <span>Maritim Muda Hub v2.0</span>
+                        </div>
+                    </footer>
                 </div>
             </main>
             <x-form id="logoutform" :action="route('logout')" style="display: none;" />

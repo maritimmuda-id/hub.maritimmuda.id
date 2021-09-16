@@ -41,7 +41,6 @@ class ApplyLocaleTest extends TestCase
         $this->assertEquals('id', App::getLocale());
 
         $user->update(['locale' => 'en']);
-        $user->fresh();
 
         $response = $this->actingAs($user)->get('test');
 

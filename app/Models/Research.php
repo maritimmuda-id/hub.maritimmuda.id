@@ -22,12 +22,14 @@ class Research extends Model implements Sortable
         'role',
         'institution_name',
         'sponsor_name',
-        'year',
+        'start_date',
+        'end_date',
         'order_column',
     ];
 
     protected $casts = [
-        'year' => 'datetime',
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
         'order_column' => 'integer',
     ];
 
@@ -42,9 +44,15 @@ class Research extends Model implements Sortable
         return $this->belongsTo(User::class);
     }
 
-    public function getYearFormattedAttribute(): string
+    public function getPeriodDateAttribute(): string
     {
-        return $this->year?->format('F Y');
+        $startDate = $this->start_date->format('F Y');
+
+        if (is_null($this->end_date)) {
+            return $startDate;
+        }
+
+        return "{$startDate} - {$this->end_date->format('F Y')}";
     }
 
     public static function attributes(): array
@@ -54,7 +62,8 @@ class Research extends Model implements Sortable
             'role' => trans('profile.research.role-label'),
             'institution_name' => trans('profile.research.institution-name-label'),
             'sponsor_name' => trans('profile.research.sponsor-name-label'),
-            'year' => trans('profile.research.year-label'),
+            'start_date' => trans('profile.research.events.start-date-label-label'),
+            'end_date' => trans('profile.research.events.end-date-label-label'),
         ];
     }
 }

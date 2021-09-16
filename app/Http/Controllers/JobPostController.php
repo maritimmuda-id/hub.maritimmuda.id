@@ -36,7 +36,7 @@ class JobPostController
             $table->addColumn('action', function (JobPost $row) {
                 return view('includes.datatable-action', [
                     'canView' => Gate::check('view', $row),
-                    'showLink' => $row->link,
+                    'showLink' => route('job-post.show', $row),
                     'canEdit' => Gate::check('update', $row),
                     'editLink' => route('job-post.edit', $row),
                     'canDelete' => Gate::check('delete', $row),

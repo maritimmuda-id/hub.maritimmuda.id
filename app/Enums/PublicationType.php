@@ -7,13 +7,15 @@ use BenSampo\Enum\Enum;
 
 final class PublicationType extends Enum implements LocalizedEnum
 {
-    const Book = 1;
+    const Abstracts = 1;
 
-    const JournalArticle = 2;
+    const Book = 2;
 
-    const MagazineArticle = 3;
+    const JournalArticle = 3;
 
-    const Abstracts = 4;
+    const MagazineArticle = 4;
 
-    const ProceedingArticle = 5;
+    const NewsArticle = 5;
+
+    const ProceedingArticle = 6;
 }
