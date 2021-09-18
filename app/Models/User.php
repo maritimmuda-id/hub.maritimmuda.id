@@ -157,6 +157,11 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
             ->withDefault(['name' => '-']);
     }
 
+    public function getBioFormattedAttribute(): string
+    {
+        return $this->bio ?? '-';
+    }
+
     public function getPhotoLinkAttribute(): string
     {
         return $this->getFirstMediaUrl('photo', 'photo');

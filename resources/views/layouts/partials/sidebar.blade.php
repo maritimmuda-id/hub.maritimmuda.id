@@ -40,7 +40,7 @@
                     :href="route('event.index')"
                     :active="request()->routeIs('event.*')"
                     :label="trans('navigation.event')"
-                    icon="fas fa-calendar"
+                    icon="fas fa-calendar-alt"
                 />
             </li>
         @endcan

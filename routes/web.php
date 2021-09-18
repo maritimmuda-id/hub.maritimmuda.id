@@ -1,18 +1,23 @@
 <?php
 
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\JobPostController;
-use App\Http\Controllers\Profile\ViewEducationHistoryController;
-use App\Http\Controllers\Profile\GeneralProfileController;
-use App\Http\Controllers\Profile\ViewAchievementHistoryController;
-use App\Http\Controllers\Profile\ViewDedicationController;
-use App\Http\Controllers\Profile\ViewOrganizationHistoryController;
-use App\Http\Controllers\Profile\ViewPublicationController;
-use App\Http\Controllers\Profile\ViewResearchController;
-use App\Http\Controllers\Profile\ViewWorkExperienceController;
-use App\Http\Controllers\ScholarshipController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\FindMemberController;
+use App\Http\Controllers\{
+    EventController,
+    JobPostController,
+    ScholarshipController,
+    UserController,
+    FindMemberController,
+    ViewDashboardController,
+};
+use App\Http\Controllers\Profile\{
+    ViewEducationHistoryController,
+    GeneralProfileController,
+    ViewAchievementHistoryController,
+    ViewDedicationController,
+    ViewOrganizationHistoryController,
+    ViewPublicationController,
+    ViewResearchController,
+    ViewWorkExperienceController,
+};
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'login');
@@ -20,7 +25,7 @@ Route::redirect('/', 'login');
 Route::middleware('auth')->group(function () {
     Route::impersonate();
 
-    Route::view('/dashboard', 'dashboard')
+    Route::get('/dashboard', [ViewDashboardController::class, '__invoke'])
         ->name('dashboard');
 
     Route::group(['prefix' => '/profile'], function () {
@@ -52,14 +57,18 @@ Route::middleware('auth')->group(function () {
             ->name('profile.research');
     });
 
-    Route::resource('user', UserController::class)
-        ->only(['index', 'show', 'destroy']);
+    Route::resource('users', UserController::class)
+        ->only(['index', 'destroy'])
+        ->names('user');
 
-    Route::resource('event', EventController::class);
+    Route::resource('events', EventController::class)
+        ->names('event');
 
-    Route::resource('scholarship', ScholarshipController::class);
+    Route::resource('scholarships', ScholarshipController::class)
+        ->names('scholarship');
 
-    Route::resource('job-post', JobPostController::class);
+    Route::resource('job-posts', JobPostController::class)
+        ->names('job-post');
 
     Route::get('find-member', [FindMemberController::class, '__invoke'])
         ->name('find-member');

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Expertise;
 use App\Models\Province;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -50,30 +51,21 @@ class FindMemberCard extends Component
             ]);
     }
 
-    public function render()
+    public function render(): View
     {
         if ($this->search) {
             $this->query->where('name', 'like', "%{$this->search}%");
         }
 
         if ($this->province) {
-            $this->query->whereHas('province', function ($query) {
-                /** @var \Illuminate\Database\Eloquent\Builder $query */
-                $query->whereKey($this->province);
-            });
+            $this->query->whereRelation('province', 'id', $this->province);
         }
 
         if ($this->expertise) {
             $this->query->where(function ($query) {
                 /** @var \Illuminate\Database\Eloquent\Builder $query */
-                $query->whereHas('firstExpertise', function ($query) {
-                    /** @var \Illuminate\Database\Eloquent\Builder $query */
-                    $query->whereKey($this->expertise);
-                })
-                    ->orWhereHas('secondExpertise', function ($query) {
-                        /** @var \Illuminate\Database\Eloquent\Builder $query */
-                        $query->whereKey($this->expertise);
-                    });
+                $query->whereRelation('firstExpertise', 'id', $this->expertise)
+                    ->orWhereRelation('secondExpertise', 'id', $this->expertise);
             });
         }
 
@@ -106,10 +98,17 @@ class FindMemberCard extends Component
                 'second_expertise' => $user->secondExpertise->name,
                 'permanent_address' => $user->permanent_address,
                 'residence_address' => $user->residence_address,
-                'bio' => $user->bio,
+                'bio' => $user->bio_formatted,
             ]);
         }
 
         return;
+    }
+
+    protected function updating($propertyName, $value): void
+    {
+        if (in_array($propertyName, ['search', 'province', 'expertise'])) {
+            $this->resetPage();
+        }
     }
 }

@@ -27,9 +27,8 @@ class UserSeeder extends Seeder
             'second_expertise_id' => 2,
         ]);
 
-        for ($i=0; $i < 2; $i++) {
-            User::factory()->useExistingData()->create();
-        }
+        User::factory()->useExistingData()->create(['locale' => 'id']);
+        User::factory()->useExistingData()->create();
 
         for ($i=0; $i < 10; $i++) {
             EducationHistory::factory()->useExistingData()->create();

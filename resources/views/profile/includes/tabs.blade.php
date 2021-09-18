@@ -57,11 +57,7 @@
             @lang('profile.research.navigation')</a>
     </li>
 </ul>
-@push('styles')
-    @livewireStyles
-@endpush
 @push('scripts')
-    @livewireScripts
     <script src="https://unpkg.com/livewire-sortable@0.2.2/dist/livewire-sortable.js"></script>
     <script>
         $(function () {
