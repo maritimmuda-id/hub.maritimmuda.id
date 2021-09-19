@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'heading' => 'Member',
+    'heading' => 'Find Member',
 
     'filter-search-label' => 'Search',
 

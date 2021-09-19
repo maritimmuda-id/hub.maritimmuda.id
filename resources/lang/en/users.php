@@ -19,5 +19,7 @@ return [
 
     'identity-card-label' => 'Identity Card',
 
+    'created-at-label' => 'Registered Date',
+
     'cannot-delete-current-user' => 'Can\'t delete current user',
 ];

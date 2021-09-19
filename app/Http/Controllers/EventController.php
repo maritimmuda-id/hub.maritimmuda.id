@@ -20,45 +20,50 @@ class EventController
         Gate::authorize('viewAny', Event::class);
 
         if ($request->ajax()) {
-            $table = DataTables::eloquent(Event::query());
-
-            $table->addIndexColumn();
-
-            $table->addColumn('poster', function (Event $row) {
-                return view('includes.datatable-image', ['link' => $row->poster_thumb_link]);
-            }, false);
-
-            $table->editColumn('type', fn (Event $row) => $row->type->description);
-            $table->editColumn('start_date', fn (Event $row) => $row->start_date->format('d F Y H:i'));
-            $table->editColumn('end_date', fn (Event $row) => $row->end_date?->format('d F Y H:i') ?? '-');
-
-            $table->rawColumns(['poster'], true);
-
-            $table->addColumn('action', function (Event $row) {
-                return view('includes.datatable-action', [
-                    'canView' => Gate::check('view', $row),
-                    'showLink' => route('event.show', $row),
-                    'canEdit' => Gate::check('update', $row),
-                    'editLink' => route('event.edit', $row),
-                    'canDelete' => Gate::check('delete', $row),
-                    'deleteLink' => route('event.destroy', $row),
-                ]);
-            });
-
-            return $table->make(true);
+            return DataTables::eloquent(Event::query())
+                ->addColumn('poster', function (Event $row) {
+                    return view('includes.datatable-image', ['link' => $row->poster_thumb_link]);
+                })
+                ->addColumn('action', function (Event $row) {
+                    return view('includes.datatable-action', [
+                        'canView' => Gate::check('view', $row),
+                        'showLink' => route('event.show', $row),
+                        'canEdit' => Gate::check('update', $row),
+                        'editLink' => route('event.edit', $row),
+                        'canDelete' => Gate::check('delete', $row),
+                        'deleteLink' => route('event.destroy', $row),
+                    ]);
+                })
+                ->editColumn('type', fn (Event $row) => $row->type->description)
+                ->editColumn('start_date', function (Event $row) {
+                    return $row->start_date->format('d F Y H:i');
+                })
+                ->editColumn('end_date', function (Event $row) {
+                    return $row->end_date?->format('d F Y H:i') ?? '-';
+                })
+                ->editColumn('created_at', function (Event $row) {
+                    return $row->created_at->format('d F Y H:i');
+                })
+                ->orderColumn('created_at', function ($query, $order) {
+                    /** @var \Illuminate\Database\Query\Builder $query */
+                    $query->orderBy('id', $order);
+                })
+                ->rawColumns(['poster'], true)
+                ->make();
         }
 
         $dataTable = $htmlBuilder->addIndex()
             ->setTableId('events-table')
             ->columns([
-                ['data' => 'id', 'name' => 'id', 'title' => __('ID'), 'searchable' => false],
-                ['data' => 'name', 'name' => 'name', 'title' => trans('events.name-label')],
-                ['data' => 'organizer_name', 'name' => 'organizer_name', 'title' => trans('events.organizer-name-label')],
-                ['data' => 'type', 'name' => 'type', 'title' => trans('events.type-label'), 'searchable' => false],
-                ['data' => 'start_date', 'name' => 'start_date', 'title' => trans('events.start-date-label'), 'searchable' => false, 'orderable' => false],
-                ['data' => 'end_date', 'name' => 'end_date', 'title' => trans('events.end-date-label'), 'searchable' => false, 'orderable' => false],
-                ['data' => 'poster', 'name' => 'poster', 'title' => trans('events.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
+                ['data' => 'created_at', 'title' => __('Posting Date'), 'searchable' => false],
+                ['data' => 'name', 'title' => trans('events.name-label')],
+                ['data' => 'organizer_name', 'title' => trans('events.organizer-name-label')],
+                ['data' => 'type', 'title' => trans('events.type-label'), 'searchable' => false],
+                ['data' => 'start_date', 'title' => trans('events.start-date-label'), 'searchable' => false, 'orderable' => false],
+                ['data' => 'end_date', 'title' => trans('events.end-date-label'), 'searchable' => false, 'orderable' => false],
+                ['data' => 'poster', 'title' => trans('events.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
             ])
+            ->orderBy(0)
             ->addAction(['title' => __('Action')])
             ->minifiedAjax(route('event.index'))
             ->drawCallback(<<<JAVASCRIPT

@@ -4,6 +4,7 @@ use App\Enums\EducationLevel;
 use App\Enums\EventType;
 use App\Enums\Gender;
 use App\Enums\JobType;
+use App\Enums\PublicationType;
 
 return [
     Gender::class => [
@@ -34,6 +35,7 @@ return [
     ],
 
     EducationLevel::class => [
+        EducationLevel::JuniorHighSchool => 'Junior High School',
         EducationLevel::SeniorHighSchool => 'Senior High School',
         EducationLevel::VocationalHighSchool => 'Vocational High School',
         EducationLevel::IslamicBoardingSchool => 'Islamic Boarding School',
@@ -42,5 +44,14 @@ return [
         EducationLevel::BachelorDegree => 'Bachelor\'s Degree',
         EducationLevel::MasterDegree => 'Master\'s Degree',
         EducationLevel::DoctorDegree => 'Doctoral Degree',
+    ],
+
+    PublicationType::class => [
+        PublicationType::Abstracts => 'Abstract',
+        PublicationType::Book => 'Book',
+        PublicationType::JournalArticle => 'Journal Article',
+        PublicationType::MagazineArticle => 'Magazine Article',
+        PublicationType::NewsArticle => 'News Article',
+        PublicationType::ProceedingArticle => 'Proceeding Article',
     ],
 ];

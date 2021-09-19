@@ -7,19 +7,21 @@ use BenSampo\Enum\Enum;
 
 final class EducationLevel extends Enum implements LocalizedEnum
 {
-    const SeniorHighSchool = 1;
+    const JuniorHighSchool = 1;
 
-    const VocationalHighSchool = 2;
+    const SeniorHighSchool = 2;
 
-    const IslamicBoardingSchool = 3;
+    const VocationalHighSchool = 3;
 
-    const D3 = 4;
+    const IslamicBoardingSchool = 4;
 
-    const D4 = 5;
+    const D3 = 5;
 
-    const BachelorDegree = 6;
+    const D4 = 6;
 
-    const MasterDegree = 7;
+    const BachelorDegree = 7;
 
-    const DoctorDegree = 8;
+    const MasterDegree = 8;
+
+    const DoctorDegree = 9;
 }

@@ -28,7 +28,7 @@ return [
 
         'institution-name-label' => 'Institution Name',
 
-        'major-label' => 'Major/Study Program',
+        'major-label' => 'Major/Field of Study',
 
         'level-label' => 'Level',
 
@@ -48,9 +48,9 @@ return [
 
         'role-label' => 'Position',
 
-        'period-start-date-label' => 'Period Start Date',
+        'period-start-date-label' => 'Start Date',
 
-        'period-end-date-label' => 'Period End Date',
+        'period-end-date-label' => 'End Date',
     ],
 
     'achievement-history' => [

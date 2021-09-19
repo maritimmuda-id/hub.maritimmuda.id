@@ -35,25 +35,25 @@ class ViewDashboardController
 
         $widgets = [
             [
-                'label' => trans('users.plural-name'),
+                'label' => trans('dashboard.users-label'),
                 'value' => $membersCount,
                 'icon' => 'fas fa-user-friends',
                 'action' => Gate::check('viewAny', \App\Models\User::class) ? route('user.index') : route('find-member'),
             ],
             [
-                'label' => trans('events.plural-name'),
+                'label' => trans('dashboard.events-label'),
                 'value' => $eventsCount,
                 'icon' => 'fas fa-calendar-alt',
                 'action' => route('event.index'),
             ],
             [
-                'label' => trans('scholarships.plural-name'),
+                'label' => trans('dashboard.scholarships-label'),
                 'value' => $scholarshipsCount,
                 'icon' => 'fas fa-money-bill-alt',
                 'action' => route('scholarship.index'),
             ],
             [
-                'label' => trans('job-posts.plural-name'),
+                'label' => trans('dashboard.job-posts-label'),
                 'value' => $jobPostsCount,
                 'icon' => 'fas fa-briefcase',
                 'action' => route('job-post.index'),

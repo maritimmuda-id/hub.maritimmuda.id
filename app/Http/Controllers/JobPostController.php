@@ -20,31 +20,30 @@ class JobPostController
         Gate::authorize('viewAny', JobPost::class);
 
         if ($request->ajax()) {
-            $table = DataTables::eloquent(JobPost::query());
-
-            $table->addIndexColumn();
-
-            $table->addColumn('poster', function (JobPost $row) {
-                return view('includes.datatable-image', ['link' => $row->poster_thumb_link]);
-            }, false);
-
-            $table->editColumn('type', fn (JobPost $row) => $row->type->description);
-            $table->editColumn('application_closed_at', fn (JobPost $row) => $row->application_closed_at?->format('d F Y H:i'));
-
-            $table->rawColumns(['poster'], true);
-
-            $table->addColumn('action', function (JobPost $row) {
-                return view('includes.datatable-action', [
-                    'canView' => Gate::check('view', $row),
-                    'showLink' => route('job-post.show', $row),
-                    'canEdit' => Gate::check('update', $row),
-                    'editLink' => route('job-post.edit', $row),
-                    'canDelete' => Gate::check('delete', $row),
-                    'deleteLink' => route('job-post.destroy', $row),
-                ]);
-            });
-
-            return $table->make(true);
+            return DataTables::eloquent(JobPost::query())
+                ->addColumn('poster', function (JobPost $row) {
+                    return view('includes.datatable-image', ['link' => $row->poster_thumb_link]);
+                })
+                ->addColumn('action', function (JobPost $row) {
+                    return view('includes.datatable-action', [
+                        'canView' => Gate::check('view', $row),
+                        'showLink' => route('job-post.show', $row),
+                        'canEdit' => Gate::check('update', $row),
+                        'editLink' => route('job-post.edit', $row),
+                        'canDelete' => Gate::check('delete', $row),
+                        'deleteLink' => route('job-post.destroy', $row),
+                    ]);
+                })
+                ->editColumn('type', fn (JobPost $row) => $row->type->description)
+                ->editColumn('application_closed_at', function (JobPost $row) {
+                    return $row->application_closed_at?->format('d F Y H:i');
+                })
+                ->orderColumn('created_at', function ($query, $order) {
+                    /** @var \Illuminate\Database\Query\Builder $query */
+                    $query->orderBy('id', $order);
+                })
+                ->rawColumns(['poster'], true)
+                ->make();
         }
 
         $dataTable = $builder->addIndex()

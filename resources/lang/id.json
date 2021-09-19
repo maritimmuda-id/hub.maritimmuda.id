@@ -1,8 +1,10 @@
 {
-    "Action": "Aksi",
+    "Account": "Akun",
+    "Action": "Tindakan",
     "Are you sure?": "Apakah anda yakin?",
     "Impersonate": "Impersonate",
-    "ID": "No.",
+    "Posting Date": "Tanggal Posting",
+    "View More": "Lihat Selengkapnya",
     "View": "Lihat",
     "Edit": "Ubah",
     "Delete": "Hapus",

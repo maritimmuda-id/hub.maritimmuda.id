@@ -37,7 +37,7 @@
                 <div class="card">
                     <div class="card-body p-2 d-flex justify-content-between">
                         <div class="d-flex">
-                            <img style="width:75px;height:100px;" class="img-fluid img-thumbnail" src="{{ $user->photo_thumb_link }}">
+                            <img style="width:75px;height:100px;" class="img-fluid img-thumbnail" src="{{ $user->photo_link }}">
                             <div class="mx-2">
                                 <h3>{{ $user->name }}</h3>
                                 <strong class="d-block">{{ $user->province->name }}</strong>
@@ -46,7 +46,10 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center mr-2">
-                            <button wire:click="show('{{ $user->uuid }}')" class="btn btn-info">
+                            <button
+                                wire:click.prevent="show('{{ $user->uuid }}')"
+                                class="btn btn-info"
+                            >
                                 <i class="fas fa-info-circle"></i>
                             </button>
                         </div>
@@ -59,7 +62,7 @@
             </div>
         @endforelse
     </div>
-    @if ($users)
+    @if ($users?->hasMorePages())
         <div class="row">
             <div class="col-md-12">
                 {!! $users->links() !!}

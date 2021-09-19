@@ -18,38 +18,41 @@ class ScholarshipController
     public function index(Request $request, Builder $builder): View | JsonResponse
     {
         if ($request->ajax()) {
-            $table = DataTables::eloquent(Scholarship::query());
-
-            $table->addIndexColumn();
-
-            $table->addColumn('poster', function (Scholarship $row) {
-                return view('includes.datatable-image', ['link' => $row->poster_thumb_link]);
-            }, false);
-
-            $table->editColumn('submission_deadline', fn (Scholarship $row) => $row->submission_deadline->format('d F Y H:i'));
-
-            $table->rawColumns(['poster'], true);
-
-            $table->addColumn('action', function (Scholarship $row) {
-                return view('includes.datatable-action', [
-                    'canView' => Gate::check('view', $row),
-                    'showLink' => route('scholarship.show', $row),
-                    'canEdit' => Gate::check('update', $row),
-                    'editLink' => route('scholarship.edit', $row),
-                    'canDelete' => Gate::check('delete', $row),
-                    'deleteLink' => route('scholarship.destroy', $row),
-                ]);
-            });
-
-            return $table->make(true);
+            return DataTables::eloquent(Scholarship::query())
+                ->addColumn('poster', function (Scholarship $row) {
+                    return view('includes.datatable-image', ['link' => $row->poster_thumb_link]);
+                })
+                ->addColumn('action', function (Scholarship $row) {
+                    return view('includes.datatable-action', [
+                        'canView' => Gate::check('view', $row),
+                        'showLink' => route('scholarship.show', $row),
+                        'canEdit' => Gate::check('update', $row),
+                        'editLink' => route('scholarship.edit', $row),
+                        'canDelete' => Gate::check('delete', $row),
+                        'deleteLink' => route('scholarship.destroy', $row),
+                    ]);
+                })
+                ->editColumn('created_at', function (Scholarship $row) {
+                    return $row->created_at->format('d F Y H:i');
+                })
+                ->editColumn('submission_deadline', function (Scholarship $row) {
+                    return $row->submission_deadline->format('d F Y H:i');
+                })
+                ->orderColumn('created_at', function ($query, $order) {
+                    /** @var \Illuminate\Database\Query\Builder $query */
+                    $query->orderBy('id', $order);
+                })
+                ->rawColumns(['poster'], true)
+                ->make();
         }
 
-        $dataTable = $builder->addIndex()
+        $dataTable = $builder->orderBy(0)
             ->columns([
-                ['data' => 'name', 'name' => 'name', 'title' => trans('scholarships.name-label')],
-                ['data' => 'provider_name', 'name' => 'provider_name', 'title' => trans('scholarships.provider-name-label')],
-                ['data' => 'submission_deadline', 'name' => 'submission_deadline', 'title' => trans('scholarships.submission-deadline-label'), 'searchable' => false],
-                ['data' => 'poster', 'name' => 'poster', 'title' => trans('scholarships.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
+                ['data' => 'created_at', 'title' => __('Posting Date'), 'searchable' => false],
+                ['data' => 'name', 'title' => trans('scholarships.name-label')],
+                ['data' => 'provider_name', 'title' => trans('scholarships.provider-name-label')],
+                ['data' => 'submission_deadline', 'title' => trans('scholarships.submission-deadline-label'), 'searchable' => false],
+                ['data' => 'poster', 'title' => trans('scholarships.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
             ])
             ->addAction(['title' => __('Action')])
             ->minifiedAjax(route('scholarship.index'))

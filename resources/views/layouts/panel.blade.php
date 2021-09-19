@@ -52,7 +52,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pt-0">
                         <div class="dropdown-header bg-light py-2">
-                            <strong>Account</strong>
+                            <strong>@lang('Account')</strong>
                         </div>
                         <a class="dropdown-item" href="{{ route('profile.edit') }}">
                             <i class="mfe-2 fas fa-user"></i>
@@ -132,6 +132,7 @@
     <script src="https://unpkg.com/lightgallery@2.x/lightgallery.min.js"></script>
     <script src="https://unpkg.com/jquery.dirty@0.8.3/dist/jquery.dirty.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    @livewireScripts
 
     @stack('scripts')
 </body>
