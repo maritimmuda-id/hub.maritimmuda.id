@@ -38,7 +38,9 @@
                     },
                 })
                 .on('dp.change', (e) => {
-                    $(e.currentTarget).val(e.date?.format('{{ $format }}'));
+                    $(e.currentTarget)
+                        .val(e.date?.format('{{ $format }}'))
+                        .trigger('change');
                 });
         });
     </script>

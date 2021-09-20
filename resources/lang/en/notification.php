@@ -3,6 +3,8 @@
 return [
     'heading' => 'Notification',
 
+    'no-notifications-text' => 'No notifications',
+
     'view-all-notification-text' => 'View all',
 
     'mark-as-read-text' => 'Mark as Read',

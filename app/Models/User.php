@@ -13,8 +13,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -25,9 +27,14 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
     use HasApiTokens;
     use HasFactory;
     use HasUuid;
-    use Notifiable;
     use Impersonate;
     use InteractsWithMedia;
+    use Notifiable;
+    use QueryCacheable;
+
+    public $file = 'file';
+
+    public $cacheFor = 3600; // 1 hour
 
     protected $fillable = [
         'uid',
@@ -177,6 +184,19 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         return $this->getFirstMediaUrl('photo', 'thumb');
     }
 
+    public function setPasswordAttribute($value): void
+    {
+        if (empty($value)) {
+            return;
+        }
+
+        if (Hash::needsRehash($value)) {
+            $value = Hash::make($value);
+        }
+
+        $this->attributes['password'] = $value;
+    }
+
     public function preferredLocale(): ?string
     {
         return $this->locale;
@@ -199,6 +219,9 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
             'gender' => trans('profile.gender-label'),
             'photo' => trans('profile.photo-label'),
             'password' => trans('profile.password-label'),
+            'current_password' => trans('profile.current-password-label'),
+            'new_password' => trans('profile.new-password-label'),
+            'new_password_confirmation' => trans('profile.new-password-confirmation-label'),
             'place_of_birth' => trans('profile.place-of-birth-label'),
             'date_of_birth' => trans('profile.date-of-birth-label'),
             'linkedin_profile' => trans('profile.linkedin-profile-label'),

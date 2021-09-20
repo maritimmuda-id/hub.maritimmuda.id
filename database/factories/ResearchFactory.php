@@ -27,7 +27,7 @@ class ResearchFactory extends Factory
     public function useExistingData(): self
     {
         return $this->state([
-            'user_id' => User::query()->inRandomOrder()->first()->id,
+            'user_id' => User::query()->dontCache()->inRandomOrder()->first()->id,
         ]);
     }
 }

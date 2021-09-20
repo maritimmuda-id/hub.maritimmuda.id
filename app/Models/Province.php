@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\QueryCacheable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 
 class Province extends Model
 {
     use HasFactory;
     use QueryCacheable;
+
+    public $file = 'file';
+
+    public $cacheFor = 604800; // 1 week
 
     public $timestamps = false;
 

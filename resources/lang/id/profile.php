@@ -155,7 +155,7 @@ return [
 
     'identity-card-label' => 'KTP',
 
-    'identity-card-help-text' => 'KTP diperlukan untuk verifikasi data anggota. Sistem otomatis memberi <em>watermark</em> untuk mencegah penyalahgunaan KTP. <a href=":href" target="_blank">Baca anjuran Kementerian Kominfo mengenai pemberian <em>watermark</em> pada KTP di postingan ini.</a>',
+    'identity-card-help-text' => 'KTP diperlukan untuk verifikasi data anggota. Sistem otomatis memberi <em>watermark</em> untuk mencegah penyalahgunaan KTP. <a href=":href" target="_blank">Baca anjuran <strong>Kementerian Kominfo</strong> mengenai pemberian <em>watermark</em> pada KTP di postingan ini.</a>',
 
     'province-label' => 'Organisasi Daerah',
 
@@ -173,9 +173,17 @@ return [
 
     'bio-label' => 'Bio Singkat',
 
+    'update-profile-success' => 'Profil berhasil diperbarui',
+
+    'change-password-header' => 'Ganti Kata Sandi',
+
     'password-label' => 'Kata Sandi',
 
-    'update-profile-success' => 'Profil berhasil diperbarui',
+    'current-password-label' => 'Kata Sandi Saat Ini',
+
+    'new-password-label' => 'Kata Sandi Baru',
+
+    'new-password-confirmation-label' => 'Konfirmasi Kata Sandi Baru',
 
     'change-password-success' => 'Kata Sandi berhasil diperbarui',
 ];

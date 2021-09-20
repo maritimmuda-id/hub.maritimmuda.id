@@ -12,7 +12,7 @@ class ApplyLocale
 {
     public const SessionLocaleName = '_app_locale';
 
-    public const AvailableLocale = ['en', 'id'];
+    public const AvailableLocale = ['id', 'en'];
 
     public function handle(Request $request, Closure $next): Response
     {

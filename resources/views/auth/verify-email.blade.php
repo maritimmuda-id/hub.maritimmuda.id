@@ -2,17 +2,17 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">{{ trans('verify-email.title') }}</div>
-    
+
                     <div class="card-body">
                         @if (session('status') == 'verification-link-sent')
                             <div class="alert alert-success" role="alert">
                                 {!! trans('verify-email.successfully-resend-email-verification') !!}
                             </div>
                         @endif
-    
+
                         {{ trans('verify-email.notice_1') }}
                         {{ trans('verify-email.notice_2') }},
                         <x-form class="d-inline" :action="route('verification.send')">

@@ -2,17 +2,18 @@
 
 use App\Http\Controllers\{
     EventController,
+    FindMemberController,
     JobPostController,
     ScholarshipController,
     UserController,
-    FindMemberController,
     ViewDashboardController,
 };
 use App\Http\Controllers\Profile\{
-    ViewEducationHistoryController,
+    ChangePasswordController,
     GeneralProfileController,
     ViewAchievementHistoryController,
     ViewDedicationController,
+    ViewEducationHistoryController,
     ViewOrganizationHistoryController,
     ViewPublicationController,
     ViewResearchController,
@@ -35,16 +36,19 @@ Route::middleware('auth')->group(function () {
         Route::patch('/general', [GeneralProfileController::class, 'update'])
             ->name('profile.update');
 
-        Route::get('/education-histories', [ViewEducationHistoryController::class, '__invoke'])
+        Route::patch('/change-password', [ChangePasswordController::class, '__invoke'])
+            ->name('profile.change-password');
+
+        Route::get('/educations', [ViewEducationHistoryController::class, '__invoke'])
             ->name('profile.education-history');
 
         Route::get('/work-experiences', [ViewWorkExperienceController::class, '__invoke'])
             ->name('profile.work-experience');
 
-        Route::get('/organization-histories', [ViewOrganizationHistoryController::class, '__invoke'])
+        Route::get('/organizations', [ViewOrganizationHistoryController::class, '__invoke'])
             ->name('profile.organization-history');
 
-        Route::get('/achievement-histories', [ViewAchievementHistoryController::class, '__invoke'])
+        Route::get('/achievements', [ViewAchievementHistoryController::class, '__invoke'])
             ->name('profile.achievement-history');
 
         Route::get('/publications', [ViewPublicationController::class, '__invoke'])

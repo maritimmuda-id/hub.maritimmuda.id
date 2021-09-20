@@ -164,5 +164,40 @@
                 </div>
             </x-form>
         </div>
+
+        <div class="card">
+            <div class="card-header">
+                @lang('profile.change-password-header')
+            </div>
+            <x-form :action="route('profile.change-password')" method="patch">
+                <div class="card-body row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <x-form-input
+                                    name="current_password"
+                                    :label="trans('profile.current-password-label')"
+                                />
+                            </div>
+                            <div class="col-md-8">
+                                <x-form-input
+                                    name="new_password"
+                                    :label="trans('profile.new-password-label')"
+                                />
+                            </div>
+                            <div class="col-md-8">
+                                <x-form-input
+                                    name="new_password_confirmation"
+                                    :label="trans('profile.new-password-confirmation-label')"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <x-save-button />
+                </div>
+            </x-form>
+        </div>
     </div>
 @endsection

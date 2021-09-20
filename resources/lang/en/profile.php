@@ -173,9 +173,17 @@ return [
 
     'bio-label' => 'Bio',
 
+    'update-profile-success' => 'Profile updated successfully',
+
+    'change-password-header' => 'Change Password',
+
     'password-label' => 'Password',
 
-    'update-profile-success' => 'Profile updated successfully',
+    'current-password-label' => 'Current Password',
+
+    'new-password-label' => 'New Password',
+
+    'new-password-confirmation-label' => 'New Password Confirmation',
 
     'change-password-success' => 'Password changed successfully',
 ];

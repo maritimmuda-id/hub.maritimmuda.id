@@ -3,6 +3,8 @@
 return [
     'heading' => 'Notifikasi',
 
+    'no-notifications-text' => 'Tidak ada notifikasi',
+
     'view-all-notification-text' => 'Lihat Semua',
 
     'mark-as-read-text' => 'Tandai telah dibaca',
