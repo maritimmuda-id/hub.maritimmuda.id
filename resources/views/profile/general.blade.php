@@ -176,18 +176,21 @@
                             <div class="col-md-8">
                                 <x-form-input
                                     name="current_password"
+                                    type="password"
                                     :label="trans('profile.current-password-label')"
                                 />
                             </div>
                             <div class="col-md-8">
                                 <x-form-input
                                     name="new_password"
+                                    type="password"
                                     :label="trans('profile.new-password-label')"
                                 />
                             </div>
                             <div class="col-md-8">
                                 <x-form-input
                                     name="new_password_confirmation"
+                                    type="password"
                                     :label="trans('profile.new-password-confirmation-label')"
                                 />
                             </div>
