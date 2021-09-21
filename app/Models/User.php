@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Gender;
 use App\Models\Concerns\HasUuid;
+use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent;
@@ -13,10 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
-use Rennokki\QueryCache\Traits\QueryCacheable;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -29,12 +28,8 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
     use HasUuid;
     use Impersonate;
     use InteractsWithMedia;
+    use MustVerifyEmailTrait;
     use Notifiable;
-    use QueryCacheable;
-
-    public $file = 'file';
-
-    public $cacheFor = 3600; // 1 hour
 
     protected $fillable = [
         'uid',
