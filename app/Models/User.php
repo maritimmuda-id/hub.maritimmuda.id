@@ -179,6 +179,11 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         return $this->getFirstMediaUrl('photo', 'thumb');
     }
 
+    public function getRouteKeyName(): string
+    {
+        return $this->getKeyName();
+    }
+
     public function preferredLocale(): ?string
     {
         return $this->locale;

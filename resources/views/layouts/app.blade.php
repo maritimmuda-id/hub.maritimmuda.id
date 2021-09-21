@@ -36,14 +36,22 @@
                 <div class="col-md-2">
                     <div class="text-muted">Didukung Oleh:</div>
                     <div class="mt-1">
-                        <img class="img-fluid" src="https://res.cloudinary.com/zhanang19/image/upload/q_auto,w_45/v1632031446/Logo_Kemenko_Marves_jdpzst.png" alt="Kementerian Koordinator Bidang Kemaritiman dan Investasi" loading="lazy">
-                        <img class="img-fluid" src="https://res.cloudinary.com/zhanang19/image/upload/q_auto,w_45/v1632031445/Logo_KKP_y7yr5d.png" alt="Kementerian Kelautan dan Perikanan" loading="lazy">
-                        <img class="img-fluid" src="https://res.cloudinary.com/zhanang19/image/upload/q_auto,w_45/v1632031504/Kemenpora_Logo_kwwpr5.png" alt="Kementerian Pemuda dan Olahraga" loading="lazy">
+                        <a href="https://maritim.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
+                            <img class="img-fluid" style="width:45px" src="{{ asset('img/logo-kemenko-marves.png') }}" alt="Kementerian Koordinator Bidang Kemaritiman dan Investasi" loading="lazy">
+                        </a>
+                        <a href="https://www.kkp.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
+                            <img class="img-fluid" style="width:45px" src="{{ asset('img/logo-kkp.png') }}" alt="Kementerian Kelautan dan Perikanan" loading="lazy">
+                        </a>
+                        <a href="https://www.kemenpora.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
+                            <img class="img-fluid" style="width:45px" src="{{ asset('img/logo-kemenpora.png') }}" alt="Kementerian Pemuda dan Olahraga" loading="lazy">
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-4 d-flex align-items-center">
-                    <img class="img-fluid" src="https://res.cloudinary.com/zhanang19/image/upload/q_auto,w_50/v1632113345/ORI_Original_Rekor_Indonesia_kbmhcc.png" alt="Original Rekor Indonesia" loading="lazy">
-                    <a href="#" class="ml-2 text-muted">Platform Digital Jejaring Nasional Pemuda Bidang Kemaritiman Pertama di Indonesia</a>
+                    <a href="#" class="d-flex flex-row align-items-center">
+                        <img class="d-block img-fluid" src="{{ asset('img/logo-ori.png') }}" alt="Original Rekor Indonesia" loading="lazy">
+                        <span class="d-block ml-2 text-muted">Platform Digital Jejaring Nasional Pemuda Bidang Kemaritiman Pertama di Indonesia</span>
+                    </a>
                 </div>
             </footer>
         </div>
