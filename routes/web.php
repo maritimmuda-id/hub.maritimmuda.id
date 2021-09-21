@@ -20,12 +20,19 @@ use App\Http\Controllers\Profile\{
     ViewWorkExperienceController,
 };
 use Illuminate\Support\Facades\Route;
+use Lab404\Impersonate\Controllers\ImpersonateController;
 
 Route::redirect('/', 'login');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::impersonate();
+Route::middleware('auth')->group(function () {
+    Route::get('/impersonate/take/{id}/{guardName?}', [ImpersonateController::class, 'take'])
+        ->name('impersonate');
 
+    Route::get('/impersonate/leave', [ImpersonateController::class, 'leave'])
+        ->name('impersonate.leave');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [ViewDashboardController::class, '__invoke'])
         ->name('dashboard');
 

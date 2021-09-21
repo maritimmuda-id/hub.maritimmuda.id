@@ -25,33 +25,35 @@
     <div class="container">
         @yield("content")
 
-        <div class="row justify-content-center mt-3">
-            <footer class="col-md-10 d-flex align-items-center justify-content-between row no-gutters">
-                <div class="col-md-4 text-muted">
-                    <span>Copyright &copy;</span>
-                    <a href="https://maritimmuda.id">Maritim Muda Nusantara</a>
-                    <span>{{ date('Y') }}</span>
-                    <div class="mt-1">Maritim Muda Hub v2.0</div>
-                </div>
-                <div class="col-md-2">
-                    <div class="text-muted">Didukung Oleh:</div>
-                    <div class="mt-1">
-                        <a href="https://maritim.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="{{ asset('img/logo-kemenko-marves.png') }}" alt="Kementerian Koordinator Bidang Kemaritiman dan Investasi" loading="lazy">
-                        </a>
-                        <a href="https://www.kkp.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="{{ asset('img/logo-kkp.png') }}" alt="Kementerian Kelautan dan Perikanan" loading="lazy">
-                        </a>
-                        <a href="https://www.kemenpora.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="{{ asset('img/logo-kemenpora.png') }}" alt="Kementerian Pemuda dan Olahraga" loading="lazy">
+        <div class="row justify-content-center">
+            <footer class="col-md-10">
+                <div class="row no-gutters align-items-center justify-content-center justify-content-md-between">
+                    <div class="col-md-4 mt-4 text-center text-md-left text-muted">
+                        <span>Copyright &copy;</span>
+                        <a href="https://maritimmuda.id">Maritim Muda Nusantara</a>
+                        <span>{{ date('Y') }}</span>
+                        <div class="mt-1">Maritim Muda Hub v2.0</div>
+                    </div>
+                    <div class="col-md-2 mt-4 text-center text-md-left">
+                        <div class="text-muted">Didukung Oleh:</div>
+                        <div class="mt-1">
+                            <a href="https://maritim.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
+                                <img class="img-fluid" src="{{ asset('img/logo-kemenko-marves.png') }}" alt="Kementerian Koordinator Bidang Kemaritiman dan Investasi" loading="lazy">
+                            </a>
+                            <a href="https://www.kkp.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
+                                <img class="img-fluid" src="{{ asset('img/logo-kkp.png') }}" alt="Kementerian Kelautan dan Perikanan" loading="lazy">
+                            </a>
+                            <a href="https://www.kemenpora.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
+                                <img class="img-fluid" src="{{ asset('img/logo-kemenpora.png') }}" alt="Kementerian Pemuda dan Olahraga" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-4 d-flex justify-content-center">
+                        <a href="#" class="d-flex flex-row align-items-center">
+                            <img class="img-fluid" src="{{ asset('img/logo-ori.png') }}" alt="Original Rekor Indonesia" loading="lazy">
+                            <span class="ml-2 text-muted">Platform Digital Jejaring Nasional Pemuda Bidang Kemaritiman Pertama di Indonesia</span>
                         </a>
                     </div>
-                </div>
-                <div class="col-md-4 d-flex align-items-center">
-                    <a href="#" class="d-flex flex-row align-items-center">
-                        <img class="d-block img-fluid" src="{{ asset('img/logo-ori.png') }}" alt="Original Rekor Indonesia" loading="lazy">
-                        <span class="d-block ml-2 text-muted">Platform Digital Jejaring Nasional Pemuda Bidang Kemaritiman Pertama di Indonesia</span>
-                    </a>
                 </div>
             </footer>
         </div>

@@ -3,6 +3,11 @@
 <div class="row justify-content-center">
     <div class="col-md-10">
         <div class="card-group">
+            <div class="card mx-auto" style="width:40%">
+                <div class="card-body d-flex justify-content-center align-items-center">
+                    <img class="img-fluid" src="{{ asset('/img/logo-300.png') }}" alt="" />
+                </div>
+            </div>
             <div class="card p-4">
                 <div class="card-body">
                     <h2 class="mb-3">{{ trans('reset-password.heading') }}</h2>
@@ -34,11 +39,6 @@
                             </div>
                         </div>
                     </x-form>
-                </div>
-            </div>
-            <div class="card d-md-down-none" style="width:40%">
-                <div class="card-body d-flex justify-content-center align-items-center">
-                    <img class="img-fluid" src="{{ asset('/img/logo-300.png') }}" alt="" />
                 </div>
             </div>
         </div>
