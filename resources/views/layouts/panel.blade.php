@@ -33,7 +33,7 @@
             </button>
 
             <div class="c-header-brand d-lg-none">
-                <img class="img-fluid p-1" height="40" src="https://res.cloudinary.com/zhanang19/image/upload/q_auto,c_scale,h_40/v1630384690/11_nr53qu.png" alt="{{ config('app.name') }}">
+                <img class="img-fluid p-1" height="40" src="{{ asset('img/logo-100.png') }}" alt="{{ config('app.name') }}">
             </div>
 
             <button class="c-header-toggler mfs-3 d-md-down-none" type="button" responsive="true">

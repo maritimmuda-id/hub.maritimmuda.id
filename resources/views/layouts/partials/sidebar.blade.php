@@ -1,6 +1,6 @@
 <div id="sidebar" class="c-sidebar c-sidebar-fixed c-sidebar-lg-show">
     <div class="c-sidebar-brand bg-white d-md-down-none">
-        <img class="c-sidebar-brand-full img-fluid p-1" height="40" src="https://res.cloudinary.com/zhanang19/image/upload/q_auto,c_scale,h_40/v1630384690/11_nr53qu.png" alt="{{ config('app.name') }}">
+        <img class="c-sidebar-brand-full img-fluid p-1" height="40" src="{{ asset('img/logo-100.png') }}" alt="{{ config('app.name') }}">
     </div>
 
     <ul class="c-sidebar-nav">
