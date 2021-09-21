@@ -35,7 +35,7 @@ class Dedication extends Model implements Sortable
     public function buildSortQuery(): Eloquent\Builder | Query\Builder
     {
         return static::query()
-            ->where('user_id', $this->user_id);
+            ->where('user_id', $this->getAttribute('user_id'));
     }
 
     public function user(): BelongsTo | Eloquent\Builder | Query\Builder

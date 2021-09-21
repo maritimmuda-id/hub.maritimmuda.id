@@ -15,7 +15,6 @@ class UserController
 {
     public function index(Request $request, Html\Builder $htmlBuilder): View | JsonResponse
     {
-        ray()->showQueries();
         Gate::authorize('viewAny', User::class);
 
         if ($request->ajax()) {

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class ChangePasswordRequest extends FormRequest
@@ -30,7 +31,9 @@ class ChangePasswordRequest extends FormRequest
     {
         /** @var \App\Models\User $user */
         $user = $this->user();
-        $user->forceFill(['password' => $this->get('new_password')])
+        $user->forceFill([
+                'password' => Hash::make($this->get('new_password'))
+            ])
             ->save();
     }
 }

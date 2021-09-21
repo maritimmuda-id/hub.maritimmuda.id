@@ -15,7 +15,6 @@ trait HasProfileForm
 
     public function __construct()
     {
-        /** @var \App\Models\User */
         $this->user = auth()->user();
     }
 

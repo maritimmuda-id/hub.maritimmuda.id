@@ -184,19 +184,6 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         return $this->getFirstMediaUrl('photo', 'thumb');
     }
 
-    public function setPasswordAttribute($value): void
-    {
-        if (empty($value)) {
-            return;
-        }
-
-        if (Hash::needsRehash($value)) {
-            $value = Hash::make($value);
-        }
-
-        $this->attributes['password'] = $value;
-    }
-
     public function preferredLocale(): ?string
     {
         return $this->locale;

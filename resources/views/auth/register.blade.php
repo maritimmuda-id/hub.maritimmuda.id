@@ -35,12 +35,20 @@
                                     />
                                 </div>
                                 <div class="col-md-6">
+                                    <x-form-select
+                                        name="gender"
+                                        :label="trans('register.province-label')"
+                                        :options="$provinces"
+                                        tabindex="4"
+                                    />
+                                </div>
+                                <div class="col-md-6">
                                     <x-form-input
                                         type="password"
                                         name="password"
                                         :label="trans('register.password-label')"
                                         autocomplete="new-password"
-                                        tabindex="4"
+                                        tabindex="5"
                                     />
                                 </div>
                                 <div class="col-md-6">
@@ -49,7 +57,7 @@
                                         name="password_confirmation"
                                         :label="trans('register.password-confirmation-label')"
                                         autocomplete="new-password"
-                                        tabindex="5"
+                                        tabindex="6"
                                     />
                                 </div>
                             </div>
@@ -57,13 +65,13 @@
 
                             <div class="row">
                                 <div class="col-6">
-                                    <button type="submit" tabindex="6" class="btn btn-primary px-4">
+                                    <button type="submit" tabindex="7" class="btn btn-primary px-4">
                                         {{ trans('register.submit-button') }}
                                     </button>
                                 </div>
                                 <div class="col-6 text-right">
                                     @if(Route::has('login'))
-                                        <a class="btn btn-link my-1 p-0" href="{{ route('login') }}" tabindex="7">
+                                        <a class="btn btn-link my-1 p-0" href="{{ route('login') }}" tabindex="8">
                                             {{ trans('register.login-cta') }}
                                         </a>
                                     @endif

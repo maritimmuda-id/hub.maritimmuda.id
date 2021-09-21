@@ -18,7 +18,7 @@ class ViewDashboardController
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-        $ttl = CarbonInterval::minutes(30)->totalSeconds;
+        $ttl = (int)CarbonInterval::minutes(30)->totalSeconds;
 
         $membersCount = Cache::remember('DashboardUserCount', $ttl, function () {
             return User::query()->count();

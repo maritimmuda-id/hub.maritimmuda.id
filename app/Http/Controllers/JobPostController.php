@@ -36,7 +36,7 @@ class JobPostController
                 })
                 ->editColumn('type', fn (JobPost $row) => $row->type->description)
                 ->editColumn('application_closed_at', function (JobPost $row) {
-                    return $row->application_closed_at?->format('d F Y H:i');
+                    return $row->application_closed_at->format('d F Y H:i');
                 })
                 ->orderColumn('created_at', function ($query, $order) {
                     /** @var \Illuminate\Database\Query\Builder $query */

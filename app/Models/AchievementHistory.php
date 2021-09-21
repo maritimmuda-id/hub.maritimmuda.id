@@ -35,7 +35,7 @@ class AchievementHistory extends Model implements Sortable
     public function buildSortQuery(): Eloquent\Builder | Query\Builder
     {
         return static::query()
-            ->where('user_id', $this->user_id);
+            ->where('user_id', $this->getAttribute('user_id'));
     }
 
     public function user(): BelongsTo | Eloquent\Builder | Query\Builder
@@ -45,11 +45,7 @@ class AchievementHistory extends Model implements Sortable
 
     public function getAchievedAtFormattedAttribute(): string
     {
-        if (is_null($this->achieved_at)) {
-            return '';
-        }
-
-        return $this->achieved_at->format('F Y');
+        return $this->achieved_at?->format('F Y') ?? '';
     }
 
     public static function attributes(): array

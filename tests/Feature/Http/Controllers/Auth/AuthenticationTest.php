@@ -31,6 +31,7 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticatedAs($user);
+        $response->assertSessionHasNoErrors();
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 
@@ -40,11 +41,12 @@ class AuthenticationTest extends TestCase
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
 
-        $this->post(route('login'), [
+        $response = $this->post(route('login'), [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);
 
+        $response->assertSessionHasErrors(['email']);
         $this->assertGuest();
     }
 }
