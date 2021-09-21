@@ -87,7 +87,7 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
                     ->watermarkHeight(100, Manipulations::UNIT_PERCENT)
                     ->watermarkWidth(100, Manipulations::UNIT_PERCENT)
             )
-            ->queued();
+            ->nonQueued();
 
         $this->addMediaConversion('photo')
             ->performOnCollections('photo')
