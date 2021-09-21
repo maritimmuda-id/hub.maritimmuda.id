@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <x-form-select
-                                        name="gender"
+                                        name="province_id"
                                         :label="trans('register.province-label')"
                                         :options="$provinces"
                                         tabindex="4"
