@@ -135,6 +135,8 @@ return [
         'end-date-label' => 'End Date',
     ],
 
+    'uid-label' => 'Member ID',
+
     'name-label' => 'Name',
 
     'email-label' => 'Email',

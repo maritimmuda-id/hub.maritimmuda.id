@@ -135,6 +135,8 @@ return [
         'end-date-label' => 'Tanggal Selesai',
     ],
 
+    'uid-label' => 'ID Anggota',
+
     'name-label' => 'Nama',
 
     'email-label' => 'Email',
