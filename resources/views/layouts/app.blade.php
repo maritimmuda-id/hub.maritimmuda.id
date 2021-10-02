@@ -51,7 +51,10 @@
                     <div class="col-md-4 mt-4 d-flex justify-content-center">
                         <a href="#" class="d-flex flex-row align-items-center">
                             <img class="img-fluid" src="{{ asset('img/logo-ori.png') }}" alt="Original Rekor Indonesia" loading="lazy">
-                            <span class="ml-2 text-muted">Platform Digital Jejaring Nasional Pemuda Bidang Kemaritiman Pertama di Indonesia</span>
+                            <div class="ml-2 text-muted small">
+                                <strong class="d-block">Rekor Nasional ORI</strong>
+                                <span>Platform Digital Jejaring Nasional Pemuda Bidang Kemaritiman Pertama di Indonesia</span>
+                            </div>
                         </a>
                     </div>
                 </div>
