@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::query()->firstOrCreate([
+        User::factory()->useExistingData()->create([
             'name' => 'Zainal Hasan',
             'email' => 'mail@zhanang.id',
             'password' => Hash::make('123123123'),
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
         }
 
         // Generate fake user with general profile only
-        for ($i = 0; $i < 32; $i++) {
+        for ($i = 0; $i < 9; $i++) {
             User::factory()->useExistingData()->create();
         }
     }

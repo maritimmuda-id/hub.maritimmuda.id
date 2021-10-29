@@ -19,10 +19,13 @@
         "protonemedia/laravel-form-components": "^2.5",
         "realrashid/sweet-alert": "^4.0",
         "rennokki/laravel-eloquent-query-cache": "^3.0",
+        "simplesoftwareio/simple-qrcode": "~4",
+        "spatie/browsershot": "^3.50",
         "spatie/eloquent-sortable": "^4.0",
         "spatie/laravel-medialibrary": "^9.7",
         "spatie/laravel-ray": "^1.25",
         "spatie/ray": "^1.30",
+        "spatie/temporary-directory": "^2.0",
         "yajra/laravel-datatables-html": "^4.38",
         "yajra/laravel-datatables-oracle": "^9.18",
         "zhanang19/laravel-rules": "^1.0"

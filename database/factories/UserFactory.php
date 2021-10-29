@@ -16,7 +16,8 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'uid' => $this->faker->regexify('[A-Za-z0-9]{50}'),
+            'uid' => null,
+            'serial_number' => null,
             'name' => $this->faker->firstName() . ' ' . $this->faker->lastName(),
             'gender' => Gender::getRandomValue(),
             'email' => $this->faker->unique()->safeEmail(),

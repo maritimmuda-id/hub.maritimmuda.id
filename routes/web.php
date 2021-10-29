@@ -6,7 +6,10 @@ use App\Http\Controllers\{
     JobPostController,
     ScholarshipController,
     UserController,
+    VerifyMembershipController,
+    VerifyUserController,
     ViewDashboardController,
+    ViewMemberCardController,
 };
 use App\Http\Controllers\Profile\{
     ChangePasswordController,
@@ -24,17 +27,23 @@ use Lab404\Impersonate\Controllers\ImpersonateController;
 
 Route::redirect('/', 'login');
 
-Route::middleware('auth')->group(function () {
+Route::get('/user/{user:uid}/membership-status', [VerifyMembershipController::class, '__invoke'])
+    ->name('check-membership-status');
+
+Route::get('/template-member-card', [ViewMemberCardController::class, '__invoke'])
+    ->name('template-member-card');
+Route::get('/member-card/{user}/view', [ViewMemberCardController::class, '__invoke'])
+    ->name('profile.member-card');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [ViewDashboardController::class, '__invoke'])
+        ->name('dashboard');
+
     Route::get('/impersonate/take/{id}/{guardName?}', [ImpersonateController::class, 'take'])
         ->name('impersonate');
 
     Route::get('/impersonate/leave', [ImpersonateController::class, 'leave'])
         ->name('impersonate.leave');
-});
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [ViewDashboardController::class, '__invoke'])
-        ->name('dashboard');
 
     Route::group(['prefix' => '/profile'], function () {
         Route::get('/general', [GeneralProfileController::class, 'edit'])
@@ -68,8 +77,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->name('profile.research');
     });
 
+    Route::post('/users/{user}/verify', [VerifyUserController::class, '__invoke'])
+        ->name('user.verify');
     Route::resource('users', UserController::class)
-        ->only(['index', 'destroy'])
+        ->except(['create', 'store', 'show'])
         ->names('user');
 
     Route::resource('events', EventController::class)

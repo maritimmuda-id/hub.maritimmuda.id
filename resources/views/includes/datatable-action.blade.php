@@ -1,8 +1,3 @@
-@if(($canImpersonate ?? false && isset($impersonateLink)))
-    <a class="btn btn-sm btn-warning" style="margin:1.25px 0;" href="{{ $impersonateLink }}">
-        <i class="fas fa-user-secret"></i> {{ __('Impersonate') }}
-    </a>
-@endif
 @if(($canView ?? true) && isset($showLink))
     <a class="btn btn-sm btn-primary" style="margin:1.25px 0;" href="{{ $showLink }}">
         <i class="fas fa-eye"></i> {{ __('View') }}

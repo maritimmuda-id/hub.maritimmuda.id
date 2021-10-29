@@ -10,6 +10,24 @@
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-6 d-flex justify-content-center">
+                                    <img src="{{ $user->getMemberCardPreview() }}" class="img-thumbnail img-fluid my-3" style="width:214px;height:135px;" alt="">
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    @if ($user->membership?->hasMemberCard())
+                                        <a href="{{ $user->membership->member_card_document_link }}" target="_blank" class="btn btn-primary">
+                                            @lang('profile.download-member-card')
+                                        </a>
+                                    @elseif ($user->hasMedia('identity_card'))
+                                        <button type="button" id="btn-member-card-processed" class="btn btn-primary">
+                                            @lang('profile.create-member-card')
+                                        </button>
+                                    @else
+                                        <button type="button" id="btn-create-member-card" class="btn btn-primary">
+                                            @lang('profile.create-member-card')
+                                        </button>
+                                    @endif
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-center">
                                     <img
                                         src="{{ $user->photo_link }}"
                                         class="img-thumbnail img-fluid my-3"
@@ -33,12 +51,13 @@
                                 </div>
 
                                 <div class="col-md-6 d-flex justify-content-center">
-                                    <img
-                                        src="{{ $user->identity_card_link }}"
-                                        class="img-thumbnail img-fluid my-3"
-                                        style="width:214px;height:135px;"
-                                        alt=""
-                                    >
+                                    @livewire('identity-card-preview', [
+                                        'user' => $user,
+                                        'attributes' => [
+                                            'class' => 'img-thumbnail img-fluid my-3',
+                                            'style' => 'width:214px;height:135px;',
+                                        ],
+                                    ])
                                 </div>
                                 <div class="col-md-6 d-flex align-items-center">
                                     <x-form-input
@@ -81,6 +100,7 @@
                                         name="province_id"
                                         :options="$provinces"
                                         :label="trans('profile.province-label')"
+                                        disabled
                                     />
                                 </div>
                                 <div class="col-md-6">
@@ -204,3 +224,42 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(function () {
+            $('#btn-create-member-card').on('click', function () {
+                Swal.fire({
+                    text: "{{ trans('profile.identity-card-is-required') }}",
+                    showConfirmButton: true,
+                    confirmButtonText: "{{ trans('profile.upload-identity-card') }}",
+                    confirmButtonAriaLabel: "{{ trans('profile.upload-identity-card') }}",
+                    showCancelButton: true,
+                    cancelButtonText: "{{ __('Close') }}",
+                    cancelButtonAriaLabel: "{{ __('Close') }}",
+                    reverseButtons: true,
+                    focusConfirm: false,
+                    allowOutsideClick: false,
+                    icon: "warning",
+                })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        $('[name="identity_card"]').click();
+                    }
+                });
+            });
+
+            $('#btn-member-card-processed').on('click', function () {
+                Swal.fire({
+                    text: "{{ trans('profile.member-card-is-being-processed') }}",
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonText: "{{ __('Close') }}",
+                    cancelButtonAriaLabel: "{{ __('Close') }}",
+                    focusConfirm: false,
+                    allowOutsideClick: false,
+                    icon: "info",
+                });
+            });
+        });
+    </script>
+@endpush

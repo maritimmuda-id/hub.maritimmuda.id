@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
 
-        Event::factory(15)->create();
-        JobPost::factory(15)->create();
-        Scholarship::factory(15)->create();
+        Event::factory(12)->create();
+        JobPost::factory(12)->create();
+        Scholarship::factory(12)->create();
     }
 }

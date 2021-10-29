@@ -27,7 +27,7 @@ class UserPolicy
 
     public function update(?User $authenticatedUser, User $user): bool
     {
-        return false;
+        return $authenticatedUser?->is_admin ?? false;
     }
 
     public function delete(?User $authenticatedUser, User $user): Response | bool

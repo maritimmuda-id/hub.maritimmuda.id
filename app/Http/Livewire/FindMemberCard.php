@@ -6,6 +6,7 @@ use App\Models\Expertise;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -31,7 +32,7 @@ class FindMemberCard extends Component
 
     public string|int|null $expertise = '';
 
-    protected \Illuminate\Database\Eloquent\Builder|User|null $query = null;
+    protected Builder|User|null $query = null;
 
     public function __construct()
     {
@@ -58,14 +59,13 @@ class FindMemberCard extends Component
         }
 
         if ($this->province) {
-            $this->query->whereRelation('province', 'id', $this->province);
+            $this->query->where('province_id', $this->province);
         }
 
         if ($this->expertise) {
-            $this->query->where(function ($query) {
-                /** @var \Illuminate\Database\Eloquent\Builder $query */
-                $query->whereRelation('firstExpertise', 'id', $this->expertise)
-                    ->orWhereRelation('secondExpertise', 'id', $this->expertise);
+            $this->query->where(function (Builder $query) {
+                $query->where('first_expertise_id', $this->expertise)
+                    ->orWhere('second_expertise_id', $this->expertise);
             });
         }
 

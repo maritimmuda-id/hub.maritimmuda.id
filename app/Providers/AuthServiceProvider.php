@@ -27,7 +27,25 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('impersonate', function (User $authenticatedUser, User $user) {
-            return $authenticatedUser->is_admin && $authenticatedUser->id !== $user->id;
+            return $authenticatedUser->canImpersonate()
+                && $user->canBeImpersonated()
+                && $authenticatedUser->id !== $user->id;
+        });
+
+        Gate::define('verify-member', function (User $authenticatedUser, User $user) {
+            if (! $authenticatedUser->is_admin) {
+                return false;
+            }
+
+            if (is_null($user->membership)) {
+                return true;
+            }
+
+            if ($user->membership->expired_at->isPast()) {
+                return true;
+            }
+
+            return false;
         });
 
         Gate::define('find-member', function (User $authenticatedUser) {

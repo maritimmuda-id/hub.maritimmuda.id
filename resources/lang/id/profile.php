@@ -188,4 +188,14 @@ return [
     'new-password-confirmation-label' => 'Konfirmasi Kata Sandi Baru',
 
     'change-password-success' => 'Kata Sandi berhasil diperbarui',
+
+    'create-member-card' => 'Buat Kartu Tanda Anggota',
+
+    'download-member-card' => 'Download Kartu Tanda Anggota',
+
+    'upload-identity-card' => 'Upload KTP',
+
+    'identity-card-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah KTP untuk keperluan verifikasi.',
+
+    'member-card-is-being-processed' => 'Kartu tanda anggota Anda sedang diproses, biasanya akan membutuhkan waktu 2-3 hari kerja.',
 ];

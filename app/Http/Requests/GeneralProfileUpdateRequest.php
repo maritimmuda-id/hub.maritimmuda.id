@@ -30,7 +30,6 @@ class GeneralProfileUpdateRequest extends FormRequest
             'identity_card' => ['nullable', 'image', 'max:4096'],
             'place_of_birth' => ['nullable', 'string', 'max:200'],
             'date_of_birth' => ['nullable', 'date', 'before:today'],
-            'province_id' => ['required', Rule::exists((new Province())->getTable(), 'id')],
             'first_expertise_id' => ['required', Rule::exists((new Expertise())->getTable(), 'id')],
             'second_expertise_id' => ['required', Rule::exists((new Expertise())->getTable(), 'id'), 'different:first_expertise_id'],
             'permanent_address' => ['nullable', 'string', 'max:300'],

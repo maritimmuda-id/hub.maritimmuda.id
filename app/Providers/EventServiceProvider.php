@@ -2,12 +2,17 @@
 
 namespace App\Providers;
 
+use App\Models\Event;
+use App\Models\JobPost;
+use App\Models\Scholarship;
+use App\Observers\EventObserver;
+use App\Observers\JobPostObserver;
+use App\Observers\ScholarshipObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Foundation\Support\Providers;
 
-class EventServiceProvider extends ServiceProvider
+class EventServiceProvider extends Providers\EventServiceProvider
 {
     protected $listen = [
         Registered::class => [
@@ -22,6 +27,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Event::observe(EventObserver::class);
+        Scholarship::observe(ScholarshipObserver::class);
+        JobPost::observe(JobPostObserver::class);
     }
 }

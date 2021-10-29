@@ -188,4 +188,14 @@ return [
     'new-password-confirmation-label' => 'New Password Confirmation',
 
     'change-password-success' => 'Password changed successfully',
+
+    'create-member-card' => 'Create Member Card',
+
+    'download-member-card' => 'Download Member Card',
+
+    'upload-identity-card' => 'Upload Identity Card',
+
+    'identity-card-is-required' => 'To create your membership card, you must upload your identity card first for verification purpose.',
+
+    'member-card-is-being-processed' => 'Your membership card is being processed, normally it will need 2-3 working days.',
 ];

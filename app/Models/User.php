@@ -12,10 +12,13 @@ use Illuminate\Database\Query;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\HtmlString;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -50,6 +53,7 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         'bio',
         'locale',
         'is_admin',
+        'serial_number',
     ];
 
     protected $hidden = [
@@ -67,12 +71,10 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('photo')
-            ->singleFile()
-            ->useFallbackUrl("https://ui-avatars.com/api/?format=jpg&background=ebedef&size=128&name={$this->name}");
+            ->singleFile();
 
         $this->addMediaCollection('identity_card')
-            ->singleFile()
-            ->useFallbackUrl("https://via.placeholder.com/856x540/fff/1f90ff?text=No%20Identity%20Card");
+            ->singleFile();
     }
 
     public function registerMediaConversions(Media $media = null): void
@@ -87,12 +89,15 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
                     ->watermarkHeight(100, Manipulations::UNIT_PERCENT)
                     ->watermarkWidth(100, Manipulations::UNIT_PERCENT)
             )
-            ->nonQueued();
+            ->queued();
 
         $this->addMediaConversion('photo')
             ->performOnCollections('photo')
-            ->queued()
-            ->fit(Manipulations::FIT_CROP, 300, 400);
+            ->setManipulations(
+                Manipulations::create()
+                    ->fit(Manipulations::FIT_CROP, 300, 400)
+            )
+            ->queued();
 
         $this->addMediaConversion('thumb')
             ->performOnCollections('photo')
@@ -159,6 +164,29 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
             ->withDefault(['name' => '-']);
     }
 
+    public function latestMembership(): HasOne | Eloquent\Builder | Query\Builder
+    {
+        return $this->hasOne(Membership::class)
+            ->latestOfMany();
+    }
+
+    public function membership(): HasOne | Eloquent\Builder | Query\Builder
+    {
+        return $this->hasOne(Membership::class)
+            ->ofMany([
+                    'id' => 'max',
+                ],
+                function (Eloquent\Builder | Query\Builder $query) {
+                    $query->where('expired_at', '>', now());
+                }
+            );
+    }
+
+    public function memberships(): HasMany | Eloquent\Builder | Query\Builder
+    {
+        return $this->hasMany(Membership::class);
+    }
+
     public function getBioFormattedAttribute(): string
     {
         return $this->bio ?? '-';
@@ -166,17 +194,96 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
 
     public function getPhotoLinkAttribute(): string
     {
-        return $this->getFirstMediaUrl('photo', 'photo');
-    }
-
-    public function getIdentityCardLinkAttribute(): string
-    {
-        return $this->getFirstMediaUrl('identity_card', 'identity_card');
+        return $this->getPhotoLinkForConversion('photo');
     }
 
     public function getPhotoThumbLinkAttribute(): string
     {
-        return $this->getFirstMediaUrl('photo', 'thumb');
+        return $this->getPhotoLinkForConversion('thumb');
+    }
+
+    private function getPhotoLinkForConversion(string $conversionName): string
+    {
+        /** @var ?string $name */
+        $name = $this->getAttribute('name');
+        $media = $this->getFirstMedia('photo');
+
+        $defaultAvatar = "https://ui-avatars.com/api/?format=jpg&background=ebedef&size=128";
+
+        if (! empty($name)) {
+            $defaultAvatar .= "&name={$name}";
+        }
+
+        if (is_null($media)) {
+            return $defaultAvatar;
+        }
+
+        if (! $media?->hasGeneratedConversion($conversionName)) {
+            return $defaultAvatar;
+        }
+
+        return $media->getUrl($conversionName);
+    }
+
+    public function isProcessingIdentityCard(): bool
+    {
+        $media = $this->getFirstMedia('identity_card');
+
+        if (is_null($media)) {
+            return false;
+        }
+
+        if (! $media->hasGeneratedConversion('identity_card')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getIdentityCardLinkAttribute(): string
+    {
+        $media = $this->getFirstMedia('identity_card');
+
+        if (is_null($media)) {
+            return 'https://via.placeholder.com/856x540/fff/1f90ff?text=No%20Identity%20Card';
+        }
+
+        if (! $media->hasGeneratedConversion('identity_card')) {
+            return 'https://via.placeholder.com/856x540/fff/1f90ff?text=Processing%20Identity%20Card';
+        }
+
+        return $media->getUrl('identity_card');
+    }
+
+    public function getMemberTypeAttribute(): ?string
+    {
+        /** @var \Carbon\Carbon|null $dateOfBirth */
+        $dateOfBirth = $this->getAttribute('date_of_birth');
+
+        if (($dateOfBirth?->age ?? 16) < 30) {
+            return "Anggota Biasa Maritim Muda";
+        }
+
+        return "Sahabat Maritim Muda";
+    }
+
+    public function getMemberCardPreview(): string
+    {
+        return $this->membership?->getMemberCardPreview()
+            ?: 'https://res.cloudinary.com/zhanang19/image/upload/v1635006351/id_card_maritim_fix_2-1_nh9ay1.png';
+    }
+
+    public function generateQrCode(): HtmlString
+    {
+        return new HtmlString(str_replace(
+            '<svg',
+            '<svg class="absolute top-0 mt-[216px] ml-[542px] w-[65px] h-[65px]"',
+            QrCode::format('svg')
+                ->errorCorrection('L')
+                ->generate(route('check-membership-status', [
+                    'user' => $this
+                ]))
+        ));
     }
 
     public function getRouteKeyName(): string
