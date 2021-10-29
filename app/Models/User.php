@@ -281,7 +281,7 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
             QrCode::format('svg')
                 ->errorCorrection('L')
                 ->generate(route('check-membership-status', [
-                    'user' => $this
+                    'id' => $this->uid
                 ]))
         ));
     }

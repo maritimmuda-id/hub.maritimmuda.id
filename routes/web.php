@@ -27,7 +27,7 @@ use Lab404\Impersonate\Controllers\ImpersonateController;
 
 Route::redirect('/', 'login');
 
-Route::get('/user/{user:uid}/membership-status', [VerifyMembershipController::class, '__invoke'])
+Route::get('/user/{id}/membership-status', [VerifyMembershipController::class, '__invoke'])
     ->name('check-membership-status');
 
 Route::get('/template-member-card', [ViewMemberCardController::class, '__invoke'])
