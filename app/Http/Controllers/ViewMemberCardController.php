@@ -10,10 +10,17 @@ class ViewMemberCardController
 {
     public function __invoke(Request $request, ?User $user): View
     {
-        if ($request->ip() !== '127.0.0.1') {
+        if (! $this->isLocalAddress($request->ip())) {
             abort(403, 'Allowed request from localhost only');
         }
 
         return view('profile.member-card.frontside', compact('user'));
+    }
+
+    private function isLocalAddress(string $ip): bool
+    {
+        return empty(
+            filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)
+        );
     }
 }
