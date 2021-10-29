@@ -10,8 +10,14 @@ class ViewMemberCardController
 {
     public function __invoke(Request $request, ?User $user): View
     {
+        $user->loadCount('membership');
+
         if (! $this->isLocalAddress($request->ip())) {
             abort(403, 'Allowed request from localhost only');
+        }
+
+        if ($user->membership_count === 0) {
+            abort(404);
         }
 
         return view('profile.member-card.frontside', compact('user'));
