@@ -67,7 +67,6 @@
                 <!-- Provinsi -->
                 <div class="absolute mt-[334px] ml-[37px] leading-[1.35]">
                     <div>{{ $user->province->name ?? 'Nama Provinsi' }}</div>
-                    <div>Indonesia</div>
                 </div>
 
                 <!-- Tanggal Berlaku -->

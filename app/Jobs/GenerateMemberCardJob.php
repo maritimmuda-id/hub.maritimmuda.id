@@ -29,43 +29,34 @@ class GenerateMemberCardJob implements ShouldQueue
 
     public function handle()
     {
-        try {
-            DB::beginTransaction();
+        $this->prepareMemberCardMetadata();
 
-            $this->prepareMemberCardMetadata();
+        $expiredDate = now()->createFromFormat('Y-m-d', '2021-12-31');
 
-            $expiredDate = now()->createFromFormat('Y-m-d', '2021-12-31');
-
-            if (now()->year > 2021) {
-                $expiredDate = now()->addYear();
-            }
-
-            /** @var \App\Models\Membership $membership */
-            $membership = $this->user
-                ->memberships()
-                ->create([
-                    'verified_at' => now(),
-                    'expired_at' => $expiredDate,
-                ]);
-
-            retry(
-                callback: fn () => $this->capture(),
-                times: 3,
-                sleepMilliseconds: 1000,
-                when: fn (\Exception $e) => $e instanceof CouldNotTakeBrowsershot,
-            );
-
-            $membership->addMedia($this->getPreviewPath())
-                ->toMediaCollection('member-card-preview');
-
-            $membership->addMedia($this->getDocumentPath())
-                ->toMediaCollection('member-card-document');
-
-            DB::commit();
-        } catch (\Exception $e) {
-            report($e);
-            DB::rollBack();
+        if (now()->year > 2021) {
+            $expiredDate = now()->addYear();
         }
+
+        /** @var \App\Models\Membership $membership */
+        $membership = $this->user
+            ->memberships()
+            ->create([
+                'verified_at' => now(),
+                'expired_at' => $expiredDate,
+            ]);
+
+        retry(
+            callback: fn () => $this->capture(),
+            times: 3,
+            sleepMilliseconds: 1000,
+            when: fn (\Exception $e) => $e instanceof CouldNotTakeBrowsershot,
+        );
+
+        $membership->addMedia($this->getPreviewPath())
+            ->toMediaCollection('member-card-preview');
+
+        $membership->addMedia($this->getDocumentPath())
+            ->toMediaCollection('member-card-document');
 
         $this->temporaryDirectory->delete();
     }

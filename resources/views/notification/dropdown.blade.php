@@ -20,7 +20,7 @@
             >
                 <div>
                     <strong class="d-block">{{ $item->data['title'] ?? '' }}</strong>
-                    <span>{{ $item->data['message'] ?? '' }}</span>
+                    <span>{{ \Illuminate\Support\Str::limit($item->data['message'] ?? '', 25) }}</span>
                 </div>
             </a>
         @empty
@@ -28,10 +28,10 @@
                 @lang('notification.no-notifications-text')
             </div>
         @endforelse
-        @if ($notifications?->hasMorePages())
+        {{-- @if ($notifications?->hasMorePages())
             <a href="#" class="dropdown-item">
                 @lang('notification.view-all-notification-text')
             </a>
-        @endif
+        @endif --}}
     </div>
 </li>

@@ -77,7 +77,6 @@
                     'class' => 'card-img',
                 ],
             ])
-            {{-- <img class="card-img" src="{{ $user->identity_card_link }}" alt=""> --}}
         </div>
         <div class="card">
             <div class="card-header">

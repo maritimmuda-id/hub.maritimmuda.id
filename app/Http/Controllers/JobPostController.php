@@ -48,11 +48,10 @@ class JobPostController
 
         $dataTable = $builder->addIndex()
             ->columns([
-                ['data' => 'id', 'name' => 'id', 'title' => __('ID'), 'searchable' => false],
-                ['data' => 'position_title', 'name' => 'position_title', 'title' => trans('job-posts.position-title-label')],
-                ['data' => 'company_name', 'name' => 'company_name', 'title' => trans('job-posts.company-name-label')],
-                ['data' => 'type', 'name' => 'type', 'title' => trans('job-posts.type-label')],
-                ['data' => 'application_closed_at', 'name' => 'application_closed_at', 'title' => trans('job-posts.application-closed-at-label'), 'orderable' => false, 'searchable' => false],
+                ['data' => 'position_title', 'name' => 'position_title', 'title' => trans('job-posts.position-title-label'), 'attributes' => ['data-priority' => 1]],
+                ['data' => 'company_name', 'name' => 'company_name', 'title' => trans('job-posts.company-name-label'), 'attributes' => ['data-priority' => 2]],
+                ['data' => 'type', 'name' => 'type', 'title' => trans('job-posts.type-label'), 'attributes' => ['data-priority' => 3]],
+                ['data' => 'application_closed_at', 'name' => 'application_closed_at', 'title' => trans('job-posts.application-closed-at-label'), 'orderable' => false, 'searchable' => false, 'attributes' => ['data-priority' => 4]],
                 ['data' => 'poster', 'name' => 'poster', 'title' => trans('job-posts.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
             ])
             ->addAction(['title' => __('Action')])

@@ -49,7 +49,7 @@ class ScholarshipController
         $dataTable = $builder->orderBy(0)
             ->columns([
                 ['data' => 'created_at', 'title' => __('Posting Date'), 'searchable' => false],
-                ['data' => 'name', 'title' => trans('scholarships.name-label')],
+                ['data' => 'name', 'title' => trans('scholarships.name-label'), 'attributes' => ['data-priority' => 1]],
                 ['data' => 'provider_name', 'title' => trans('scholarships.provider-name-label')],
                 ['data' => 'submission_deadline', 'title' => trans('scholarships.submission-deadline-label'), 'searchable' => false],
                 ['data' => 'poster', 'title' => trans('scholarships.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
