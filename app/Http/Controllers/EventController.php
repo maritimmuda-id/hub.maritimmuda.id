@@ -57,9 +57,9 @@ class EventController
             ->columns([
                 ['data' => 'created_at', 'title' => __('Posting Date'), 'searchable' => false],
                 ['data' => 'name', 'title' => trans('events.name-label'), 'attributes' => ['data-priority' => 1]],
-                ['data' => 'organizer_name', 'title' => trans('events.organizer-name-label')],
-                ['data' => 'type', 'title' => trans('events.type-label'), 'searchable' => false],
-                ['data' => 'start_date', 'title' => trans('events.start-date-label'), 'searchable' => false, 'orderable' => false],
+                ['data' => 'organizer_name', 'title' => trans('events.organizer-name-label'), 'attributes' => ['data-priority' => 2]],
+                ['data' => 'type', 'title' => trans('events.type-label'), 'searchable' => false, 'attributes' => ['data-priority' => 3]],
+                ['data' => 'start_date', 'title' => trans('events.start-date-label'), 'searchable' => false, 'orderable' => false, 'attributes' => ['data-priority' => 4]],
                 ['data' => 'end_date', 'title' => trans('events.end-date-label'), 'searchable' => false, 'orderable' => false],
                 ['data' => 'poster', 'title' => trans('events.poster-label'), 'searchable' => false, 'orderable' => false, 'printable' => false, 'exportable' => false],
             ])
