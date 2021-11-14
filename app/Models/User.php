@@ -19,6 +19,8 @@ use Illuminate\Support\HtmlString;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -31,11 +33,11 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
     use HasUuid;
     use Impersonate;
     use InteractsWithMedia;
+    use LogsActivity;
     use MustVerifyEmailTrait;
     use Notifiable;
 
     protected $fillable = [
-        'uid',
         'name',
         'gender',
         'email',
@@ -53,7 +55,6 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         'bio',
         'locale',
         'is_admin',
-        'serial_number',
     ];
 
     protected $hidden = [
@@ -67,6 +68,14 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         'date_of_birth' => 'date',
         'is_admin' => 'boolean',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logFillable()
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
+    }
 
     public function registerMediaCollections(): void
     {
