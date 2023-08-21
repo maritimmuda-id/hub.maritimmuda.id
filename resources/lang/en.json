@@ -1,0 +1,22 @@
+{
+    "Registered": "Registered",
+    ":age years old": ":age years old",
+    "Account": "Account",
+    "Action": "Action",
+    "Are you sure?": "Are you sure?",
+    "Impersonate": "Impersonate",
+    "Posting Date": "Posting Date",
+    "View More": "View More",
+    "View": "View",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Back": "Back",
+    "Save": "Save",
+    "Cancel": "Cancel",
+    "Create :resource": "Add :resource",
+    "Edit :resource": "Edit :resource",
+    "Change Language": "Change Language",
+    ":resource created": ":resource successfully created.",
+    ":resource updated": ":resource successfully updated.",
+    ":resource deleted": ":resource successfully deleted."
+}
