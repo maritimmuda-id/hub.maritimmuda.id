@@ -157,7 +157,7 @@ return [
 
     'identity-card-label' => 'KTP',
 
-    'identity-card-help-text' => 'KTP diperlukan untuk verifikasi data anggota. Sistem otomatis memberi <em>watermark</em> untuk mencegah penyalahgunaan KTP. <a href=":href" target="_blank">Baca anjuran <strong>Kementerian Kominfo</strong> mengenai pemberian <em>watermark</em> pada KTP di postingan ini.</a>',
+    'identity-card-help-text' => 'KTP diperlukan untuk verifikasi data anggota. Sistem otomatis memberi <em>watermark</em> untuk mencegah penyalahgunaan KTP. <a href=":href" target="_blank">Baca anjuran <strong>Kementerian Kominfo</strong> mengenai pemberian <em>watermark</em> pada KTP di postingan ini.</a> Max 50KB',
 
     'province-label' => 'Organisasi Daerah',
 

@@ -157,7 +157,7 @@ return [
 
     'identity-card-label' => 'Identity Card',
 
-    'identity-card-help-text' => 'Identity card is needed to verify member’s data. System automatically apply a watermark to prevent identity card abuse. <a href=":href" target="_blank">Read more about this concept on this post.</a>',
+    'identity-card-help-text' => 'Identity card is needed to verify member’s data. System automatically apply a watermark to prevent identity card abuse. <a href=":href" target="_blank">Read more about this concept on this post.</a> Max 50KB',
 
     'province-label' => 'Provincial Organization',
 
