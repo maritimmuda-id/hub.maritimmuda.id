@@ -28,8 +28,8 @@
                         </div>
                     </div>
                 @endforeach
-                <div class="col-6"> <!-- Use col-6 to take up half of the width -->
-                    <canvas id="myChart" width="80"></canvas> <!-- Adjust height as needed -->
+                <div class="col-12"> <!-- Use col-6 to take up half of the width -->
+                    <canvas id="myChart" height="100"></canvas> <!-- Adjust height as needed -->
                 </div>
             </div>
         </div>
@@ -42,10 +42,10 @@
             const myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    labels: {!! json_encode($months) !!},
                     datasets: [{
                         label: 'User Count',
-                        data: [10, 20, 30, 40, 50, 100], // Adjusted data point
+                        data: {!! json_encode($monthlyCounts) !!}, // Adjusted data point
                         borderColor: 'rgb(50, 31, 219)' // Corrected property name
                     }]
                 },

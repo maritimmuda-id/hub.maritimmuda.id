@@ -89,27 +89,39 @@ class ViewDashboardController
         //     $userCounts[$month] = $userCount;
         // }
 
-        $startDate = now()->subMonths(11)->startOfMonth();
-        $endDate = now()->endOfMonth();
+        // Mendapatkan tanggal hari ini
+        $today = Carbon::now();
 
-        $userCounts = User::whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
-            ->orderBy(DB::raw('YEAR(created_at)'), 'ASC')
-            ->orderBy(DB::raw('MONTH(created_at)'), 'ASC')
-            ->get([DB::raw('COUNT(*) as count')]);
+        // Inisialisasi array untuk menyimpan daftar bulan
+        $months = [];
 
-        // Inisialisasi array hasil dengan nilai 0 untuk 12 bulan
-        $monthlyCounts = array_fill(0, 12, 0);
+        // Loop untuk menghitung 12 bulan terakhir
+        for ($i = 0; $i < 12; $i++) {
+            // Memformat tanggal dalam format "F Y" dan menyimpannya dalam array
+            $formattedDate = $today->format('F Y');
+            $months[] = $formattedDate;
 
-        foreach ($userCounts as $count) {
-            // Mendapatkan indeks bulan dalam array
-            $monthIndex = (now()->year - $count->year) * 12 + (now()->month - $count->month);
-
-            // Memasukkan jumlah pengguna ke dalam array sesuai dengan indeks bulan
-            $monthlyCounts[$monthIndex] = $count->count;
+            // Pindahkan ke bulan sebelumnya
+            $today->subMonth();
         }
 
+        // Membalikkan array untuk mendapatkan urutan bulan yang benar
+        $months = array_reverse($months);
 
-        return view('dashboard', compact('user', 'widgets','monthlyCounts'));
+        $currentDate = Carbon::now();
+        $monthlyCounts = [];
+
+        for ($i = 0; $i < 12; $i++) {
+            $startDate = $currentDate->copy()->subMonths($i)->startOfMonth();
+            $endDate = $currentDate->copy()->subMonths($i)->endOfMonth();
+
+            // $monthName = $startDate->format('F Y');
+            $count = User::whereBetween('created_at', [$startDate, $endDate])->count();
+
+            $monthlyCounts[] = $count;
+        }
+        $monthlyCounts  = array_reverse($monthlyCounts);
+
+        return view('dashboard', compact('user', 'widgets','months', 'monthlyCounts'));
     }
 }
