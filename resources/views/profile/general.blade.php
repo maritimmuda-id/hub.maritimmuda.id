@@ -17,7 +17,7 @@
                                         <a href="{{ $user->membership->member_card_document_link }}" target="_blank" class="btn btn-primary">
                                             @lang('profile.download-member-card')
                                         </a>
-                                    @elseif ($user->hasMedia('identity_card'))
+                                    @elseif ($user->hasMedia('payment_confirm'))
                                         <button type="button" id="btn-member-card-processed" class="btn btn-primary">
                                             @lang('profile.create-member-card')
                                         </button>
@@ -27,6 +27,7 @@
                                         </button>
                                     @endif
                                 </div>
+
                                 <div class="col-md-6 d-flex justify-content-center">
                                     <img
                                         src="{{ $user->photo_link }}"
@@ -70,6 +71,21 @@
                                                 @lang('profile.identity-card-help-text', [
                                                     'href' => 'https://www.instagram.com/p/CTPPBLLhtVr/'
                                                 ])
+                                            </small>
+                                        </x-slot>
+                                    </x-form-input>
+                                </div>
+
+                                <div class="align-items-center" style="display: none;">
+                                    <x-form-input
+                                        type="file"
+                                        name="payment_confirm"
+                                        class="w-100"
+                                        :label="trans('profile.payment-label')"
+                                    >
+                                        <x-slot name="help">
+                                            <small class="form-text text-muted">
+                                                @lang('profile.payment-help-text')
                                             </small>
                                         </x-slot>
                                     </x-form-input>
@@ -227,12 +243,33 @@
 @push('scripts')
     <script>
         $(function () {
+            // $('#btn-create-member-card').on('click', function () {
+            //     Swal.fire({
+            //         text: "{{ trans('profile.identity-card-is-required') }}",
+            //         showConfirmButton: true,
+            //         confirmButtonText: "{{ trans('profile.upload-identity-card') }}",
+            //         confirmButtonAriaLabel: "{{ trans('profile.upload-identity-card') }}",
+            //         showCancelButton: true,
+            //         cancelButtonText: "{{ __('Close') }}",
+            //         cancelButtonAriaLabel: "{{ __('Close') }}",
+            //         reverseButtons: true,
+            //         focusConfirm: false,
+            //         allowOutsideClick: false,
+            //         icon: "warning",
+            //     })
+            //     .then(result => {
+            //         if (result.isConfirmed) {
+            //             $('[name="payment_confirm"]').click();
+            //         }
+            //     });
+            // });
+
             $('#btn-create-member-card').on('click', function () {
                 Swal.fire({
-                    text: "{{ trans('profile.identity-card-is-required') }}",
+                    text: "{{ trans('profile.payment-is-required') }}",
                     showConfirmButton: true,
-                    confirmButtonText: "{{ trans('profile.upload-identity-card') }}",
-                    confirmButtonAriaLabel: "{{ trans('profile.upload-identity-card') }}",
+                    confirmButtonText: "{{ trans('profile.upload-payment-confirm') }}",
+                    confirmButtonAriaLabel: "{{ trans('profile.upload-payment-confirm') }}",
                     showCancelButton: true,
                     cancelButtonText: "{{ __('Close') }}",
                     cancelButtonAriaLabel: "{{ __('Close') }}",
@@ -243,7 +280,7 @@
                 })
                 .then(result => {
                     if (result.isConfirmed) {
-                        $('[name="identity_card"]').click();
+                        $('[name="payment_confirm"]').click();
                     }
                 });
             });

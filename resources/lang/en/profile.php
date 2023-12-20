@@ -198,4 +198,12 @@ return [
     'identity-card-is-required' => 'To create your membership card, you must upload your identity card first for verification purpose.',
 
     'member-card-is-being-processed' => 'Your membership card is being processed, normally it will need 2-3 working days.',
+
+    'payment-label' => 'Upload The Payment Confirmation Receipt',
+
+    'payment-help-text' => 'This is a payment help text',
+
+    'upload-payment-confirm' => 'Upload The Payment Confirmation Receipt',
+
+    'payment-is-required' => 'To create a membership card, you must upload the payment confirmation receipt',
 ];

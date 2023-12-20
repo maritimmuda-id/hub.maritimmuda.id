@@ -88,6 +88,7 @@ class FindMemberCard extends Component
                 'name' => $user->name,
                 'email' => $user->email,
                 'photo_link' => $user->photo_link,
+                'payment_confirm' => $user->payment_confirm,
                 'place_of_birth' => $user->place_of_birth,
                 'date_of_birth' => $user->date_of_birth,
                 'gender' => $user->gender->description,

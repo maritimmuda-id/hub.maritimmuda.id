@@ -16,6 +16,6 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
-        "puppeteer": "^21.1.1"
+        "puppeteer": "^21.6.1"
     }
 }

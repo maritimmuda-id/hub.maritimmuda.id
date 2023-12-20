@@ -198,4 +198,12 @@ return [
     'identity-card-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah KTP untuk keperluan verifikasi.',
 
     'member-card-is-being-processed' => 'Kartu tanda anggota Anda sedang diproses, biasanya akan membutuhkan waktu 2-3 hari kerja.',
+
+    'payment-label' => 'Upload Bukti Konfirmasi Pembayaran',
+
+    'payment-help-text' => 'Ini adalah payment help text',
+
+    'upload-payment-confirm' => 'Upload Bukti Konfirmasi Pembayaran',
+
+    'payment-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah bukti pembayaran.',
 ];
