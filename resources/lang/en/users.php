@@ -17,6 +17,8 @@ return [
 
     'photo-label' => 'Photo',
 
+    'payment-label' => 'Payment',
+
     'identity-card-label' => 'Identity Card',
 
     'created-at-label' => 'Registered Date',

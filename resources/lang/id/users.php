@@ -17,6 +17,8 @@ return [
 
     'photo-label' => 'Foto',
 
+    'payment-label' => 'Pembayaran',
+
     'identity-card-label' => 'KTP',
 
     'created-at-label' => 'Tanggal Pendaftaran',

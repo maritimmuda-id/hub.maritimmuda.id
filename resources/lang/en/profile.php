@@ -206,4 +206,6 @@ return [
     'upload-payment-confirm' => 'Upload The Payment Confirmation Receipt',
 
     'payment-is-required' => 'To create a membership card, you must upload the payment confirmation receipt',
+
+    'update-payment-success' => 'Upload payment confirmation successfully',
 ];

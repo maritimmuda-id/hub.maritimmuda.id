@@ -88,6 +88,9 @@ class UserController
                 ->addColumn('photo', function (User $row) {
                     return view('includes.datatable-image', ['link' => $row->photo_thumb_link]);
                 })
+                ->addColumn('payment_confirm', function (User $row) {
+                    return view('includes.datatable-image', ['link' => $row->payment_tumb_link]);
+                })
                 ->addColumn('action', function (User $row) {
                     return view('user.includes.actions', [
                         'canEdit' => Gate::check('update', $row),
@@ -121,6 +124,7 @@ class UserController
                 ['data' => 'first_expertise_name', 'name' => 'firstExpertise.name', 'title' => trans('users.first-expertise-name-label')],
                 ['data' => 'second_expertise_name', 'name' => 'secondExpertise.name', 'title' => trans('users.second-expertise-name-label')],
                 ['data' => 'photo', 'title' => trans('users.photo-label'), 'orderable' => false, 'searchable' => false],
+                ['data' => 'payment_confirm', 'title' => trans('users.payment-label'), 'orderable' => false, 'searchable' => false],
             ])
             ->addAction(['title' => __('Action')])
             ->minifiedAjax(

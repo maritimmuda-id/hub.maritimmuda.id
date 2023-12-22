@@ -206,4 +206,6 @@ return [
     'upload-payment-confirm' => 'Upload Bukti Konfirmasi Pembayaran',
 
     'payment-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah bukti pembayaran.',
+
+    'update-payment-success' => 'Upload bukti pembayaran successfully',
 ];

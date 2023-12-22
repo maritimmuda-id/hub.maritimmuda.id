@@ -36,7 +36,7 @@
                         <span>Copyright &copy;</span>
                         <a href="https://maritimmuda.id">Maritim Muda Nusantara</a>
                         <span>{{ date('Y') }}</span>
-                        <div class="mt-1">Maritim Muda Hub v2.0</div>
+                        <div class="mt-1">Maritim Muda Hub v2.1 - 2023</div>
                     </div>
                     <div class="col-md-2 mt-4 text-center text-md-left">
                         <div class="text-muted">Didukung Oleh:</div>

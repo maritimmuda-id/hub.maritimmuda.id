@@ -28,25 +28,26 @@ class GeneralProfileController
         $user = $request->user();
 
         $user->fill(
-            collect($request->validated())->except(['photo', 'identity_card','payment_confirm'])->toArray()
+            collect($request->validated())->except(['photo', 'identity_card', 'payment_confirm'])->toArray()
         )->save();
 
         if ($request->hasFile('photo')) {
             $user->addMediaFromRequest('photo')
                 ->toMediaCollection('photo');
+                toast(trans('profile.update-profile-success'), 'success');
         }
 
         if ($request->hasFile('identity_card')) {
             $user->addMediaFromRequest('identity_card')
                 ->toMediaCollection('identity_card');
+                toast(trans('profile.update-profile-success'), 'success');
         }
 
         if ($request->hasFile('payment_confirm')) {
             $user->addMediaFromRequest('payment_confirm')
                 ->toMediaCollection('payment_confirm');
+                toast(trans('profile.update-payment-success'), 'success');
         }
-
-        toast(trans('profile.update-profile-success'), 'success');
 
         return redirect()->route('profile.edit');
     }
