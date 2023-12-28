@@ -1,5 +1,55 @@
+{{-- @dd($monthlyCounts) --}}
 @extends('layouts.panel')
 @section('content')
+    <div class="card">
+        <div class="card-header">
+            <h4 class="d-inline">
+                @lang('users.plural-chart')
+            </h4>
+        </div>
+
+        <div class="col-12"> <!-- Use col-6 to take up half of the width -->
+            <canvas id="myChart" height="100"></canvas> <!-- Adjust height as needed -->
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const lineChart = document.getElementById('myChart');
+                const ctx = lineChart.getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: {!! json_encode($months) !!},
+                        datasets: [{
+                            label: "{{ trans('users.regis-chart') }}",
+                            data: {!! json_encode($monthlyCountsCreated) !!}, // Adjusted data point
+                            borderColor: 'rgb(50, 31, 219)' // Corrected property name
+                        },
+                        {
+                            label: "{{ trans('users.verify-chart') }}",
+                            data: {!! json_encode($monthlyCountsVerify) !!}, // Adjusted data point for the second line
+                            borderColor: 'rgb(255, 0, 0)' // Adjust the color for the second line
+                        }]
+
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: "{{ trans('users.user-chart') }}"
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    </div>
+
     <div class="card">
         <div class="card-header">
             <h4 class="d-inline">

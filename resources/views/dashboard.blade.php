@@ -1,4 +1,3 @@
-{{-- @dd($monthlyCounts) --}}
 @extends('layouts.panel')
 
 @section('content')
@@ -28,41 +27,7 @@
                         </div>
                     </div>
                 @endforeach
-                <div class="col-12"> <!-- Use col-6 to take up half of the width -->
-                    <canvas id="myChart" height="100"></canvas> <!-- Adjust height as needed -->
-                </div>
             </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const lineChart = document.getElementById('myChart');
-            const ctx = lineChart.getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: {!! json_encode($months) !!},
-                    datasets: [{
-                        label: 'User Count',
-                        data: {!! json_encode($monthlyCounts) !!}, // Adjusted data point
-                        borderColor: 'rgb(50, 31, 219)' // Corrected property name
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Line Chart Users'
-                        }
-                    }
-                }
-            });
-        });
-    </script>
 @endsection

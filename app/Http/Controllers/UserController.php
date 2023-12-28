@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Expertise;
 use App\Models\Province;
 use App\Models\User;
+use App\Models\Membership;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
@@ -15,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html;
+use Carbon\Carbon;
 
 class UserController
 {
@@ -142,7 +144,46 @@ class UserController
                 function(){window.lgThumb();}
             JAVASCRIPT);
 
-        return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters'));
+
+        // Mendapatkan tanggal hari ini
+        $today = Carbon::now();
+
+        // Inisialisasi array untuk menyimpan daftar bulan
+        $months = [];
+
+        // Loop untuk menghitung 12 bulan terakhir
+        for ($i = 0; $i < 12; $i++) {
+            // Memformat tanggal dalam format "F Y" dan menyimpannya dalam array
+            $formattedDate = $today->format('F Y');
+            $months[] = $formattedDate;
+
+            // Pindahkan ke bulan sebelumnya
+            $today->subMonth();
+        }
+
+        // Membalikkan array untuk mendapatkan urutan bulan yang benar
+        $months = array_reverse($months);
+
+        $currentDate = Carbon::now();
+        $monthlyCountsCreated = [];
+        $monthlyCountsVerify = [];
+
+        for ($i = 0; $i < 12; $i++) {
+            $startDate = $currentDate->copy()->subMonths($i)->startOfMonth();
+            $endDate = $currentDate->copy()->subMonths($i)->endOfMonth();
+
+            // $monthName = $startDate->format('F Y');
+            $count_created = User::whereBetween('created_at', [$startDate, $endDate])->count();
+            $count_verify = Membership::whereBetween('verified_at', [$startDate, $endDate])->count();
+
+            $monthlyCountsCreated[] = $count_created;
+            $monthlyCountsVerify[] = $count_verify;
+        }
+
+        $monthlyCountsCreated  = array_reverse($monthlyCountsCreated);
+        $monthlyCountsVerify  = array_reverse($monthlyCountsVerify);
+
+        return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'monthlyCountsCreated', 'monthlyCountsVerify'));
     }
 
     public function edit(User $user): View

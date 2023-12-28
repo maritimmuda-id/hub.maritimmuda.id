@@ -1,6 +1,14 @@
 <?php
 
 return [
+    'plural-chart' => 'Grafik Perkembangan',
+
+    'user-chart' => 'Diagram Anggota',
+
+    'regis-chart' => 'Anggota Mendaftar',
+
+    'verify-chart' => 'Anggota Terverifikasi',
+
     'plural-name' => 'Daftar Anggota',
 
     'singular-name' => 'Anggota',

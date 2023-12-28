@@ -1,6 +1,14 @@
 <?php
 
 return [
+    'plural-chart' => 'Progress Chart',
+
+    'user-chart' => 'Chart User',
+
+    'regis-chart' => 'Registration User',
+
+    'verify-chart' => 'Verification User',
+
     'plural-name' => 'Users',
 
     'singular-name' => 'User',
