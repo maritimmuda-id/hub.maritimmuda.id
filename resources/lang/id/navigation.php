@@ -7,7 +7,7 @@ return [
 
     'logout' => 'Keluar',
 
-    'user' => 'Data Anggota',
+    'user' => 'Administrasi Anggota',
 
     'find-member' => 'Cari Anggota',
 

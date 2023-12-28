@@ -7,7 +7,7 @@ return [
 
     'logout' => 'Logout',
 
-    'user' => 'Users',
+    'user' => 'Administration Member',
 
     'find-member' => 'Find Member',
 
