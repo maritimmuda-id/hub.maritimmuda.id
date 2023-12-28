@@ -35,7 +35,7 @@ class GeneralProfileController
             $user->addMediaFromRequest('photo')
                 ->toMediaCollection('photo');
                 toast(trans('profile.update-profile-success'), 'success');
-        }
+        } 
 
         if ($request->hasFile('identity_card')) {
             $user->addMediaFromRequest('identity_card')
