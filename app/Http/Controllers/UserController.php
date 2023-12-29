@@ -167,6 +167,8 @@ class UserController
         $currentDate = Carbon::now();
         $monthlyCountsCreated = [];
         $monthlyCountsVerify = [];
+        $userCountsCreated = [];
+        $userCountsVerify = [];
 
         for ($i = 0; $i < 12; $i++) {
             $startDate = $currentDate->copy()->subMonths($i)->startOfMonth();
@@ -175,15 +177,24 @@ class UserController
             // $monthName = $startDate->format('F Y');
             $count_created = User::whereBetween('created_at', [$startDate, $endDate])->count();
             $count_verify = Membership::whereBetween('verified_at', [$startDate, $endDate])->count();
+            $user_count_created = User::count();
+            $user_count_verify = Membership::count();
+            $user_count_difference = User::count() - Membership::count();
 
             $monthlyCountsCreated[] = $count_created;
             $monthlyCountsVerify[] = $count_verify;
+            $userCountsCreated[] = $user_count_created;
+            $userCountsVerify[] = $user_count_verify;
+            $userCountsDifference[] = $user_count_difference;
         }
 
         $monthlyCountsCreated  = array_reverse($monthlyCountsCreated);
         $monthlyCountsVerify  = array_reverse($monthlyCountsVerify);
+        $userCountsCreated  = array_reverse($userCountsCreated);
+        $userCountsVerify  = array_reverse($userCountsVerify);
+        $userCountsDifference  = array_reverse($userCountsDifference);
 
-        return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'monthlyCountsCreated', 'monthlyCountsVerify'));
+        return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'monthlyCountsCreated', 'monthlyCountsVerify', 'userCountsCreated', 'userCountsVerify', 'userCountsDifference'));
     }
 
     public function edit(User $user): View

@@ -1,13 +1,19 @@
 <?php
 
 return [
-    'plural-chart' => 'Grafik Perkembangan',
+    'plural-administration' => 'Beranda Administrasi',
 
     'user-chart' => 'Diagram Anggota',
 
     'regis-chart' => 'Anggota Mendaftar',
 
     'verify-chart' => 'Anggota Terverifikasi',
+
+    'difference-chart' => 'Selisih',
+
+    'y-axis-label' => 'Jumlah Anggota',
+
+    'x-axis-label' => 'Bulan dan Tahun',
 
     'plural-name' => 'Daftar Anggota',
 

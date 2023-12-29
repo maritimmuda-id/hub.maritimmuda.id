@@ -4,16 +4,18 @@
     <div class="card">
         <div class="card-header">
             <h4 class="d-inline">
-                @lang('users.plural-chart')
+                @lang('users.plural-administration')
             </h4>
-        </div>
+        </divcol-6>
 
-        <div class="col-12"> <!-- Use col-6 to take up half of the width -->
-            <canvas id="myChart" height="100"></canvas> <!-- Adjust height as needed -->
+        <div class="col-md-6 d-flex"> <!-- Use col-6 to take up half of the width -->
+            <canvas id="myChart" height="200"></canvas> <!-- Adjust height as needed -->
+            <canvas id="myChart2" height="200"></canvas> <!-- Adjust height as needed -->
         </div>
 
         <script>
             document.addEventListener("DOMContentLoaded", function() {
+                // Line chart
                 const lineChart = document.getElementById('myChart');
                 const ctx = lineChart.getContext('2d');
                 const myChart = new Chart(ctx, {
@@ -29,6 +31,55 @@
                             label: "{{ trans('users.verify-chart') }}",
                             data: {!! json_encode($monthlyCountsVerify) !!}, // Adjusted data point for the second line
                             borderColor: 'rgb(255, 0, 0)' // Adjust the color for the second line
+                        }]
+
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: "{{ trans('users.x-axis-label') }}" // Y-axis title
+                                }
+                            },                            
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: "{{ trans('users.y-axis-label') }}" // Y-axis title
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: "{{ trans('users.user-chart') }}"
+                            }
+                        }
+                    }
+                });
+
+                // Pie chart
+                const pieChart = document.getElementById('myChart2');
+                const ctx2 = pieChart.getContext('2d');
+                const myPieChart = new Chart(ctx2, {
+                    type: 'pie',
+                    data: {
+                        //labels: {!! json_encode($userCountsCreated) !!},
+                        datasets: [{
+                            label: "{{ trans('users.regis-chart') }}",
+                            data: {!! json_encode($userCountsCreated) !!}, // Adjusted data point
+                            borderColor: 'rgb(50, 31, 219)' // Corrected property name
+                        },
+                        {
+                            label: "{{ trans('users.verify-chart') }}",
+                            data: {!! json_encode($userCountsVerify) !!}, // Adjusted data point for the second line
+                            borderColor: 'rgb(255, 0, 0)' // Adjust the color for the second line
+                        },
+                        {
+                            label: "{{ trans('users.difference-chart') }}",
+                            data: {!! json_encode($userCountsDifference) !!}, // Adjusted data point for the second line
+                            borderColor: 'rgb(0, 255, 0)' // Adjust the color for the second line
                         }]
 
                     },

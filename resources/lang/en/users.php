@@ -1,13 +1,19 @@
 <?php
 
 return [
-    'plural-chart' => 'Progress Chart',
+    'plural-administration' => 'Administration Dashboard',
 
     'user-chart' => 'Chart User',
 
     'regis-chart' => 'Registration User',
 
     'verify-chart' => 'Verification User',
+
+    'difference-chart' => 'Difference',
+
+    'y-axis-label' => 'Number of Member',
+
+    'x-axis-label' => 'Month and Year',
 
     'plural-name' => 'Users',
 
