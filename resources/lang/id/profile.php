@@ -207,5 +207,9 @@ return [
 
     'payment-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah bukti pembayaran.',
 
+    'maritimmuda-bank' => 'BRI a.n Perkumpulan Maritim Muda Nusantara',
+
+    'maritimmuda-bank-id' => '106001001018308',
+
     'update-payment-success' => 'Upload bukti pembayaran successfully',
 ];

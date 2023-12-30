@@ -124,7 +124,7 @@
                     <span>{{ date('Y') }}</span>
                 </div>
                 <div class="mfs-auto">
-                    <span>Maritim Muda Hub v2.1 - 2023</span>
+                    <span>Maritim Muda Hub v2.1 - 2024</span>
                 </div>
             </footer>
         </div>

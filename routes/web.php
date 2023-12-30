@@ -10,6 +10,7 @@ use App\Http\Controllers\{
     VerifyUserController,
     ViewDashboardController,
     ViewMemberCardController,
+    MakeAdminController,
 };
 use App\Http\Controllers\Profile\{
     ChangePasswordController,
@@ -79,6 +80,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/users/{user}/verify', [VerifyUserController::class, '__invoke'])
         ->name('user.verify');
+    Route::post('/users/{user}/make-admin', [MakeAdminController::class, 'make'])
+    ->name('user.make-admin');
+    Route::post('/users/{user}/make-deladmin', [MakeAdminController::class, 'delete'])
+    ->name('user.make-deladmin');
     Route::resource('users', UserController::class)
         ->except(['create', 'store', 'show'])
         ->names('user');

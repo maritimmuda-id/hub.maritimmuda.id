@@ -3,21 +3,29 @@
 return [
     'plural-administration' => 'Administration Dashboard',
 
-    'user-chart' => 'Chart User',
+    'user-chart' => 'Chart Member',
 
-    'regis-chart' => 'Registration User',
+    'user-chart-verify' => 'Verified Member Chart',
 
-    'verify-chart' => 'Verification User',
+    'user-total' => 'Current Total Number of Member: ',
 
-    'difference-chart' => 'Difference',
+    'regis-chart' => 'Registration',
+
+    'verify-chart' => 'Verification',
+
+    'verify-chart-verify' => 'Verified Email and E-KTA',
+
+    'notkta-chart-verify' => 'Verified Email',
+
+    'notemail-chart-verify' => 'Unverified Email and E-KTA',
 
     'y-axis-label' => 'Number of Member',
 
     'x-axis-label' => 'Month and Year',
 
-    'plural-name' => 'Users',
+    'plural-name' => 'Member List',
 
-    'singular-name' => 'User',
+    'singular-name' => 'Member',
 
     'name-label' => 'Name',
 

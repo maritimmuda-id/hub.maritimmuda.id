@@ -9,8 +9,13 @@
         </divcol-6>
 
         <div class="col-md-6 d-flex"> <!-- Use col-6 to take up half of the width -->
-            <canvas id="myChart" height="200"></canvas> <!-- Adjust height as needed -->
-            <canvas id="myChart2" height="200"></canvas> <!-- Adjust height as needed -->
+            <canvas id="myChart" height="200" style="padding: 10px;"></canvas> <!-- Adjust height as needed -->
+            <canvas id="myChart2" height="200" style="padding: 10px;"></canvas> <!-- Adjust height as needed -->
+        </div>
+
+        <div class="col-12">
+            <!-- <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+            <div class="elfsight-app-8ab823bc-6cde-4045-83bb-f9ca87c046f0" data-elfsight-app-lazy></div> -->
         </div>
 
         <script>
@@ -30,7 +35,7 @@
                         {
                             label: "{{ trans('users.verify-chart') }}",
                             data: {!! json_encode($monthlyCountsVerify) !!}, // Adjusted data point for the second line
-                            borderColor: 'rgb(255, 0, 0)' // Adjust the color for the second line
+                            borderColor: 'rgb(0, 255, 0)' // Adjust the color for the second line
                         }]
 
                     },
@@ -41,12 +46,15 @@
                                     display: true,
                                     text: "{{ trans('users.x-axis-label') }}" // Y-axis title
                                 }
-                            },                            
+                            },
                             y: {
                                 beginAtZero: true,
                                 title: {
                                     display: true,
                                     text: "{{ trans('users.y-axis-label') }}" // Y-axis title
+                                },
+                                ticks: {
+                                    precision: 0 // Set precision to 0 to display integers without decimals
                                 }
                             }
                         },
@@ -63,36 +71,43 @@
                 const pieChart = document.getElementById('myChart2');
                 const ctx2 = pieChart.getContext('2d');
                 const myPieChart = new Chart(ctx2, {
-                    type: 'pie',
+                    type: 'bar',
                     data: {
-                        //labels: {!! json_encode($userCountsCreated) !!},
+                        labels: {!! json_encode($user_count) !!},
                         datasets: [{
-                            label: "{{ trans('users.regis-chart') }}",
-                            data: {!! json_encode($userCountsCreated) !!}, // Adjusted data point
-                            borderColor: 'rgb(50, 31, 219)' // Corrected property name
-                        },
-                        {
-                            label: "{{ trans('users.verify-chart') }}",
+                            label: "{{ trans('users.verify-chart-verify') }}",
                             data: {!! json_encode($userCountsVerify) !!}, // Adjusted data point for the second line
-                            borderColor: 'rgb(255, 0, 0)' // Adjust the color for the second line
+                            backgroundColor: 'rgb(0, 255, 0)' // Adjust the color for the second line
                         },
                         {
-                            label: "{{ trans('users.difference-chart') }}",
-                            data: {!! json_encode($userCountsDifference) !!}, // Adjusted data point for the second line
-                            borderColor: 'rgb(0, 255, 0)' // Adjust the color for the second line
+                            label: "{{ trans('users.notkta-chart-verify') }}",
+                            data: {!! json_encode($userCountsCreated) !!}, // Adjusted data point for the second line
+                            backgroundColor: 'rgb(0, 0, 255)' // Adjust the color for the second line
+                        },
+                        {
+                            label: "{{ trans('users.notemail-chart-verify') }}",
+                            data: {!! json_encode($userCountsNotMail) !!}, // Adjusted data point for the second line
+                            backgroundColor: 'rgb(255, 0, 0)' // Adjust the color for the second line
                         }]
 
                     },
                     options: {
                         scales: {
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: "{{ trans('users.y-axis-label') }}" // Y-axis title
+                                },
+                                ticks: {
+                                    precision: 0 // Set precision to 0 to display integers without decimals
+                                }
                             }
                         },
                         plugins: {
                             title: {
                                 display: true,
-                                text: "{{ trans('users.user-chart') }}"
+                                text: "{{ trans('users.user-chart-verify') }}"
                             }
                         }
                     }

@@ -76,7 +76,15 @@
                                     </x-form-input>
                                 </div>
 
-                                <div class="align-items-center" style="display: none;">
+                                <div class="col-md-6 d-flex justify-content-center">
+                                    <img
+                                        src="{{ $user->payment_link }}"
+                                        class="img-thumbnail img-fluid my-3"
+                                        style="width:214px;height:135px;"
+                                        alt="payment_confirm"
+                                    >
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center">
                                     <x-form-input
                                         type="file"
                                         name="payment_confirm"
@@ -277,6 +285,13 @@
                     focusConfirm: false,
                     allowOutsideClick: false,
                     icon: "warning",
+                    html: `
+                        <div>
+                            <p>{{ trans('profile.payment-is-required') }}</p><br>
+                            <b><h2>{{ trans('profile.maritimmuda-bank') }}</h2><b>
+                            <h1>{{ trans('profile.maritimmuda-bank-id') }}</h1>
+                        </div>
+                    `,
                 })
                 .then(result => {
                     if (result.isConfirmed) {

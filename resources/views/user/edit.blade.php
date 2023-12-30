@@ -110,8 +110,12 @@
                         </button>
                     </x-form>
                 @endcan
-                @if ($user->ha)
-
+                @if ($user->uid !== null)
+                    <x-form :action="route('user.verify', $user)" onsubmit="return confirm('{{ __('Are you sure?') }}');" style="display: inline-block;">
+                        <button type="submit" class="btn btn-sm btn-primary" style="margin:1.25px 0;">
+                            <i class="fas fa-user-check"></i>&nbsp;&nbsp;{{ __('membership.regenerate-member-card') }}
+                        </button>
+                    </x-form>
                 @endif
             </div>
         </div>

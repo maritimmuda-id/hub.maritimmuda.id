@@ -1,5 +1,11 @@
 @extends('layouts.panel')
 @section('content')
+@php
+    // Assuming you have access to the currently authenticated user
+    $user = Auth::user();
+@endphp
+
+@if ($user && $user->uid !== null)
     <div class="card">
         <div class="card-header">
             <h4 class="d-inline">
@@ -9,7 +15,6 @@
                 @can('create', \App\Models\Event::class)
                     <a href="{{ route('event.create') }}" class="btn btn-sm btn-success">
                         <i class="fas fa-plus"></i>
-
                         @lang('Create :resource', [
                             'resource' => trans('events.singular-name'),
                         ])
@@ -22,6 +27,20 @@
             {!! $dataTable->table() !!}
         </div>
     </div>
+@else
+    <div class="card">
+        <div class="card-header">{{ trans('verify-membership.title') }}</div>
+
+        <div class="card-body">
+            {{ trans('verify-membership.notice_1') }}
+            {{ trans('verify-membership.notice_2') }},
+            <a class="d-inline" href="{{ route('profile.edit') }}">
+                <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ trans('verify-membership.notice_3') }}</button>.
+            </a>
+        </div>
+    </div>
+@endif
+
 @endsection
 @push('scripts')
     {!! $dataTable->scripts() !!}

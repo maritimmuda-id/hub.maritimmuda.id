@@ -91,7 +91,7 @@ class UserController
                     return view('includes.datatable-image', ['link' => $row->photo_thumb_link]);
                 })
                 ->addColumn('payment_confirm', function (User $row) {
-                    return view('includes.datatable-image', ['link' => $row->payment_tumb_link]);
+                    return view('includes.datatable-image', ['link' => $row->payment_link]);
                 })
                 ->addColumn('action', function (User $row) {
                     return view('user.includes.actions', [
@@ -148,8 +148,9 @@ class UserController
         // Mendapatkan tanggal hari ini
         $today = Carbon::now();
 
-        // Inisialisasi array untuk menyimpan daftar bulan
+        // Inisialisasi array
         $months = [];
+        $user_count = [trans('users.user-total').User::count()];
 
         // Loop untuk menghitung 12 bulan terakhir
         for ($i = 0; $i < 12; $i++) {
@@ -169,6 +170,7 @@ class UserController
         $monthlyCountsVerify = [];
         $userCountsCreated = [];
         $userCountsVerify = [];
+        $userCountsNotMail = [];
 
         for ($i = 0; $i < 12; $i++) {
             $startDate = $currentDate->copy()->subMonths($i)->startOfMonth();
@@ -177,24 +179,24 @@ class UserController
             // $monthName = $startDate->format('F Y');
             $count_created = User::whereBetween('created_at', [$startDate, $endDate])->count();
             $count_verify = Membership::whereBetween('verified_at', [$startDate, $endDate])->count();
-            $user_count_created = User::count();
-            $user_count_verify = Membership::count();
-            $user_count_difference = User::count() - Membership::count();
+            $user_count_created = User::whereNull('uid')->whereNotNull('email_verified_at')->count();
+            $user_count_verify = User::whereNotNull('uid')->count();
+            $user_count_notmail = User::whereNull('email_verified_at')->count();
 
             $monthlyCountsCreated[] = $count_created;
             $monthlyCountsVerify[] = $count_verify;
             $userCountsCreated[] = $user_count_created;
             $userCountsVerify[] = $user_count_verify;
-            $userCountsDifference[] = $user_count_difference;
+            $userCountsNotMail[] = $user_count_notmail;
         }
 
         $monthlyCountsCreated  = array_reverse($monthlyCountsCreated);
         $monthlyCountsVerify  = array_reverse($monthlyCountsVerify);
         $userCountsCreated  = array_reverse($userCountsCreated);
         $userCountsVerify  = array_reverse($userCountsVerify);
-        $userCountsDifference  = array_reverse($userCountsDifference);
+        $userCountsNotMail  = array_reverse($userCountsNotMail);
 
-        return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'monthlyCountsCreated', 'monthlyCountsVerify', 'userCountsCreated', 'userCountsVerify', 'userCountsDifference'));
+        return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'user_count', 'monthlyCountsCreated', 'monthlyCountsVerify', 'userCountsCreated', 'userCountsVerify', 'userCountsNotMail'));
     }
 
     public function edit(User $user): View

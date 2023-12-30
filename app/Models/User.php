@@ -84,6 +84,9 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
 
         $this->addMediaCollection('identity_card')
             ->singleFile();
+
+        $this->addMediaCollection('payment_confirm')
+            ->singleFile();
     }
 
     public function registerMediaConversions(Media $media = null): void
@@ -106,6 +109,10 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
                 Manipulations::create()
                     ->fit(Manipulations::FIT_CROP, 300, 400)
             )
+            ->queued();
+
+        $this->addMediaConversion('payment_confirm')
+            ->performOnCollections('payment_confirm')
             ->queued();
 
         $this->addMediaConversion('thumb')
@@ -217,11 +224,11 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         $name = $this->getAttribute('name');
         $media = $this->getFirstMedia('photo');
 
-        $defaultAvatar = "https://ui-avatars.com/api/?format=jpg&background=ebedef&size=128";
+        $defaultAvatar = "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg";
 
-        if (! empty($name)) {
-            $defaultAvatar .= "&name={$name}";
-        }
+        // if (! empty($name)) {
+        //     $defaultAvatar .= "&name={$name}";
+        // }
 
         if (is_null($media)) {
             return $defaultAvatar;
@@ -262,6 +269,17 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         }
 
         return $media->getUrl('identity_card');
+    }
+
+    public function getPaymentLinkAttribute(): string
+    {
+        $media = $this->getFirstMedia('payment_confirm');
+
+        if (is_null($media)) {
+            return 'https://via.placeholder.com/856x540/fff/1f90ff?text=No%20Payment%20File%20Upload';
+        }
+
+        return $media->getUrl('payment_confirm');
     }
 
     public function getMemberTypeAttribute(): ?string

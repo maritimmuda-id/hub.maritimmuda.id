@@ -5,11 +5,19 @@ return [
 
     'user-chart' => 'Diagram Anggota',
 
-    'regis-chart' => 'Anggota Mendaftar',
+    'user-chart-verify' => 'Diagram Anggota Terverifikasi Email dan E-KTA',
 
-    'verify-chart' => 'Anggota Terverifikasi',
+    'user-total' => 'Jumlah Total Anggota: ',
 
-    'difference-chart' => 'Selisih',
+    'regis-chart' => 'Mendaftar',
+
+    'verify-chart' => 'Terverifikasi',
+
+    'verify-chart-verify' => 'Terverifikasi Email dan E-KTA',
+
+    'notkta-chart-verify' => 'Terverifikasi Email',
+
+    'notemail-chart-verify' => 'Tidak Terverifikasi Email dan E-KTA',
 
     'y-axis-label' => 'Jumlah Anggota',
 

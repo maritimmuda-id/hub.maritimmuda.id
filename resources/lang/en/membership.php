@@ -7,6 +7,8 @@ return [
 
     'verify-and-generate-member-card' => 'Verify and Generate New Member Card',
 
+    'regenerate-member-card' => 'Regenerate Member Card',
+
     'member-type' => 'Member Type',
 
     'member-age' => 'Member Age',

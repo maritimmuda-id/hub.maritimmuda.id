@@ -34,4 +34,10 @@ abstract class TestCase extends BaseTestCase
             'input',
         ]);
     }
+
+    public function makeUserAdmin(User $user)
+    {
+        return $this->actingAs($this->admin())
+            ->post(route('user.make-admin', $user));
+    }
 }

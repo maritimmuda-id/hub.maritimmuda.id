@@ -207,5 +207,9 @@ return [
 
     'payment-is-required' => 'To create a membership card, you must upload the payment confirmation receipt',
 
+    'maritimmuda-bank' => 'BRI a.n Perkumpulan Maritim Muda Nusantara',
+
+    'maritimmuda-bank-id' => '106001001018308',
+
     'update-payment-success' => 'Upload payment confirmation successfully',
 ];
