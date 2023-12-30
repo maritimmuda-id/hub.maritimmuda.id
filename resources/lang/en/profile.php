@@ -201,7 +201,7 @@ return [
 
     'payment-label' => 'Upload The Payment Confirmation Receipt',
 
-    'payment-help-text' => 'This is a payment help text',
+    'payment-help-text' => 'Please make payment via bank transfer BRI a.n Perkumpulan Maritim Muda Nusantara 106001001018308',
 
     'upload-payment-confirm' => 'Upload The Payment Confirmation Receipt',
 
@@ -210,6 +210,10 @@ return [
     'maritimmuda-bank' => 'BRI a.n Perkumpulan Maritim Muda Nusantara',
 
     'maritimmuda-bank-id' => '106001001018308',
+
+    'price' => 'Rp. 30,000,00-/year',
+
+    'discon' => 'Rp. 50,000,00-/year',
 
     'update-payment-success' => 'Upload payment confirmation successfully',
 ];
