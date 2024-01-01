@@ -80,7 +80,7 @@
                                     <img
                                         src="{{ $user->payment_link }}"
                                         class="img-thumbnail img-fluid my-3"
-                                        style="width:214px;height:135px;"
+                                        style="width:214px;height:200px;"
                                         alt="payment_confirm"
                                     >
                                 </div>
@@ -204,7 +204,9 @@
                     @endbind
                 </div>
                 <div class="card-footer">
-                    <x-save-button />
+                    <div class="save-profile-btn">
+                        <x-save-button />
+                    </div>
                 </div>
             </x-form>
         </div>
@@ -299,6 +301,9 @@
                 })
                 .then(result => {
                     if (result.isConfirmed) {
+                        document.querySelector('[name="payment_confirm"]').addEventListener('change', function() {
+                            $('.save-profile-btn .btn').click();
+                        });
                         $('[name="payment_confirm"]').click();
                     }
                 });

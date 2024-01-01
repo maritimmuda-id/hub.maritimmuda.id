@@ -197,11 +197,11 @@ return [
 
     'identity-card-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah KTP untuk keperluan verifikasi.',
 
-    'member-card-is-being-processed' => 'Kartu tanda anggota Anda sedang diproses, biasanya akan membutuhkan waktu 2-3 hari kerja.',
+    'member-card-is-being-processed' => 'Permintaan kartu tanda anggota Anda sedang dalam proses verifikasi, biasanya akan membutuhkan waktu 2-5 hari kerja. Terimakasih.',
 
     'payment-label' => 'Upload Bukti Konfirmasi Pembayaran',
 
-    'payment-help-text' => 'Silahkan lakukan pembayaran melalui transfer bank BRI a.n Perkumpulan Maritim Muda Nusantara 106001001018308',
+    'payment-help-text' => 'Lakukan pembayaran melalui transfer bank BRI a.n Perkumpulan Maritim Muda Nusantara 106001001018308',
 
     'upload-payment-confirm' => 'Upload Bukti Konfirmasi Pembayaran',
 
@@ -215,5 +215,5 @@ return [
 
     'discon' => 'Rp. 50,000,00-/tahun',
 
-    'update-payment-success' => 'Upload bukti pembayaran successfully',
+    'update-payment-success' => 'Upload bukti pembayaran berhasil',
 ];

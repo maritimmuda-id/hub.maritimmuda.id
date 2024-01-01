@@ -113,6 +113,10 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
 
         $this->addMediaConversion('payment_confirm')
             ->performOnCollections('payment_confirm')
+            ->setManipulations(
+                Manipulations::create()
+                ->fit(Manipulations::FIT_CROP, 856, 540)
+            )
             ->queued();
 
         $this->addMediaConversion('thumb')
