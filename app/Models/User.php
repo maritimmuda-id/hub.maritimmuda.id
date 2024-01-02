@@ -276,7 +276,7 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         $media = $this->getFirstMedia('payment_confirm');
 
         if (is_null($media)) {
-            return 'https://via.placeholder.com/856x540/fff/1f90ff?text=No%20Payment%20File%20Upload';
+            return 'https://via.placeholder.com/214x200/fff/1f90ff?text=No%20Payment%20File%20Upload';
         }
 
         return $media->getUrl('payment_confirm');

@@ -218,4 +218,6 @@ return [
     'update-payment-success' => 'Upload payment confirmation successfully',
 
     'member-verify-check' => 'Member verified',
+
+    'member-label' => 'Member',
 ];

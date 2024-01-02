@@ -217,5 +217,7 @@ return [
 
     'update-payment-success' => 'Upload bukti pembayaran berhasil',
 
-    'member-verify-check' => 'Member terverifikasi',
+    'member-verify-check' => 'Anggota terverifikasi',
+
+    'member-label' => 'Anggota',
 ];

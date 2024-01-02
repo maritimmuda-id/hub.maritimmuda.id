@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            Member
+            @lang('profile.member-label')
         </div>
 
         @livewire('find-member-card')
