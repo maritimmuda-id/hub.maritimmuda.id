@@ -5,7 +5,7 @@
         </button>
     </x-form>
 @endif
-@if($user->is_admin == 1)
+@if($user->is_admin == 1 && $user->uuid != auth()->user()->uuid)
     <x-form :action="route('user.make-deladmin', $user)" method="post" onsubmit="return confirm('{{ __('Are you sure?') }}');" style="display: inline-block;">
         <button type="submit" class="btn btn-sm btn-dark" style="margin:1.25px 0;">
             <i class="fas fa-key"></i> {{ __('DelAdmin') }}

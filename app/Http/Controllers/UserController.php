@@ -74,6 +74,8 @@ class UserController
                     if ($status == UserStatus::RequestIdentityCardVerification) {
                         $query->whereDoesntHave('memberships');
                         $query->whereRelation('media', 'collection_name', 'identity_card');
+                    } elseif ($status == UserStatus::UserAdmin) {
+                        $query->where('is_admin', 1);
                     }
 
                     // TODO: Add query to filter by `request renewal` status

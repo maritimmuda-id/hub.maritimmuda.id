@@ -17,12 +17,16 @@
                                         <a href="{{ $user->membership->member_card_document_link }}" target="_blank" class="btn btn-primary">
                                             @lang('profile.download-member-card')
                                         </a>
-                                    @elseif ($user->hasMedia('payment_confirm'))
+                                    @elseif ($user->hasMedia('payment_confirm') && $user->hasMedia('identity_card'))
                                         <button type="button" id="btn-member-card-processed" class="btn btn-primary">
                                             @lang('profile.create-member-card')
                                         </button>
-                                    @else
-                                        <button type="button" id="btn-create-member-card" class="btn btn-primary">
+                                    @elseif (!$user->hasMedia('payment_confirm'))
+                                        <button type="button" id="btn-create-member-card-from-payment" class="btn btn-primary">
+                                            @lang('profile.create-member-card')
+                                        </button>
+                                    @elseif (!$user->hasMedia('identity_card'))
+                                        <button type="button" id="btn-create-member-card-from-identity" class="btn btn-primary">
                                             @lang('profile.create-member-card')
                                         </button>
                                     @endif
@@ -253,28 +257,31 @@
 @push('scripts')
     <script>
         $(function () {
-            // $('#btn-create-member-card').on('click', function () {
-            //     Swal.fire({
-            //         text: "{{ trans('profile.identity-card-is-required') }}",
-            //         showConfirmButton: true,
-            //         confirmButtonText: "{{ trans('profile.upload-identity-card') }}",
-            //         confirmButtonAriaLabel: "{{ trans('profile.upload-identity-card') }}",
-            //         showCancelButton: true,
-            //         cancelButtonText: "{{ __('Close') }}",
-            //         cancelButtonAriaLabel: "{{ __('Close') }}",
-            //         reverseButtons: true,
-            //         focusConfirm: false,
-            //         allowOutsideClick: false,
-            //         icon: "warning",
-            //     })
-            //     .then(result => {
-            //         if (result.isConfirmed) {
-            //             $('[name="payment_confirm"]').click();
-            //         }
-            //     });
-            // });
+            $('#btn-create-member-card-from-identity').on('click', function () {
+                Swal.fire({
+                    text: "{{ trans('profile.identity-card-is-required') }}",
+                    showConfirmButton: true,
+                    confirmButtonText: "{{ trans('profile.upload-identity-card') }}",
+                    confirmButtonAriaLabel: "{{ trans('profile.upload-identity-card') }}",
+                    showCancelButton: true,
+                    cancelButtonText: "{{ __('Close') }}",
+                    cancelButtonAriaLabel: "{{ __('Close') }}",
+                    reverseButtons: true,
+                    focusConfirm: false,
+                    allowOutsideClick: false,
+                    icon: "warning",
+                })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        document.querySelector('[name="identity_card"]').addEventListener('change', function() {
+                            $('.save-profile-btn .btn').click();
+                        });
+                        $('[name="identity_card"]').click();
+                    }
+                });
+            });
 
-            $('#btn-create-member-card').on('click', function () {
+            $('#btn-create-member-card-from-payment').on('click', function () {
                 Swal.fire({
                     text: "{{ trans('profile.payment-is-required') }}",
                     showConfirmButton: true,
