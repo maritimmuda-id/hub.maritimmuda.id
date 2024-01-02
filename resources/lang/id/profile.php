@@ -216,4 +216,6 @@ return [
     'discon' => 'Rp. 50,000,00-/tahun',
 
     'update-payment-success' => 'Upload bukti pembayaran berhasil',
+
+    'member-verify-check' => 'Member terverifikasi',
 ];

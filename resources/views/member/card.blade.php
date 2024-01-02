@@ -39,7 +39,7 @@
                         <div class="d-flex">
                             <img style="width:75px;height:100px;" class="img-fluid img-thumbnail" src="{{ $user->photo_link }}">
                             <div class="mx-2">
-                                <h3>{{ $user->name }}</h3>
+                                <h3>{{ $user->name }} @if ($user->uid !== null && $user->uid !== 'null') <i class="fas fa-check-circle" style="font-size: 20px; color: #39f;" title="@lang('profile.member-verify-check')"></i> @endif</h3>
                                 <strong class="d-block">{{ $user->province->name }}</strong>
                                 <small class="d-block">{{ $user->firstExpertise?->name }}</small>
                                 <small class="d-block">{{ $user->secondExpertise?->name }}</small>
@@ -157,7 +157,11 @@
         $(function () {
             Livewire.on('openModal', (e) => {
                 $('#uid').text(e.uid);
-                $('#name_1').text(e.name);
+                if (e.uid !== null) {
+                    $('#name_1').html(`${e.name} <i class="fas fa-check-circle" style="font-size: 20px; color: #39f;" title="@lang('profile.member-verify-check')"></i>`);
+                } else {
+                    $('#name_1').text(e.name)
+                }
                 $('#name_2').text(e.name);
                 $('#email').attr('href', `mailto:${e.email}`);
                 $('#bio').text(e.bio);

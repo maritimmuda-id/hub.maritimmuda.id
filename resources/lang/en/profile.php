@@ -216,4 +216,6 @@ return [
     'discon' => 'Rp. 50,000,00-/year',
 
     'update-payment-success' => 'Upload payment confirmation successfully',
+
+    'member-verify-check' => 'Member verified',
 ];
