@@ -22,7 +22,7 @@ $(document).ready(function () {
         window.adjustDataTable();
     });
 
-    $(".c-header-toggler.mfs-3.d-md-down-none").click(function (e) {
+    $(".c-header-toggler.d-md-down-none").click(function (e) {
         $("#sidebar").toggleClass("c-sidebar-lg-show");
 
         setTimeout(function () {

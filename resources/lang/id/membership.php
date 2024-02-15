@@ -16,4 +16,8 @@ return [
     'verified-date' => 'Tanggal Verifikasi',
 
     'expired-date' => 'Tanggal Kadaluarsa',
+
+    'singular-name' => 'Data Anggota',
+
+    'head-membership' => 'Ubah Anggota',
 ];

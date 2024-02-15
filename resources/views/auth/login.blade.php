@@ -3,14 +3,14 @@
 <div class="row justify-content-center">
     <div class="col-md-10">
         <div class="card-group">
-            <div class="card mx-auto" style="width:40%">
+            <div class="card mx-auto" style="width:40%; border: none;">
                 <div class="card-body d-flex justify-content-center align-items-center">
-                    <img class="img-fluid" src="{{ asset('/img/logo-300.png') }}" alt="" />
+                    <img class="img-fluid pt-md-4 pb-md-4 pl-md-4" src="{{ asset('/img/My password-amico.png') }}" alt="" />
                 </div>
             </div>
-            <div class="card p-4">
+            <div class="card p-4" style="border: none;">
                 <div class="card-body">
-                    <h2 class="mb-3">{{ trans('login.heading') }}</h2>
+                    <h2 class="mb-3"><b>{{ trans('login.heading') }}</b></h2>
 
                     @if (session()->has('status'))
                     <div class="alert alert-success" role="alert">

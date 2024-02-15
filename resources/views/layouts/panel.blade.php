@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="https://unpkg.com/lightgallery@2.x/css/lightgallery-bundle.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="https://maritimmuda.id/assets/images/favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 
     @stack('styles')
 </head>
@@ -45,51 +48,23 @@
                     alt="{{ config('app.name') }}">
             </div>
 
-            <button class="c-header-toggler mfs-3 d-md-down-none" type="button" responsive="true">
+            <button class="c-header-toggler d-md-down-none" type="button" responsive="true">
                 <i class="fas fa-fw fa-bars"></i>
             </button>
 
             <ul class="c-header-nav ml-auto">
 
+                <h6 class="m-0 d-sm-none d-md-none d-lg-flex" style="color: rgba(0,0,21,.5);">Kita muda, wujudkan poros maritim dunia!</h6>
+
                 @livewire('user-notification')
 
                 @include('layouts.partials.change-language')
-
-                <li class="c-header-nav-item dropdown">
-                    <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false">
-                        <div class="c-avatar">
-                            <img class="c-avatar-img" src="{{ auth()->user()->photo_thumb_link }}"
-                                alt="{{ auth()->user()->email }}">
-                        </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right pt-0">
-                        <div class="dropdown-header bg-light py-2">
-                            <strong>@lang('Account')</strong>
-                        </div>
-                        <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                            <i class="mfe-2 fas fa-user"></i>
-                            @lang('navigation.profile')
-                        </a>
-                        @impersonating
-                            <a href="{{ route('impersonate.leave') }}" class="dropdown-item">
-                                <i class="mfe-2 fas fa-sign-out-alt"></i>
-                                @lang('navigation.leave-impersonation')
-                            </a>
-                        @endImpersonating
-                        <a href="javacript:void(0)" class="dropdown-item"
-                            onclick="event.preventDefault();document.getElementById('logoutform').submit();">
-                            <i class="mfe-2 fas fa-sign-out-alt"></i>
-                            @lang('navigation.logout')
-                        </a>
-                    </div>
-                </li>
             </ul>
         </header>
 
         <div class="c-body">
-            <main class="c-main">
-                <div class="container-fluid">
+            <main class="c-main p-0">
+                <div class="container-fluid p-0">
                     @if (session('message'))
                         <div class="row mb-2">
                             <div class="col-lg-12">
@@ -124,7 +99,7 @@
                     <span>{{ date('Y') }}</span>
                 </div>
                 <div class="mfs-auto">
-                    <span>Maritim Muda Hub v2.1 - 2024</span>
+                    <span>Maritim Muda Hub v3.0</span>
                 </div>
             </footer>
         </div>

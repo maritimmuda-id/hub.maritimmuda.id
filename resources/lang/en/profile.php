@@ -220,4 +220,6 @@ return [
     'member-verify-check' => 'Member verified',
 
     'member-label' => 'Member',
+
+    'profile-label' => 'Profile',
 ];

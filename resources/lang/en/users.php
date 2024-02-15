@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'plural-administration' => 'Administration Dashboard',
+    'plural-chart' => 'Chart',
 
     'user-chart' => 'Chart Member',
 
@@ -46,4 +46,6 @@ return [
     'created-at-label' => 'Registered Date',
 
     'cannot-delete-current-user' => 'Can\'t delete current user',
+
+    'export-table' => 'Export Table to XLSX',
 ];

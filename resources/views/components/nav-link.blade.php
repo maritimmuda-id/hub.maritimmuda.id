@@ -9,3 +9,4 @@
     <i class="c-sidebar-nav-icon fa-fw {{ $icon }}"></i>
     {!! $label !!}
 </a>
+

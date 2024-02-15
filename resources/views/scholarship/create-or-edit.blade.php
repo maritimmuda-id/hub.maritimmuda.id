@@ -1,8 +1,14 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <h4 class="d-inline">
+    <div class="pt-4">
+        <h1 class="d-inline p-4">
+            <b><i class="fas fa-edit"></i> @lang('scholarships.singular-name')</b>
+        </h1>
+    </div>
+
+    <div class="card p-3 m-4" style="border: none;">
+        <div class="card-header" style="border: none;">
+            <h4 class="d-inline pb-3"><b>
                 @if ($isOnCreateState)
                     @lang('Create :resource', [
                         'resource' => trans('scholarships.singular-name')
@@ -11,7 +17,7 @@
                     @lang('Edit :resource', [
                         'resource' => trans('scholarships.singular-name')
                     ])
-                @endif
+                @endif</b>
             </h4>
             <div class="card-header-actions">
                 @can('viewAny', \App\Models\Scholarship::class)
@@ -61,7 +67,7 @@
                     </div>
                 @endbind
             </div>
-            <div class="card-footer">
+            <div class="card-footer" style="border: none;">
                 <x-save-button />
             </div>
         </x-form>

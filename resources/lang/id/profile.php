@@ -220,4 +220,6 @@ return [
     'member-verify-check' => 'Anggota terverifikasi',
 
     'member-label' => 'Anggota',
+
+    'profile-label' => 'Profil',
 ];

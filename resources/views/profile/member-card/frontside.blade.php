@@ -19,6 +19,7 @@
             }
         }
     </script>
+    <link rel="icon" type="image/x-icon" href="https://maritimmuda.id/assets/images/favicon.png">
 </head>
 <body id="page" class="font-sans">
     <div class="bg-white max-w-[210mm] h-[120mm] px-16">

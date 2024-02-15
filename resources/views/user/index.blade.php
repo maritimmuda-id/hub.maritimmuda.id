@@ -1,16 +1,25 @@
 {{-- @dd($monthlyCounts) --}}
 @extends('layouts.panel')
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <h4 class="d-inline">
-                @lang('users.plural-administration')
-            </h4>
-        </divcol-6>
+    <div class="pt-4">
+        <h1 class="d-inline p-4">
+            <b><i class="fas fa-users"></i> @lang('navigation.user')</b>
+        </h1>
+    </div>
 
-        <div class="col-md-6 d-flex"> <!-- Use col-6 to take up half of the width -->
-            <canvas id="myChart" height="200" style="padding: 10px;"></canvas> <!-- Adjust height as needed -->
-            <canvas id="myChart2" height="200" style="padding: 10px;"></canvas> <!-- Adjust height as needed -->
+    <div class="card p-3 m-4" style="border: none;">
+        <h4 class="d-inline pb-3">
+            <b>@lang('users.plural-chart')</b>
+        </h4>
+
+        <div class="row d-flex justify-content-between align-items-center pr-3 pl-3">
+            <div class="card mb-0" style="flex: 0 0 50%; max-width: 49%;"> <!-- Use col-6 to take up half of the width -->
+                <canvas id="myChart" height="250"></canvas> <!-- Adjust height as needed -->
+            </div>
+
+            <div class="card mb-0" style="flex: 0 0 50%; max-width: 49%;"> <!-- Use col-6 to take up half of the width -->
+                <canvas id="myChart2" height="250"></canvas> <!-- Adjust height as needed -->
+            </div>
         </div>
 
         <div class="col-12">
@@ -30,12 +39,12 @@
                         datasets: [{
                             label: "{{ trans('users.regis-chart') }}",
                             data: {!! json_encode($monthlyCountsCreated) !!}, // Adjusted data point
-                            borderColor: 'rgb(50, 31, 219)' // Corrected property name
+                            borderColor: '#0c6c9d' // Corrected property name
                         },
                         {
                             label: "{{ trans('users.verify-chart') }}",
                             data: {!! json_encode($monthlyCountsVerify) !!}, // Adjusted data point for the second line
-                            borderColor: 'rgb(0, 255, 0)' // Adjust the color for the second line
+                            borderColor: '#14a9c3' // Adjust the color for the second line
                         }]
 
                     },
@@ -61,33 +70,36 @@
                         plugins: {
                             title: {
                                 display: true,
-                                text: "{{ trans('users.user-chart') }}"
+                                text: "{{ trans('users.user-chart') }}",
+                                font: {
+                                    family: "'Poppins', sans-serif",
+                                }
                             }
                         }
                     }
                 });
 
-                // Pie chart
-                const pieChart = document.getElementById('myChart2');
-                const ctx2 = pieChart.getContext('2d');
-                const myPieChart = new Chart(ctx2, {
+                // Bar chart
+                const barChart = document.getElementById('myChart2');
+                const ctx2 = barChart.getContext('2d');
+                const myBarChart = new Chart(ctx2, {
                     type: 'bar',
                     data: {
                         labels: {!! json_encode($user_count) !!},
                         datasets: [{
                             label: "{{ trans('users.verify-chart-verify') }}",
                             data: {!! json_encode($userCountsVerify) !!}, // Adjusted data point for the second line
-                            backgroundColor: 'rgb(0, 255, 0)' // Adjust the color for the second line
+                            backgroundColor: '#14a9c3' // Adjust the color for the second line
                         },
                         {
                             label: "{{ trans('users.notkta-chart-verify') }}",
                             data: {!! json_encode($userCountsCreated) !!}, // Adjusted data point for the second line
-                            backgroundColor: 'rgb(0, 0, 255)' // Adjust the color for the second line
+                            backgroundColor: '#0c6c9d' // Adjust the color for the second line
                         },
                         {
                             label: "{{ trans('users.notemail-chart-verify') }}",
                             data: {!! json_encode($userCountsNotMail) !!}, // Adjusted data point for the second line
-                            backgroundColor: 'rgb(255, 0, 0)' // Adjust the color for the second line
+                            backgroundColor: '#d95353' // Adjust the color for the second line
                         }]
 
                     },
@@ -107,7 +119,10 @@
                         plugins: {
                             title: {
                                 display: true,
-                                text: "{{ trans('users.user-chart-verify') }}"
+                                text: "{{ trans('users.user-chart-verify') }}",
+                                font: {
+                                    family: "'Poppins', sans-serif",
+                                }
                             }
                         }
                     }
@@ -116,11 +131,14 @@
         </script>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            <h4 class="d-inline">
-                @lang('users.plural-name')
+    <div class="card m-4" style="border: none;">
+        <div class="card-header pt-4" style="border-bottom: none;">
+            <h4 class="d-inline" id="plural-table-name">
+                <b>@lang('users.plural-name')</b>
             </h4>
+            <div class="card-header-actions">
+                <button class="btn btn-sm btn-info" onclick="exportToXlsx()"><i class="fas fa-download"></i> @lang('users.export-table')</button>
+            </div>
         </div>
 
         <div class="card-body">
@@ -205,5 +223,54 @@
                 refreshDatatable();
             });
         });
+
+        function exportToXlsx() {
+            const table = document.getElementById("users-table");
+
+            // Create a copy of the table without excluded columns
+            const tableCopy = table.cloneNode(true);
+            const excludedColumnIndices = getColumnIndicesToExclude(tableCopy);
+
+            // Remove excluded columns
+            removeColumns(tableCopy, excludedColumnIndices);
+
+            // Convert the modified table to XLSX
+            const ws = XLSX.utils.table_to_sheet(tableCopy);
+            const wb = XLSX.utils.book_new();
+
+            // Set a sheet name
+            const rawSheetName = document.getElementById("users-table_info").innerHTML;
+            const sheet_name = rawSheetName.substr(0, 31);
+            XLSX.utils.book_append_sheet(wb, ws, sheet_name);
+
+            // Save the file
+            const sheetName = {!! json_encode(__('users.plural-name')) !!};
+            const filename = "[EXPORT] " + sheetName + " - Maritim Muda Hub.xlsx";
+            // Now use 'filename' in your XLSX.writeFile call
+            XLSX.writeFile(wb, filename);
+        }
+
+        function getColumnIndicesToExclude(table) {
+            const excludedColumns = ["Action", "Tindakan", "Payment", "Pembayaran", "Photo", "Foto"];
+            const indices = [];
+
+            // Find column indices to exclude
+            const headerRow = table.querySelector("thead tr");
+            Array.from(headerRow.children).forEach((th, index) => {
+            if (excludedColumns.includes(th.textContent.trim())) {
+                indices.push(index);
+            }
+            });
+
+            return indices;
+        }
+
+        function removeColumns(table, indices) {
+            // Remove columns from the table
+            Array.from(table.rows).forEach(row => {
+            indices.sort((a, b) => b - a); // Sort in descending order to avoid index issues
+            indices.forEach(index => row.deleteCell(index));
+            });
+        }
     </script>
 @endpush

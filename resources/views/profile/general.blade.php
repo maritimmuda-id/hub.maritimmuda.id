@@ -1,9 +1,15 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="nav-tabs-boxed">
+    <div class="pt-4">
+        <h1 class="d-inline p-4">
+            <b><i class="fas fa-user"></i> @lang('profile.profile-label')</b>
+        </h1>
+    </div>
+
+    <div class="nav-tabs-boxed m-4" style="border: none;">
         @include('profile.includes.tabs')
 
-        <div class="card">
+        <div class="card p-3 mt-3" style="border: none;">
             <x-form :action="route('profile.update')" method="patch" files>
                 <div class="card-body row">
                     @bind($user)
@@ -207,7 +213,7 @@
                         </div>
                     @endbind
                 </div>
-                <div class="card-footer">
+                <div class="card-footer" style="border: none;">
                     <div class="save-profile-btn">
                         <x-save-button />
                     </div>
@@ -215,42 +221,46 @@
             </x-form>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                @lang('profile.change-password-header')
+        <div class="card p-3 mb-0" style="border: none;">
+            <div class="card-header" style="border: none;">
+                <h4 class="d-inline pb-3">
+                    <b>@lang('profile.change-password-header')</b>
+                </h4>
             </div>
-            <x-form :action="route('profile.change-password')" method="patch">
-                <div class="card-body row">
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <x-form-input
-                                    name="current_password"
-                                    type="password"
-                                    :label="trans('profile.current-password-label')"
-                                />
-                            </div>
-                            <div class="col-md-8">
-                                <x-form-input
-                                    name="new_password"
-                                    type="password"
-                                    :label="trans('profile.new-password-label')"
-                                />
-                            </div>
-                            <div class="col-md-8">
-                                <x-form-input
-                                    name="new_password_confirmation"
-                                    type="password"
-                                    :label="trans('profile.new-password-confirmation-label')"
-                                />
+            <div class="card p-3 m-3">
+                <x-form :action="route('profile.change-password')" method="patch">
+                    <div class="card-body row pb-0">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <x-form-input
+                                        name="current_password"
+                                        type="password"
+                                        :label="trans('profile.current-password-label')"
+                                    />
+                                </div>
+                                <div class="col-md-8">
+                                    <x-form-input
+                                        name="new_password"
+                                        type="password"
+                                        :label="trans('profile.new-password-label')"
+                                    />
+                                </div>
+                                <div class="col-md-8">
+                                    <x-form-input
+                                        name="new_password_confirmation"
+                                        type="password"
+                                        :label="trans('profile.new-password-confirmation-label')"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <x-save-button />
-                </div>
-            </x-form>
+                    <div class="card-footer" style="border: none;">
+                        <x-save-button />
+                    </div>
+                </x-form>
+            </div>
         </div>
     </div>
 @endsection

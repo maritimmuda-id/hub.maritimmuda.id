@@ -2,7 +2,7 @@
     <li class="nav-item">
         <a
             class="nav-link{{ request()->routeIs('profile.edit') ? ' active' : '' }}"
-            href="{{ route('profile.edit') }}"
+            href="{{ route('profile.edit') }}" style="border: none; border-radius: 18px; padding: 10px 30px 10px 30px;"
         >
             @lang('profile.general')
         </a>
@@ -10,49 +10,49 @@
     <li class="nav-item">
         <a
             class="nav-link{{ request()->routeIs('profile.education-history') ? ' active' : '' }}"
-            href="{{ route('profile.education-history') }}"
+            href="{{ route('profile.education-history') }}" style="border: none; border-radius: 18px; padding: 10px 30px 10px 30px;"
         >
             @lang('profile.education-history.navigation')</a>
     </li>
     <li class="nav-item">
         <a
             class="nav-link{{ request()->routeIs('profile.work-experience') ? ' active' : '' }}"
-            href="{{ route('profile.work-experience') }}"
+            href="{{ route('profile.work-experience') }}" style="border: none; border-radius: 18px; padding: 10px 30px 10px 30px;"
         >
             @lang('profile.work-experience.navigation')</a>
     </li>
     <li class="nav-item">
         <a
             class="nav-link{{ request()->routeIs('profile.organization-history') ? ' active' : '' }}"
-            href="{{ route('profile.organization-history') }}"
+            href="{{ route('profile.organization-history') }}" style="border: none; border-radius: 18px; padding: 10px 30px 10px 30px;"
         >
             @lang('profile.organization-history.navigation')</a>
     </li>
     <li class="nav-item">
         <a
             class="nav-link{{ request()->routeIs('profile.achievement-history') ? ' active' : '' }}"
-            href="{{ route('profile.achievement-history') }}"
+            href="{{ route('profile.achievement-history') }}" style="border: none; border-radius: 18px; padding: 10px 30px 10px 30px;"
         >
             @lang('profile.achievement-history.navigation')</a>
     </li>
     <li class="nav-item">
         <a
             class="nav-link{{ request()->routeIs('profile.publication') ? ' active' : '' }}"
-            href="{{ route('profile.publication') }}"
+            href="{{ route('profile.publication') }}" style="border: none; border-radius: 18px; padding: 10px 30px 10px 30px;"
         >
             @lang('profile.publication.navigation')</a>
     </li>
     <li class="nav-item">
         <a
             class="nav-link{{ request()->routeIs('profile.dedication') ? ' active' : '' }}"
-            href="{{ route('profile.dedication') }}"
+            href="{{ route('profile.dedication') }}" style="border: none; border-radius: 18px; padding: 10px 30px 10px 30px;"
         >
             @lang('profile.dedication.navigation')</a>
     </li>
     <li class="nav-item">
         <a
             class="nav-link{{ request()->routeIs('profile.research') ? ' active' : '' }}"
-            href="{{ route('profile.research') }}"
+            href="{{ route('profile.research') }}" style="border: none; border-radius: 18px; padding: 10px 30px 10px 30px;"
         >
             @lang('profile.research.navigation')</a>
     </li>

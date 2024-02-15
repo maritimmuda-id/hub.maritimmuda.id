@@ -1,11 +1,15 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <h4 class="d-inline">
-                @lang('Edit :resource', [
-                    'resource' => trans('users.singular-name')
-                ])
+    <div class="pt-4">
+        <h1 class="d-inline p-4">
+            <b><i class="fas fa-edit"></i> @lang('membership.head-membership')</b>
+        </h1>
+    </div>
+
+    <div class="card p-3 m-4" style="border: none;">
+        <div class="card-header" style="border: none;">
+            <h4 class="d-inline pb-3">
+                <b>@lang('membership.singular-name')</b>
             </h4>
             <div class="card-header-actions">
                 @can('viewAny', \App\Models\User::class)
@@ -64,13 +68,13 @@
                     </div>
                 @endbind
             </div>
-            <div class="card-footer">
+            <div class="card-footer" style="border: none;">
                 <x-save-button />
             </div>
         </x-form>
     </div>
-    <div class="card-group mb-4">
-        <div class="card">
+    <div class="card-group mb-4 mr-4 ml-4">
+        <div class="card p-3 mr-4" style="border: none; border-radius: 15px;">
             @livewire('identity-card-preview', [
                 'user' => $user,
                 'attributes' => [
@@ -78,31 +82,35 @@
                 ],
             ])
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h4>@lang('membership.heading')</h4>
+        <div class="card p-3" style="border: none; border-radius: 15px;">
+            <div class="card-header" style="border: none;">
+                <h4 class="d-inline pb-3">
+                    <b>@lang('membership.heading')</b>
+                </h4>
             </div>
             <div class="card-body">
-                <dl class="row">
-                    <dt class="col-sm-5">@lang('membership.member-age')</dt>
-                    <dd class="col-sm-7">
-                        @lang(':age years old', ['age' => $user->date_of_birth?->age ?? 0])
-                    </dd>
-                    <dt class="col-sm-5">@lang('membership.member-type')</dt>
-                    <dd class="col-sm-7">
-                        {{ $user->member_type }}
-                    </dd>
-                    <dt class="col-sm-5">@lang('membership.verified-date')</dt>
-                    <dd class="col-sm-7">
-                        {{ $user->membership?->verified_at?->format('d M Y') ?? '-' }}
-                    </dd>
-                    <dt class="col-sm-5">@lang('membership.expired-date')</dt>
-                    <dd class="col-sm-7">
-                        {{ $user->membership?->expired_at?->format('d M Y') ?? '-' }}
-                    </dd>
-                </dl>
+                <div class="card p-3">
+                    <dl class="row">
+                        <dt class="col-sm-5">@lang('membership.member-age')</dt>
+                        <dd class="col-sm-7">
+                            @lang(':age years old', ['age' => $user->date_of_birth?->age ?? 0])
+                        </dd>
+                        <dt class="col-sm-5">@lang('membership.member-type')</dt>
+                        <dd class="col-sm-7">
+                            {{ $user->member_type }}
+                        </dd>
+                        <dt class="col-sm-5">@lang('membership.verified-date')</dt>
+                        <dd class="col-sm-7">
+                            {{ $user->membership?->verified_at?->format('d M Y') ?? '-' }}
+                        </dd>
+                        <dt class="col-sm-5">@lang('membership.expired-date')</dt>
+                        <dd class="col-sm-7">
+                            {{ $user->membership?->expired_at?->format('d M Y') ?? '-' }}
+                        </dd>
+                    </dl>
+                </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer" style="border: none;">
                 @can('verify-member', $user)
                     <x-form :action="route('user.verify', $user)" onsubmit="return confirm('{{ __('Are you sure?') }}');" style="display: inline-block;">
                         <button type="submit" class="btn btn-sm btn-primary" style="margin:1.25px 0;">

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'plural-administration' => 'Beranda Administrasi',
+    'plural-chart' => 'Diagram',
 
     'user-chart' => 'Diagram Anggota',
 
@@ -46,4 +46,6 @@ return [
     'created-at-label' => 'Tanggal Pendaftaran',
 
     'cannot-delete-current-user' => 'Tidak dapat menghapus anggota saat ini',
+
+    'export-table' => 'Ekspor Tabel ke XLSX',
 ];

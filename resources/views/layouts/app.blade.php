@@ -21,6 +21,8 @@
         rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="https://maritimmuda.id/assets/images/favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 
     @stack('styles')
 </head>
@@ -36,7 +38,7 @@
                         <span>Copyright &copy;</span>
                         <a href="https://maritimmuda.id">Maritim Muda Nusantara</a>
                         <span>{{ date('Y') }}</span>
-                        <div class="mt-1">Maritim Muda Hub v2.1 - 2024</div>
+                        <div class="mt-1">Maritim Muda Hub v3.0</div>
                     </div>
                     <div class="col-md-2 mt-4 text-center text-md-left">
                         <div class="text-muted">Didukung Oleh:</div>

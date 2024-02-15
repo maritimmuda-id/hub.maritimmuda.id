@@ -122,6 +122,6 @@ class ViewDashboardController
         // }
         // $monthlyCounts  = array_reverse($monthlyCounts);
 
-        return view('dashboard', compact('user', 'widgets','months'));
+        return view('dashboard', compact('user', 'widgets','months', 'membersCount'));
     }
 }

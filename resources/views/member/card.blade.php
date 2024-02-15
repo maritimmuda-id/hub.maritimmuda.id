@@ -39,7 +39,7 @@
                         <div class="d-flex">
                             <img style="width:75px;height:100px;" class="img-fluid img-thumbnail" src="{{ $user->photo_link }}">
                             <div class="mx-2">
-                                <h3>{{ $user->name }} @if ($user->uid !== null && $user->uid !== 'null') <i class="fas fa-check-circle" style="font-size: 20px; color: #39f;" title="@lang('profile.member-verify-check')"></i> @endif</h3>
+                                <h3>{{ $user->name }} @if ($user->uid !== null && $user->uid !== 'null') <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i> @endif</h3>
                                 <strong class="d-block">{{ $user->province->name }}</strong>
                                 <small class="d-block">{{ $user->firstExpertise?->name }}</small>
                                 <small class="d-block">{{ $user->secondExpertise?->name }}</small>
@@ -79,9 +79,11 @@
         aria-hidden="true"
     >
         <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
+            <div class="modal-content" style="border-radius: 15px; border: none;">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="userProfileModalHeading">@lang('Detail')</h5>
+                    <h4 class="modal-title" id="userProfileModalHeading">
+                        <b><i class="fas fa-info-circle"></i> @lang('Detail')</b>
+                    </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true close-btn">&times;</span>
                     </button>
@@ -158,7 +160,7 @@
             Livewire.on('openModal', (e) => {
                 $('#uid').text(e.uid);
                 if (e.uid !== null) {
-                    $('#name_1').html(`${e.name} <i class="fas fa-check-circle" style="font-size: 20px; color: #39f;" title="@lang('profile.member-verify-check')"></i>`);
+                    $('#name_1').html(`${e.name} <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i>`);
                 } else {
                     $('#name_1').text(e.name)
                 }

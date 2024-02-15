@@ -54,6 +54,8 @@ class FindMemberCard extends Component
 
     public function render(): View
     {
+        $this->query->orderBy('created_at', 'desc');
+
         if ($this->search) {
             $this->query->where('name', 'like', "%{$this->search}%");
         }

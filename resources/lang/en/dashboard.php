@@ -8,4 +8,6 @@ return [
     'scholarships-label' => 'Scholarships',
 
     'job-posts-label' => 'Job Posts',
+
+    'welcome-label' => 'Welcome,',
 ];

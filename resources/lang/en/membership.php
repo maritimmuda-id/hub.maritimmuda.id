@@ -16,4 +16,8 @@ return [
     'verified-date' => 'Verified Date',
 
     'expired-date' => 'Expired Date',
+
+    'singular-name' => 'Member Data',
+
+    'head-membership' => 'Edit Member',
 ];

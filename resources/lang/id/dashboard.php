@@ -7,5 +7,7 @@ return [
 
     'scholarships-label' => 'Beasiswa',
 
-    'job-posts-label' => 'Lowongan Pekerjaan',
+    'job-posts-label' => 'Lowongan Kerja',
+
+    'welcome-label' => 'Selamat Datang,',
 ];

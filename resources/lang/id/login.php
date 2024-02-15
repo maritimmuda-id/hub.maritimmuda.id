@@ -8,4 +8,5 @@ return [
     'submit-button' => 'Masuk',
     'forgot-password-cta' => 'Lupa Kata Sandi?',
     'register-cta' => 'Buat Akun Baru',
+    'backto-login' => 'Kembali',
 ];
