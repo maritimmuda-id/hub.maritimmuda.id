@@ -35,6 +35,16 @@
                 />
             </li>
         @endcan
+        @can('find-member')
+        <li class="c-sidebar-nav-item">
+            <x-nav-link
+                :href="route('product-store')"
+                :active="request()->routeIs('find-member')"
+                :label="'Produk'"
+                icon="fas fa-shopping-cart"
+            />
+        </li>
+        @endcan
         <br>
         <h6 class="ml-3 mb-0 text-uppercase" style="font-size: 12px;"><b>@lang('navigation.membership')</b></h6>
         @can('viewAny', \App\Models\Event::class)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{
+    AdminShopController,
     EventController,
     FindMemberController,
     JobPostController,
@@ -100,5 +101,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('find-member', [FindMemberController::class, '__invoke'])
         ->name('find-member');
 });
+
+Route::view('product', 'store.index')->name('product-store');
 
 require __DIR__.'/auth.php';
