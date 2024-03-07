@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Store extends Model
 {
     use HasFactory;
+    protected $table = "Stores";
+    protected $primaryKey = "id";
+    protected $keyType = "int";
+    public $incrementing = true;
+    public $timestamps = true;
 }

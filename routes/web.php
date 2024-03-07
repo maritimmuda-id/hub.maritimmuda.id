@@ -12,6 +12,7 @@ use App\Http\Controllers\{
     ViewDashboardController,
     ViewMemberCardController,
     MakeAdminController,
+    StoreController,
 };
 use App\Http\Controllers\Profile\{
     ChangePasswordController,
@@ -100,8 +101,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('find-member', [FindMemberController::class, '__invoke'])
         ->name('find-member');
-});
 
-Route::view('product', 'store.index')->name('product-store');
+    Route::get('/store', [StoreController::class, 'index'])->name('store');
+});
 
 require __DIR__.'/auth.php';
