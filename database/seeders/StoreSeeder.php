@@ -58,7 +58,7 @@ class StoreSeeder extends Seeder
             $extension = pathinfo($item['image'], PATHINFO_EXTENSION);
             $imageName = uniqid() . '.' . $extension;
             $imageData = $response->getBody()->getContents();
-            $filePath = 'media/' . $imageName; // Direktori tujuan untuk menyimpan gambar
+            $filePath = 'public/' . $imageName; // Direktori tujuan untuk menyimpan gambar
             Storage::put($filePath, $imageData);
 
             Store::insert([

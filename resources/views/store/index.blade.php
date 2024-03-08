@@ -36,13 +36,13 @@
     <div class="flex flex-wrap gap-5 mt-3 mb-8">
         @foreach ($product as $item)
         <a href="{{$item->link}}" class="w-full max-w-[150px] md:max-w-[220px] lg:max-w-[190px] xl:max-w-[256px] flex flex-col gap-2 pb-2 border border-indigo-50 shadow-lg shadow-indigo-100 overflow-hidden rounded-md pointer-events-none">
-            <div class="w-full h-48 md:h-52 lg:h-50 opacity-50">
+            <div class="w-full h-48 md:h-52 lg:h-50">
                 @if ($item->image != '')
-                <img src="{{ Storage::url('media/' . $item->image) }}"
+                <img src="{{ asset('media/' . $item->image) }}"
                     class="object-cover w-full h-full"
                     alt="Gambar Produk {{ $item->name }}">
-                @else
-                    <img src="{{ Storage::url('media/' . $item->image) }}">
+                @else 
+                <img src="{{ asset('media/' . $item->image) }}">
                 @endif
             </div>
             <div class="flex flex-col p-3">
