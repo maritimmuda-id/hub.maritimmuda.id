@@ -74,6 +74,8 @@ class UserController
                     if ($status == UserStatus::RequestIdentityCardVerification) {
                         $query->whereDoesntHave('memberships');
                         $query->whereRelation('media', 'collection_name', 'identity_card');
+                    } elseif ($status == UserStatus::HaveAnIdentityCard) {
+                        $query->whereNotNull('uid');
                     } elseif ($status == UserStatus::UserAdmin) {
                         $query->where('is_admin', 1);
                     }

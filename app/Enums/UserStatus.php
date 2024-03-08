@@ -8,7 +8,9 @@ final class UserStatus extends Enum
 {
     const RequestIdentityCardVerification = 2;
 
-    const UserAdmin = 3;
+    const HaveAnIdentityCard = 3;
+
+    const UserAdmin = 4;
 
     // const RequestRenewalMembership = 3;
 }
