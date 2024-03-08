@@ -38,7 +38,7 @@
         @can('find-member')
         <li class="c-sidebar-nav-item">
             <x-nav-link
-                :href="route('product-store')"
+                :href="route('product.index')"
                 :active="request()->routeIs('find-member')"
                 :label="'Produk'"
                 icon="fas fa-shopping-cart"
