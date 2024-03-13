@@ -4,6 +4,11 @@
 <section class="py-4 px-4">
     <div class="flex flex-col gap-3 sm:gap-0 sm:flex-row sm:justify-between sm:items-center">
         <div class="text-xl md:text-2xl font-bold text-slate-900">Produk</div>
+        <div class="col-md-8 mt-2">
+            <a href="{{ route('store.admin.index') }}" class="btn btn-sm btn-primary mb-2">
+                <i class="fas fa-plus"></i> Produk List
+            </a>
+        </div>
         <div class="w-full max-w-sm lg:max-w-lg">
             {{-- search --}}
             <form action="{{ url('/search') }}" method="GET">
@@ -17,8 +22,7 @@
                         </svg>
                     </div>
                     <input name="search" type="search" value="{{ Request::get('search') }}" id="default-search"
-                        class="block w-full p-3 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500"
-                        placeholder="Cari produk impianmu..." required>
+                        class="block w-full p-3 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500" required>
                     <button type="submit"
                         class="text-white absolute right-2.5 bottom-2.5 bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -32,11 +36,10 @@
             </form>
         </div>
     </div>
-
-    <div class="flex flex-wrap gap-5 mt-3 mb-8">
+    <div class="flex flex-wrap justify-around gap-5 mt-3 mb-5">
         @foreach ($product as $item)
-        <a href="{{$item->link}}" class="w-full max-w-[150px] md:max-w-[220px] lg:max-w-[190px] xl:max-w-[256px] flex flex-col gap-2 pb-2 border border-indigo-50 shadow-lg shadow-indigo-100 overflow-hidden rounded-md pointer-events-none">
-            <div class="w-full h-48 md:h-52 lg:h-50">
+        <div class="w-full max-w-[135px] md:max-w-[200px] lg:max-w-[180px] xl:max-w-[240px] flex flex-col gap-2 pb-2 border border-indigo-50 shadow-lg shadow-indigo-100 overflow-hidden rounded-md">
+            <div class="w-full h-48 md:h-52 lg:h-58">
                 @if ($item->image != '')
                 <img src="{{ asset('media/' . $item->image) }}"
                     class="object-cover w-full h-full"
@@ -46,13 +49,17 @@
                 @endif
             </div>
             <div class="flex flex-col p-3">
-                <div class="w-fit bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
-                    {{ $item->category }}</div>
+                <div class="w-fit bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-0.5 py-0.5 rounded">
+                {{ $item->category }}</div>
                 <div class="text-slate-900 line-clamp-1 sm:line-clamp-2">{{ $item->name }}</div>
                 <div class="text-slate-900 font-bold">Rp{{ number_format($item->price, 0, ',', '.') }}
                 </div>
+                <a href="{{$item->link}}" class="bg-green-500 text-white px-2 py-1 rounded-md text-sm flex items-center justify-center">
+                    <ion-icon name="cart-outline" class="text-lg mr-1"></ion-icon> 
+                    Beli di Tokopedia
+                </a>
             </div>
-        </a>
+        </div>
         @endforeach
     </div>
 </section>

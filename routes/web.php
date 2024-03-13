@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\{
     AdminShopController,
+    AdminStoreController,
     EventController,
     FindMemberController,
     JobPostController,
@@ -102,7 +103,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('find-member', [FindMemberController::class, '__invoke'])
         ->name('find-member');
 
-    Route::get('/store', [StoreController::class, 'index'])->name('store');
+    Route::get('store', [StoreController::class, 'index'])->name('store');
+    Route::resource('store/admin', AdminStoreController::class)->names([
+        'index' => 'store.admin.index',
+        'create' => 'store.create',
+        'store' => 'store.store',
+        'edit' => 'store.edit',
+        'update' => 'store.update',
+        'destroy' => 'store.destroy',
+    ]);
 });
 
 require __DIR__.'/auth.php';
