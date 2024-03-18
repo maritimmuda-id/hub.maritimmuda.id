@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminStoreController
 {
@@ -17,7 +18,7 @@ class AdminStoreController
     {
         $method="post";
         $action="store.admin";
-        return view("store.create-or-edit",compact("method","action"));
+        return view("store.create",compact("method","action"));
     }
 
     public function store(Request $request)
@@ -36,33 +37,30 @@ class AdminStoreController
 
     public function edit($id)
     {
-        $product = Store::where('id', $id)->first();
-        return view('store.create-or-edit', compact('product'));
+        $product = Store::findOrFail($id);
+        return view('store.edit', compact('product'));
     }
 
     public function update(Request $request, $id)
     {
-        $data=Store::findorfail($id);
+        $product = Store::findOrFail($id);
 
-        $image=$request->image;
-        if(isset($image)){
-            $path=$request->file('image')->store('','public');
-            $update_image=[
-                'image'=>$path
-            ];
-            $data->update($update_image);
+        $product->name = $request->name;
+        $product->link = $request->link;
+        $product->price = $request->price;
+        $product->category = $request->category;
+
+        if ($request->hasFile('image')) {
+            Storage::disk('public')->delete($product->image);
+
+            $path = $request->file('image')->store('', 'public');
+            $product->image = $path;
         }
 
-        $product=[
-            'name'=>$request->name,
-            'link'=>$request->link,
-            'price'=>$request->price,
-            'category'=>$request->category,
-        ];
-        $data->update($product);
-        session()->flash('success', 'Product has been updated successfully.');
-        return redirect()->route("store.admin.index");
+        $product->save();
 
+        session()->flash('success', 'Product has been updated successfully.');
+        return redirect()->route('store.admin.index');
     }
 
     public function destroy($id)

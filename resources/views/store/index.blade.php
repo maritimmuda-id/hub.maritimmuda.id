@@ -36,7 +36,7 @@
             </form>
         </div>
     </div>
-    <div class="flex flex-wrap justify-around gap-5 mt-3 mb-5">
+    <div class="flex flex-wrap gap-5 mt-3 mb-5">
         @foreach ($product as $item)
         <div class="w-full max-w-[135px] md:max-w-[200px] lg:max-w-[180px] xl:max-w-[240px] flex flex-col gap-2 pb-2 border border-indigo-50 shadow-lg shadow-indigo-100 overflow-hidden rounded-md">
             <div class="w-full h-48 md:h-52 lg:h-58">

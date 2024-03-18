@@ -112,6 +112,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'update' => 'store.update',
         'destroy' => 'store.destroy',
     ]);
+    
 });
 
 require __DIR__.'/auth.php';
