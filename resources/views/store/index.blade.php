@@ -5,13 +5,15 @@
     <div class="flex flex-col gap-3 sm:gap-0 sm:flex-row sm:justify-between sm:items-center">
         <div class="text-xl md:text-2xl font-bold text-slate-900">Produk</div>
         <div class="col-md-8 mt-2">
+            @if(auth()->user()->is_admin)
             <a href="{{ route('store.admin.index') }}" class="btn btn-sm btn-primary mb-2">
                 <i class="fas fa-plus"></i> Produk List
             </a>
+            @endif
         </div>
         <div class="w-full max-w-sm lg:max-w-lg">
             {{-- search --}}
-            <form action="{{ url('/search') }}" method="GET">
+            <form action="{{ route('search') }}" method="GET">
                 <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

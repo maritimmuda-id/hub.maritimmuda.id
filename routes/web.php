@@ -104,6 +104,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('find-member');
 
     Route::get('store', [StoreController::class, 'index'])->name('store');
+    Route::get('search', [StoreController::class, 'search'])->name('search');
     Route::resource('store/admin', AdminStoreController::class)->names([
         'index' => 'store.admin.index',
         'create' => 'store.create',

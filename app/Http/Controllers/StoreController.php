@@ -12,4 +12,13 @@ class StoreController
         $product = Store::get()->all();
         return view('store.index', ['product' => $product]);
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $product = Store::where('name', 'LIKE', '%' . $search . '%')->get();
+
+        return view('store.index', compact('product'));
+    }
 }

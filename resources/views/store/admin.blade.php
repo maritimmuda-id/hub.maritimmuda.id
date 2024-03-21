@@ -14,6 +14,7 @@
                     </a>
                 </div>
             </div>
+            @endif
             <div class="card p-3 m-3">
                 <table class="table table-striped">
                     <thead>
@@ -51,41 +52,3 @@
     </section>
 </div>
 @endsection
-
-@push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@if(session('success'))
-<script>
-    Swal.fire({
-        title: 'Success!',
-        text: '{{ session('success') }}',
-        icon: 'success',
-        confirmButtonText: 'OK'
-    });
-</script>
-@endif
-
-<script>
-    const deleteButtons = document.querySelectorAll('.deleteButton');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.getAttribute('data-id');
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You want to delete this product?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Jika pengguna mengonfirmasi, kirimkan formulir untuk menghapus produk
-                    document.getElementById('deleteForm' + productId).submit();
-                }
-            });
-        });
-    });
-</script>
-@endpush
