@@ -59,6 +59,33 @@
                 @livewire('user-notification')
 
                 @include('layouts.partials.change-language')
+
+                <li class="c-header-nav-item dropdown">
+                    <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <div class="c-avatar">
+                            <img class="c-avatar-img" src="{{ auth()->user()->photo_thumb_link }}" alt="{{ auth()->user()->email }}">
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right pt-0">
+                        <div class="dropdown-header bg-light py-2">
+                            <strong>@lang('Account')</strong>
+                        </div>
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                            <i class="mfe-2 fas fa-user"></i>
+                            @lang('navigation.profile')
+                        </a>
+                        @impersonating
+                            <a href="{{ route('impersonate.leave') }}" class="dropdown-item">
+                                <i class="mfe-2 fas fa-sign-out-alt"></i>
+                                @lang('navigation.leave-impersonation')
+                            </a>
+                        @endImpersonating
+                        <a href="javacript:void(0)" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logoutform').submit();">
+                            <i class="mfe-2 fas fa-sign-out-alt"></i>
+                            @lang('navigation.logout')
+                        </a>
+                    </div>
+                </li>
             </ul>
         </header>
 

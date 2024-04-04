@@ -14,7 +14,6 @@
                     </a>
                 </div>
             </div>
-            @endif
             <div class="card p-3 m-3">
                 <table class="table table-striped">
                     <thead>
@@ -36,13 +35,17 @@
                             <td>{{ $item->link}}</td>
                             <td><img src="{{ asset('media/' . $item->image) }}" alt="Gambar" width="100" height="100"></td>
                             <td>
-                                <form id="deleteForm{{ $item->id }}" action="{{ route('store.destroy', $item->id) }}" method="POST">
+                                <form action="{{ route('store.edit', $item->id) }}" method="GET">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-warning mb-2"><i class="fas fa-edit"></i>Edit</button>
+                                </form>
+                                <form action="{{ route('store.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{ route('store.edit', $item->id) }}" class="btn btn-sm btn-warning mb-2"><i class="fas fa-edit"></i> Edit</a>
-                                    <button type="button" class="btn btn-sm btn-danger mb-2 deleteButton" style="background-color: #d95353" data-id="{{ $item->id }}"><i class="fas fa-trash-alt"></i> Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-danger mb-2"><i class="fas fa-trash"></i>Delete</button>
                                 </form>
                             </td>
+                                                   
                         </tr>
                         @endforeach
                     </tbody>

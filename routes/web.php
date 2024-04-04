@@ -3,6 +3,7 @@
 use App\Http\Controllers\{
     AdminShopController,
     AdminStoreController,
+    EmailExpiredController,
     EventController,
     FindMemberController,
     JobPostController,
@@ -28,6 +29,8 @@ use App\Http\Controllers\Profile\{
 };
 use Illuminate\Support\Facades\Route;
 use Lab404\Impersonate\Controllers\ImpersonateController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 Route::redirect('/', 'login');
 
@@ -83,10 +86,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/users/{user}/verify', [VerifyUserController::class, '__invoke'])
         ->name('user.verify');
-    Route::post('/users/{user}/make-admin', [MakeAdminController::class, 'make'])
+    Route::post('/users/{user}/make-admin', [MakeAdminController::class, 'makeAdmin'])
     ->name('user.make-admin');
-    Route::post('/users/{user}/make-deladmin', [MakeAdminController::class, 'delete'])
+    Route::post('/users/{user}/make-deladmin', [MakeAdminController::class, 'deleteAdmin'])
     ->name('user.make-deladmin');
+    Route::post('/users/{user}/make-developer', [MakeAdminController::class, 'makeDeveloper'])
+    ->name('user.make-developer');
+    Route::post('/users/{user}/make-deldeveloper', [MakeAdminController::class, 'deleteDeveloper'])
+    ->name('user.make-deldeveloper');
     Route::resource('users', UserController::class)
         ->except(['create', 'store', 'show'])
         ->names('user');
@@ -113,7 +120,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'update' => 'store.update',
         'destroy' => 'store.destroy',
     ]);
-    
+
+    Route::post('send.email', [EmailExpiredController::class, 'sendEmail'])->name('send.email');
 });
 
 require __DIR__.'/auth.php';

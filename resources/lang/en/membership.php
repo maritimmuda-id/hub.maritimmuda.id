@@ -9,6 +9,18 @@ return [
 
     'regenerate-member-card' => 'Regenerate Member Card',
 
+    'button-text-mail' => 'Send Email',
+
+    'heading-text-mail' => 'Send Message Email',
+
+    'subject-text-mail' => 'Subject',
+
+    'text-mail' => 'Message',
+
+    'confirm-text-mail' => 'Send',
+
+    'cancel-text-mail' => 'Cancel',
+
     'member-type' => 'Member Type',
 
     'member-age' => 'Member Age',

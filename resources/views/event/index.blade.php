@@ -10,7 +10,13 @@
     $user = Auth::user();
 @endphp
 
-@if ($user && $user->uid !== null)
+@if ($user && $user->uid !== null && $user->memberships()->whereExists(function ($query) use ($user) {
+    $query->select(DB::raw(1))
+        ->from('users')
+        ->join('memberships', 'memberships.user_id', '=', 'users.id')
+        ->where('users.id', '=', $user->id, )
+        ->whereDate('memberships.expired_at', '>=', now());
+    })->exists())
     <div class="card p-3 m-4" style="border: none;">
         <div class="card-header" style="border-bottom: none;">
             <h4 class="d-inline pb-3">
@@ -31,6 +37,31 @@
         <div class="card-body">
             {!! $dataTable->table() !!}
         </div>
+    </div>
+@elseif ($user && $user->uid !== null && $user->memberships()->whereExists(function ($query) use ($user) {
+    $query->select(DB::raw(1))
+        ->from('users')
+        ->join('memberships', 'memberships.user_id', '=', 'users.id')
+        ->where('users.id', '=', $user->id)
+        ->whereDate('memberships.expired_at', '<', now());
+    })->exists())
+    <div class="card p-3 m-4" style="border: none;">
+        <div class="card-header" style="border: none;">
+            <h4 class="d-inline pb-3">
+                <b>{{ trans('verify-membership.title_expired') }}</b>
+            </h4>
+        </div>
+
+        <div class="card-body">
+            {{ trans('verify-membership.notice_1') }}
+            {{ trans('verify-membership.notice_4') }},
+            <a class="d-inline" href="{{ route('profile.edit') }}">
+                <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ trans('verify-membership.notice_5') }}</button>.
+            </a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <img class="img-fluid" src="{{ asset('/img/Feeling sorry-pana.svg') }}" style="width:35%;" alt="">
     </div>
 @else
     <div class="card p-3 m-4" style="border: none;">

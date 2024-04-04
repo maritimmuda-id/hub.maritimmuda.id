@@ -33,29 +33,47 @@
     </form>
     <div class="row">
         @forelse ($users as $user)
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body p-2 d-flex justify-content-between">
-                        <div class="d-flex">
-                            <img style="width:75px;height:100px;" class="img-fluid img-thumbnail" src="{{ $user->photo_link }}">
-                            <div class="mx-2">
-                                <h3>{{ $user->name }} @if ($user->uid !== null && $user->uid !== 'null') <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i> @endif</h3>
-                                <strong class="d-block">{{ $user->province->name }}</strong>
-                                <small class="d-block">{{ $user->firstExpertise?->name }}</small>
-                                <small class="d-block">{{ $user->secondExpertise?->name }}</small>
+            @if ($user->is_admin != 3)
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body p-2 d-flex justify-content-between">
+                            <div class="d-flex">
+                                <img style="width:75px;height:100px;" class="img-fluid img-thumbnail" src="{{ $user->photo_link }}">
+                                <div class="mx-2">
+                                    <h3>{{ $user->name }} 
+                                        @if ($user && $user->uid !== null && $user->memberships()->whereExists(function ($query) use ($user) {
+                                            $query->select(DB::raw(1))
+                                                ->from('users')
+                                                ->join('memberships', 'memberships.user_id', '=', 'users.id')
+                                                ->where('users.id', '=', $user->id)
+                                                ->whereDate('memberships.expired_at', '>=', now());
+                                            })->exists())
+                                            <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i> 
+                                        @endif
+                                        @if ($user->is_admin == 1) 
+                                            <i class="fas fa-key" style="font-size: 20px; color: #ffcb3d;" title="@lang('profile.member-admin-check')"></i> 
+                                        @endif
+                                        @if ($user->is_admin == 2) 
+                                            <i class="fas fa-code" style="font-size: 20px; color: #ff2727;" title="@lang('profile.member-developer-check')"></i> 
+                                        @endif
+                                    </h3>
+                                    <strong class="d-block">{{ $user->province->name }}</strong>
+                                    <small class="d-block">{{ $user->firstExpertise?->name }}</small>
+                                    <small class="d-block">{{ $user->secondExpertise?->name }}</small>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex align-items-center mr-2">
-                            <button
-                                wire:click.prevent="show('{{ $user->uuid }}')"
-                                class="btn btn-info"
-                            >
-                                <i class="fas fa-info-circle"></i>
-                            </button>
+                            <div class="d-flex align-items-center mr-2">
+                                <button
+                                    wire:click.prevent="show('{{ $user->uuid }}')"
+                                    class="btn btn-info"
+                                >
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
         @empty
             <div class="col-md-12">
                 <h4>@lang('member.filter-no-results-text')</h4>
@@ -160,9 +178,29 @@
             Livewire.on('openModal', (e) => {
                 $('#uid').text(e.uid);
                 if (e.uid !== null) {
-                    $('#name_1').html(`${e.name} <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i>`);
+                    var iconsHtml = `${e.name}`;
+
+                    if (e.memberships && e.memberships.length > 0) {
+                        var currentDate = new Date();
+                        var activeMembership = e.memberships.find(membership => {
+                            var expiredDate = new Date(membership.expired_at);
+                            // Check if expired_at is today or after today
+                            return expiredDate >= currentDate.setDate(currentDate.getDate() - 1);
+                        });
+                        if (activeMembership) {
+                            iconsHtml += ` <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i>`;
+                        }
+                    }
+                    if (e.is_admin == 1) {
+                        iconsHtml += ` <i class="fas fa-key" style="font-size: 20px; color: #ffcb3d;" title="@lang('profile.member-admin-check')"></i>`;
+                    }
+                    if (e.is_admin == 2) {
+                        iconsHtml += ` <i class="fas fa-code" style="font-size: 20px; color: #ff2727;" title="@lang('profile.member-developer-check')"></i>`;
+                    }
+
+                    $('#name_1').html(iconsHtml);
                 } else {
-                    $('#name_1').text(e.name)
+                    $('#name_1').text(e.name);
                 }
                 $('#name_2').text(e.name);
                 $('#email').attr('href', `mailto:${e.email}`);

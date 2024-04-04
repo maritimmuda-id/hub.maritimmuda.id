@@ -218,6 +218,10 @@ return [
     'update-payment-success' => 'Upload payment confirmation successfully',
 
     'member-verify-check' => 'Member verified',
+    
+    'member-admin-check' => 'Admin',
+
+    'member-developer-check' => 'Developer',
 
     'member-label' => 'Member',
 

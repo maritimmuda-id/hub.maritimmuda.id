@@ -24,6 +24,7 @@ class UpdateUserRequest extends FormRequest
             'gender' => ['required', new EnumValue(Gender::class, false)],
             'province_id' => ['required', new Exists(Province::class, 'id')],
             'date_of_birth' => ['nullable', 'date', 'before:today'],
+            'uid' => ['nullable','string'],
         ];
     }
 

@@ -219,6 +219,10 @@ return [
 
     'member-verify-check' => 'Anggota terverifikasi',
 
+    'member-admin-check' => 'Admin',
+
+    'member-developer-check' => 'Developer',
+
     'member-label' => 'Anggota',
 
     'profile-label' => 'Profil',

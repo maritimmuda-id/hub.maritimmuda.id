@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html;
 use Carbon\Carbon;
@@ -72,15 +73,34 @@ class UserController
                     // User doesn't have any membership,
                     // this means that this one will be their first membership
                     if ($status == UserStatus::RequestIdentityCardVerification) {
-                        $query->whereDoesntHave('memberships');
+                        $query->where(function($query) {
+                            $query->whereDoesntHave('memberships')
+                                ->orWhereHas('memberships', function($q) {
+                                    $q->whereDate('expired_at', '<', now()); // Menggunakan now() untuk mendapatkan tanggal hari ini
+                                });
+                        });
                         $query->whereRelation('media', 'collection_name', 'identity_card');
                     } elseif ($status == UserStatus::HaveAnIdentityCard) {
-                        $query->whereNotNull('uid');
+                        $query->whereNotNull('uid')
+                        ->whereExists(function ($subquery) {
+                              $subquery->select(DB::raw(1))
+                                       ->from('memberships')
+                                       ->whereRaw('memberships.user_id = users.id')
+                                       ->whereDate('memberships.expired_at', '>=', now());
+                          });
                     } elseif ($status == UserStatus::UserAdmin) {
                         $query->where('is_admin', 1);
+                    } elseif ($status == UserStatus::UserDeveloper) {
+                        $query->where('is_admin', 2);
+                    } elseif ($status == UserStatus::Superadmin) {
+                        $query->where('is_admin', 3);
                     }
 
                     // TODO: Add query to filter by `request renewal` status
+
+                    if (! empty($startDate = $request->input('start_date')) && ! empty($endDate = $request->input('end_date'))) {
+                        $query->whereBetween('created_at', [$startDate, $endDate]);
+                    }
                 })
                 ->addColumn('province_name', function (User $row) {
                     return $row->province?->name ?? '-';
@@ -183,8 +203,28 @@ class UserController
             // $monthName = $startDate->format('F Y');
             $count_created = User::whereBetween('created_at', [$startDate, $endDate])->count();
             $count_verify = Membership::whereBetween('verified_at', [$startDate, $endDate])->count();
-            $user_count_created = User::whereNull('uid')->whereNotNull('email_verified_at')->count();
-            $user_count_verify = User::whereNotNull('uid')->count();
+            $user_count_created = User::whereNotNull('email_verified_at')
+                ->where(function ($query) {
+                    $query->whereNotExists(function ($subquery) {
+                        $subquery->select(DB::raw(1))
+                            ->from('memberships')
+                            ->whereColumn('memberships.user_id', 'users.id'); // Ensure user id from memberships table does not match with users table
+                    })->orWhereExists(function ($subquery) {
+                        $subquery->select(DB::raw(1))
+                            ->from('memberships')
+                            ->whereColumn('memberships.user_id', 'users.id')
+                            ->whereDate('memberships.expired_at', '<', now()); // Ensure expired_at is not passed
+                    });
+                })
+                ->count();
+            $user_count_verify = User::whereNotNull('uid')
+                ->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('memberships')
+                        ->whereColumn('memberships.user_id', 'users.id') 
+                        ->whereDate('memberships.expired_at', '>=', now()); 
+                })
+                ->count();        
             $user_count_notmail = User::whereNull('email_verified_at')->count();
 
             $monthlyCountsCreated[] = $count_created;
@@ -200,7 +240,18 @@ class UserController
         $userCountsVerify  = array_reverse($userCountsVerify);
         $userCountsNotMail  = array_reverse($userCountsNotMail);
 
-        return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'user_count', 'monthlyCountsCreated', 'monthlyCountsVerify', 'userCountsCreated', 'userCountsVerify', 'userCountsNotMail'));
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $users = User::query();
+
+        if ($startDate && $endDate) {
+            $users->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        $users = $users->get();
+
+        return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'user_count', 'monthlyCountsCreated', 'monthlyCountsVerify', 'userCountsCreated', 'userCountsVerify', 'userCountsNotMail', 'users'));
     }
 
     public function edit(User $user): View

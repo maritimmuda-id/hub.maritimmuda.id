@@ -12,5 +12,9 @@ final class UserStatus extends Enum
 
     const UserAdmin = 4;
 
+    const UserDeveloper = 5;
+
+    const Superadmin = 6;
+
     // const RequestRenewalMembership = 3;
 }

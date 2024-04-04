@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Expertise;
+use App\Models\Membership;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -85,8 +86,11 @@ class FindMemberCard extends Component
         $user = User::query()->firstWhere('uuid', $userUuid);
 
         if ($user) {
+            $memberships = Membership::where('user_id', $user->id)->get();
+
             $this->emit('openModal', [
                 'uid' => $user->uid,
+                'is_admin' => $user->is_admin,
                 'name' => $user->name,
                 'email' => $user->email,
                 'photo_link' => $user->photo_link,
@@ -102,11 +106,25 @@ class FindMemberCard extends Component
                 'permanent_address' => $user->permanent_address,
                 'residence_address' => $user->residence_address,
                 'bio' => $user->bio_formatted,
+                'memberships' => $memberships,
             ]);
         }
 
         return;
     }
+
+    // public function showMemberhip(?string $userId): void
+    // {
+    //     $memberhips = Membership::query()->firstWhere('user_id', $userId);
+
+    //     if ($memberhips) {
+    //         $this->emit('openModal', [
+    //             'user_id' => $memberhips->user_id,
+    //         ]);
+    //     }
+
+    //     return;
+    // }
 
     protected function updating($propertyName, $value): void
     {

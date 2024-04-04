@@ -12,6 +12,11 @@ canvas {
     margin: none;
 }
 
+.disabled {
+    cursor: not-allowed;
+}
+
+
 .btn-warning {
     background-color: #ffcb3d;
 }
@@ -55,6 +60,10 @@ canvas {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+}
+
+.dataTable-custom {
+    border: 1px solid #ddd;
 }
 
 .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle, .c-sidebar .c-sidebar-nav-link.c-active {
