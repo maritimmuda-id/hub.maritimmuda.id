@@ -13,6 +13,8 @@ use App\Http\Controllers\{
     ViewMemberCardController,
     MakeAdminController,
     StoreController,
+    AnnouncementController,
+    DeveloperController,
 };
 use App\Http\Controllers\Profile\{
     ChangePasswordController,
@@ -102,7 +104,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('find-member', [FindMemberController::class, '__invoke'])
         ->name('find-member');
 
-    Route::get('/store', [StoreController::class, 'index'])->name('store');
+    Route::get('store', [StoreController::class, 'index'])->name('store');
+    Route::get('search', [StoreController::class, 'search'])->name('search');
+    Route::resource('store/admin', AdminStoreController::class)->names([
+        'index' => 'store.admin.index',
+        'create' => 'store.create',
+        'store' => 'store.store',
+        'edit' => 'store.edit',
+        'update' => 'store.update',
+        'destroy' => 'store.destroy',
+    ]);
+
+    Route::post('send.email', [EmailExpiredController::class, 'sendEmail'])->name('send.email');
 });
 
 require __DIR__.'/auth.php';

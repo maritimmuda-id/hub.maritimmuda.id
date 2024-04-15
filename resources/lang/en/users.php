@@ -31,6 +31,8 @@ return [
 
     'email-label' => 'Email',
 
+    'role-label' => 'Administration Role',
+
     'province-name-label' => 'Province',
 
     'first-expertise-name-label' => 'First Expertise',

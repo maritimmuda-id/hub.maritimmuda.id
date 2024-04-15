@@ -159,87 +159,12 @@
             <h4 class="d-inline" id="plural-table-name">
                 <b>@lang('users.plural-name')</b>
             </h4>
-<<<<<<< Updated upstream
-            <div class="card-header-actions">
-                <button class="btn btn-sm btn-info" onclick="exportToXlsx()"><i class="fas fa-download"></i> @lang('users.export-table')</button>
-=======
             <div class="card-header-actions ml-3">
                 <button class="btn btn-sm btn-info" onclick="exportToXlsx()"><i class="fas fa-download"></i> <span class="d-none d-sm-inline-block">@lang('users.export-table')</span></button>
             </div>
             <div class="card-header-actions">
-                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#broadcastModal"><i class="fas fa-paper-plane"></i> <span class="d-none d-sm-inline-block">@lang('users.broadcast')</span></button>
->>>>>>> Stashed changes
+                <button class="btn btn-sm btn-warning" onclick="exportToXlsx()"><i class="fas fa-paper-plane"></i> <span class="d-none d-sm-inline-block">@lang('users.broadcast')</span></button>
             </div>
-            <div class="modal fade" id="broadcastModal" tabindex="-1" role="dialog" aria-labelledby="broadcastModalLabel" aria-hidden="true" data-backdrop="static">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content" style="border: none; border-radius: 15px;">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="broadcastModalLabel">{{ __('membership.heading-text-mail') }}</h5>
-                        </div>
-                        <div class="modal-body">
-                            <form id="broadcastForm" action="{{ route('send.broadcast') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="allMail">{{ __('membership.e-mail') }}</label>
-                                    <input class="form-control mb-3" id="allMail" name="email" rows="4" required readonly value="All"></input>
-                                    <label for="subjectMessage">{{ __('membership.subject-text-mail') }}</label>
-                                    <input class="form-control mb-3" id="subjectMessage" name="subject-message" rows="4" required></input>
-                                    <label for="image">{{ __('membership.image') }}</label>
-                                    <input type="file" name="image" id="image" class="form-control mb-3" accept="image/*">
-                                    <label for="broadcastMessage">{{ __('membership.text-mail') }}</label>
-                                    <textarea class="form-control" id="broadcastMessage" name="message" rows="4" required></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" id="cancelButton" class="btn btn-secondary" data-dismiss="modal">{{ __('membership.cancel-text-mail') }}</button>
-                            <button type="submit" form="broadcastForm" id="sendButton" class="btn btn-primary">{{ __('membership.confirm-text-mail') }}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@^10"></script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    // Fungsi untuk menampilkan pesan sukses
-                    function showSuccessMessage(email) {
-                        Swal.fire({
-                            title: 'Email berhasil terkirim!',
-                            text: email,
-                            timer: 5000,
-                            showConfirmButton: false,
-                            showCloseButton: true,
-                            toast: true,
-                            icon: 'success',
-                            position: 'top-end'
-                        });
-                    }
-
-                    // Handler untuk mengirim email
-                    @if(session('email_sent'))
-                        var userEmail = $('#allMail').val(); // Mengambil nilai email dari session
-                        showSuccessMessage(userEmail);
-                    @endif
-                });
-
-                // Menonaktifkan tombol setelah diklik
-                function disableButtons() {
-                    var sendButton = document.getElementById("sendButton");
-                    var cancelButton = document.getElementById("cancelButton");
-
-                    sendButton.disabled = true;
-                    cancelButton.disabled = true;
-
-                    sendButton.classList.add("disabled");
-                    cancelButton.classList.add("disabled");
-                }
-
-                // Menonaktifkan tombol setelah form terkirim
-                document.getElementById("broadcastForm").addEventListener("submit", function () {
-                    disableButtons();
-                });
-            </script>
         </div>
 
         <div class="card-body">
@@ -294,8 +219,6 @@
                         @endforeach
                     </x-form-select>
                 </div>
-<<<<<<< Updated upstream
-=======
                 <div class="col-md-2">
                     <x-form-input
                         type="date"
@@ -316,9 +239,20 @@
                         :value="request('end_date')"
                     />
                 </div>
->>>>>>> Stashed changes
             </div>
             {{ $dataTable->table() }}
+            <div class="row">
+                <div class="col-md-2">
+                    <!-- Dropdown untuk memilih jumlah baris -->
+                    <x-form-select name="length" class="form-control-sm" onchange="changeRowLength(this)">
+                        <option value="10">10</option>
+                        <option value="100">100</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="maximum" id="maximum-option">Maximum</option>
+                    </x-form-select>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -332,7 +266,7 @@
 
         $(function () {
             var throttled;
-            $("[name=search]").on('keyup change paste cut', function (e) {
+            $("[name=search], [name=status], [name=province_id], [name=expertise_id], [name=start_date], [name=end_date]").on('keyup change paste cut', function (e) {
                 if (throttled) {
                     clearTimeout(throttled);
                 }
@@ -341,12 +275,22 @@
                     console.log(e.type);
                     refreshDatatable();
                 }, 1000);
-            })
-
-            $("[name=status], [name=province_id], [name=expertise_id]").on('change', function (e) {
-                refreshDatatable();
             });
         });
+
+        function refreshDatatable () {
+            // Mendapatkan nilai input untuk filter
+            const status = $('[name=status]').val();
+            const keyword = $('[name=search]').val();
+            const expertiseId = $('[name=expertise_id]').val();
+            const provinceId = $('[name=province_id]').val();
+            const startDate = $('[name=start_date]').val();
+            const endDate = $('[name=end_date]').val();
+
+            // Mengirim permintaan Ajax dengan data filter yang diperbarui
+            window.{{ config('datatables-html.namespace') }}["users-table"].ajax.url('{{ route("user.index") }}?status=' + status + '&keyword=' + keyword + '&expertise_id=' + expertiseId + '&province_id=' + provinceId + '&start_date=' + startDate + '&end_date=' + endDate).load();
+        }
+
 
         function exportToXlsx() {
             const table = document.getElementById("users-table");
@@ -368,10 +312,8 @@
             XLSX.utils.book_append_sheet(wb, ws, sheet_name);
 
             // Save the file
-            const info = $('#users-table_info').text();
-            const entriesTable = info.split(' ')[3];
             const sheetName = {!! json_encode(__('users.plural-name')) !!};
-            const filename = "[EXPORT] [" + entriesTable + "] " + sheetName + " - Maritim Muda Hub.xlsx";
+            const filename = "[EXPORT] " + sheetName + " - Maritim Muda Hub.xlsx";
             // Now use 'filename' in your XLSX.writeFile call
             XLSX.writeFile(wb, filename);
         }
@@ -383,9 +325,9 @@
             // Find column indices to exclude
             const headerRow = table.querySelector("thead tr");
             Array.from(headerRow.children).forEach((th, index) => {
-            if (excludedColumns.includes(th.textContent.trim())) {
-                indices.push(index);
-            }
+                if (excludedColumns.includes(th.textContent.trim())) {
+                    indices.push(index);
+                }
             });
 
             return indices;
@@ -394,9 +336,32 @@
         function removeColumns(table, indices) {
             // Remove columns from the table
             Array.from(table.rows).forEach(row => {
-            indices.sort((a, b) => b - a); // Sort in descending order to avoid index issues
-            indices.forEach(index => row.deleteCell(index));
+                indices.sort((a, b) => b - a); // Sort in descending order to avoid index issues
+                indices.forEach(index => row.deleteCell(index));
             });
         }
+
+        function changeRowLength(select) {
+            const length = select.value;
+            let pageSize = length;
+
+            // Jika opsi "Maximum" dipilih, atur jumlah baris yang ditampilkan sesuai jumlah yang disajikan oleh DataTables
+            if (length === 'maximum') {
+                const info = $('#users-table_info').text();
+                const entriesText = info.split(' ')[5]; // Ambil teks yang mengandung jumlah entri yang ditampilkan
+                pageSize = parseInt(entriesText);
+            }
+
+            const dataTable = window.{{ config('datatables-html.namespace') }}["users-table"];
+            dataTable.page.len(pageSize).draw();
+
+            // Mengubah inner HTML dari elemen dengan id "maximum-option"
+            if (length === 'maximum') {
+                $('#maximum-option').text(pageSize);
+            } else {
+                $('#maximum-option').text('Maximum');
+            }
+        }
+
     </script>
 @endpush

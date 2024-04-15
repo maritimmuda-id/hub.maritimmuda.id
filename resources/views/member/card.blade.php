@@ -33,6 +33,7 @@
     </form>
     <div class="row">
         @forelse ($users as $user)
+<<<<<<< Updated upstream
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body p-2 d-flex justify-content-between">
@@ -43,6 +44,48 @@
                                 <strong class="d-block">{{ $user->province->name }}</strong>
                                 <small class="d-block">{{ $user->firstExpertise?->name }}</small>
                                 <small class="d-block">{{ $user->secondExpertise?->name }}</small>
+=======
+            @if ($user->is_admin != 3)
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body p-2 d-flex justify-content-between">
+                            <div class="d-flex">
+                                <img style="width:75px;height:100px;" class="img-fluid img-thumbnail" src="{{ $user->photo_link }}">
+                                <div class="mx-2">
+                                    <h3>{{ $user->name }}
+                                        @if ($user && $user->uid !== null && $user->memberships()->whereExists(function ($query) use ($user) {
+                                            $query->select(DB::raw(1))
+                                                ->from('users')
+                                                ->join('memberships', 'memberships.user_id', '=', 'users.id')
+                                                ->where('users.id', '=', $user->id)
+                                                ->whereDate('memberships.expired_at', '>=', now())
+                                                ->whereRaw('memberships.id = (
+                                                    SELECT MAX(id) FROM memberships
+                                                    WHERE memberships.user_id = users.id
+                                                )');
+                                            })->exists())
+                                            <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i>
+                                        @endif
+                                        @if ($user->is_admin == 1)
+                                            <i class="fas fa-key" style="font-size: 20px; color: #ffcb3d;" title="@lang('profile.member-admin-check')"></i>
+                                        @endif
+                                        @if ($user->is_admin == 2)
+                                            <i class="fas fa-code" style="font-size: 20px; color: #d95353;" title="@lang('profile.member-developer-check')"></i>
+                                        @endif
+                                    </h3>
+                                    <strong class="d-block">{{ $user->province->name }}</strong>
+                                    <small class="d-block">{{ $user->firstExpertise?->name }}</small>
+                                    <small class="d-block">{{ $user->secondExpertise?->name }}</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mr-2">
+                                <button
+                                    wire:click.prevent="show('{{ $user->uuid }}')"
+                                    class="btn btn-info"
+                                >
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+>>>>>>> Stashed changes
                             </div>
                         </div>
                         <div class="d-flex align-items-center mr-2">
@@ -62,10 +105,10 @@
             </div>
         @endforelse
     </div>
-    @if ($users?->hasMorePages())
+    @if ($users->hasMorePages() || !$users->isEmpty())
         <div class="row">
             <div class="col-md-12">
-                {!! $users->links() !!}
+                {!! $users->onEachSide(1)->links() !!}
             </div>
         </div>
     @endif
@@ -153,11 +196,95 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="membershipModal-perpanjangan" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="border-radius: 15px; border: none;">
+                <div class="modal-header">
+                    <b>@lang('verify-membership.title_expired')</b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @lang('verify-membership.notice_4'), <a href="{{ route('profile.edit') }}">@lang('verify-membership.notice_6')</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="membershipModal-buatKTA" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="border-radius: 15px; border: none;">
+                <div class="modal-header">
+                    <b>@lang('verify-membership.title')</b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @lang('verify-membership.notice_2'), <a href="{{ route('profile.edit') }}">@lang('verify-membership.notice_3')</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @push('scripts')
     <script>
+        // $(function () {
+        //     Livewire.on('openModal', (e) => {
+        //         $('#uid').text(e.uid);
+        //         var iconsHtml = `${e.name}`;
+
+        //         if (e.memberships && e.memberships.length > 0) {
+        //             var currentDate = new Date();
+        //             var activeMembership = e.memberships.find(membership => {
+        //                 var expiredDate = new Date(membership.expired_at);
+        //                 // Check if expired_at is today or after today
+        //                 return expiredDate >= currentDate.setDate(currentDate.getDate() - 1);
+        //             });
+        //             if (activeMembership) {
+        //                 iconsHtml += ` <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i>`;
+        //             }
+        //         }
+        //         if (e.is_admin == 1) {
+        //             iconsHtml += ` <i class="fas fa-key" style="font-size: 20px; color: #ffcb3d;" title="@lang('profile.member-admin-check')"></i>`;
+        //         }
+        //         if (e.is_admin == 2) {
+        //             iconsHtml += ` <i class="fas fa-code" style="font-size: 20px; color: #d95353;" title="@lang('profile.member-developer-check')"></i>`;
+        //         }
+        //         $('#name_1').html(iconsHtml);
+        //         $('#name_2').text(e.name);
+        //         $('#email').attr('href', `mailto:${e.email}`);
+        //         $('#bio').text(e.bio);
+        //         $('#province').text(e.province);
+        //         $('#first_expertise').text(e.first_expertise);
+        //         $('#second_expertise').text(e.second_expertise);
+        //         $('#linkedin_profile').hide();
+        //         $('#instagram_profile').hide();
+        //         if (e.linkedin_profile !== null) {
+        //             $('#linkedin_profile')
+        //                 .attr('href', e.linkedin_profile)
+        //                 .show();
+        //         }
+        //         if (e.instagram_profile !== null) {
+        //             $('#instagram_profile')
+        //                 .attr('href', e.instagram_profile)
+        //                 .show();
+        //         }
+        //         $('#photo_link').attr('src', e.photo_link);
+        //         $('#userProfileModal').modal('show');
+        //     });
+        // });
+
+
         $(function () {
             Livewire.on('openModal', (e) => {
+<<<<<<< Updated upstream
                 $('#uid').text(e.uid);
                 if (e.uid !== null) {
                     $('#name_1').html(`${e.name} <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i>`);
@@ -184,7 +311,78 @@
                 }
                 $('#photo_link').attr('src', e.photo_link);
                 $('#userProfileModal').modal('show');
+=======
+                @if(auth()->check() && auth()->user()->uid !== null && auth()->user()->memberships()->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('memberships')
+                        ->join('users', 'memberships.user_id', '=', 'users.id')
+                        ->where('memberships.user_id', '=', auth()->user()->id)
+                        ->whereDate('memberships.expired_at', '>=', now())
+                        ->whereRaw('memberships.id = (
+                            SELECT MAX(id) FROM memberships
+                            WHERE memberships.user_id = users.id
+                        )');
+                    })->exists())
+                    $('#uid').text(e.uid);
+                    var iconsHtml = `${e.name}`;
+
+                    if (e.memberships && e.memberships.length > 0) {
+                        var currentDate = new Date();
+                        var activeMembership = e.memberships.find(membership => {
+                            var expiredDate = new Date(membership.expired_at);
+                            // Check if expired_at is today or after today
+                            return expiredDate >= currentDate.setDate(currentDate.getDate() - 1);
+                        });
+                        if (activeMembership) {
+                            iconsHtml += ` <i class="fas fa-check-circle" style="font-size: 20px; color: #0c6c9d;" title="@lang('profile.member-verify-check')"></i>`;
+                        }
+                    }
+                    if (e.is_admin == 1) {
+                        iconsHtml += ` <i class="fas fa-key" style="font-size: 20px; color: #ffcb3d;" title="@lang('profile.member-admin-check')"></i>`;
+                    }
+                    if (e.is_admin == 2) {
+                        iconsHtml += ` <i class="fas fa-code" style="font-size: 20px; color: #d95353;" title="@lang('profile.member-developer-check')"></i>`;
+                    }
+                    $('#name_1').html(iconsHtml);
+                    $('#name_2').text(e.name);
+                    $('#email').attr('href', `mailto:${e.email}`);
+                    $('#bio').text(e.bio);
+                    $('#province').text(e.province);
+                    $('#first_expertise').text(e.first_expertise);
+                    $('#second_expertise').text(e.second_expertise);
+                    $('#linkedin_profile').hide();
+                    $('#instagram_profile').hide();
+                    if (e.linkedin_profile !== null) {
+                        $('#linkedin_profile')
+                            .attr('href', e.linkedin_profile)
+                            .show();
+                    }
+                    if (e.instagram_profile !== null) {
+                        $('#instagram_profile')
+                            .attr('href', e.instagram_profile)
+                            .show();
+                    }
+                    $('#photo_link').attr('src', e.photo_link);
+                    $('#userProfileModal').modal('show');
+                @elseif(auth()->check() && auth()->user()->uid !== null && auth()->user()->memberships()->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('memberships')
+                        ->join('users', 'memberships.user_id', '=', 'users.id')
+                        ->where('memberships.user_id', '=', auth()->user()->id)
+                        ->whereDate('memberships.expired_at', '<', now())
+                        ->whereRaw('memberships.id = (
+                            SELECT MAX(id) FROM memberships
+                            WHERE memberships.user_id = users.id
+                        )');
+                    })->exists())
+                    // alert("Aktifkan kartu keanggotaan Anda");
+                    $('#membershipModal-perpanjangan').modal('show');
+                @else
+                    $('#membershipModal-buatKTA').modal('show');
+                @endif
+>>>>>>> Stashed changes
             });
         });
+
     </script>
 @endpush

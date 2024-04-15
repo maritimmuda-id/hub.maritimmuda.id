@@ -6,11 +6,21 @@ use BenSampo\Enum\Enum;
 
 final class UserStatus extends Enum
 {
-    const RequestIdentityCardVerification = 2;
+    const NoVerify = 2;
 
-    const HaveAnIdentityCard = 3;
+    const RequestIdentityCardVerification = 3;
 
-    const UserAdmin = 4;
+    const RequestRenewalMembership = 4;
 
+<<<<<<< Updated upstream
     // const RequestRenewalMembership = 3;
+=======
+    const HaveAnIdentityCard = 5;
+
+    const UserAdmin = 6;
+
+    const UserDeveloper = 7;
+
+    const Superadmin = 8;
+>>>>>>> Stashed changes
 }

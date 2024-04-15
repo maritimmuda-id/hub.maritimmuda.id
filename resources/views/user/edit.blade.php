@@ -24,6 +24,7 @@
             <div class="card-body">
                 @bind($user)
                     <div class="row">
+<<<<<<< Updated upstream
                         <div class="col-md-6">
                             <x-form-input
                                 name="uid"
@@ -31,6 +32,24 @@
                                 disabled
                             />
                         </div>
+=======
+                        @if(auth()->user()->is_admin == 2 || auth()->user()->is_admin == 3)
+                            <div class="col-md-6">
+                                <x-form-input
+                                    name="uid"
+                                    :label="trans('profile.uid-label')"
+                                />
+                            </div>
+                        @elseif(auth()->user()->is_admin == 1)
+                            <div class="col-md-6">
+                                <x-form-input
+                                    name="uid"
+                                    disabled
+                                    :label="trans('profile.uid-label')"
+                                />
+                            </div>
+                        @endif
+>>>>>>> Stashed changes
                         <div class="col-md-6">
                             <x-form-input
                                 name="name"
@@ -125,6 +144,81 @@
                         </button>
                     </x-form>
                 @endif
+<<<<<<< Updated upstream
+=======
+                <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#emailModal">
+                    <i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ __('membership.button-text-mail') }}
+                </button>
+                <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true" data-backdrop="static">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="border: none; border-radius: 15px;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="emailModalLabel">{{ __('membership.heading-text-mail') }}</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form id="emailForm" action="{{ route('send.email') }}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        @bind($user)
+                                            <x-form-input id="user_email" name="email" :label="trans('profile.email-label')" readonly/>
+                                        @endbind
+                                        <label for="subjectMessage">{{ __('membership.subject-text-mail') }}</label>
+                                        <input class="form-control mb-3" id="subjectMessage" name="subject-message" rows="4" required></input>
+                                        <label for="emailMessage">{{ __('membership.text-mail') }}</label>
+                                        <textarea class="form-control" id="emailMessage" name="message" rows="4" required></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="cancelButton" class="btn btn-secondary" data-dismiss="modal">{{ __('membership.cancel-text-mail') }}</button>
+                                <button type="submit" form="emailForm" id="sendButton" class="btn btn-primary">{{ __('membership.confirm-text-mail') }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@^10"></script>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        // Fungsi untuk menampilkan pesan sukses
+                        function showSuccessMessage(email) {
+                            Swal.fire({
+                                title: 'Email berhasil terkirim!',
+                                text: email,
+                                timer: 5000,
+                                showConfirmButton: false,
+                                showCloseButton: true,
+                                toast: true,
+                                icon: 'success',
+                                position: 'top-end'
+                            });
+                        }
+
+                        // Handler untuk mengirim email
+                        @if(session('email_sent'))
+                            var userEmail = $('#user_email').val(); // Mengambil nilai email dari session
+                            showSuccessMessage(userEmail);
+                        @endif
+                    });
+                    
+                    // Menonaktifkan tombol setelah diklik
+                    function disableButtons() {
+                        var sendButton = document.getElementById("sendButton");
+                        var cancelButton = document.getElementById("cancelButton");
+
+                        sendButton.disabled = true;
+                        cancelButton.disabled = true;
+
+                        sendButton.classList.add("disabled");
+                        cancelButton.classList.add("disabled");
+                    }
+
+                    // Menonaktifkan tombol setelah form terkirim
+                    document.getElementById("emailForm").addEventListener("submit", function () {
+                        disableButtons();
+                    });
+                </script>
+>>>>>>> Stashed changes
             </div>
         </div>
     </div>

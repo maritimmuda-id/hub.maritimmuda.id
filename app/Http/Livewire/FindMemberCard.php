@@ -85,6 +85,13 @@ class FindMemberCard extends Component
         $user = User::query()->firstWhere('uuid', $userUuid);
 
         if ($user) {
+<<<<<<< Updated upstream
+=======
+            $memberships = Membership::where('user_id', $user->id)
+            ->whereRaw('id = (SELECT MAX(id) FROM memberships WHERE user_id = ' . $user->id . ')')
+            ->get();
+
+>>>>>>> Stashed changes
             $this->emit('openModal', [
                 'uid' => $user->uid,
                 'name' => $user->name,

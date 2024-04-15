@@ -9,6 +9,23 @@ return [
 
     'regenerate-member-card' => 'Regenerate Member Card',
 
+<<<<<<< Updated upstream
+=======
+    'button-text-mail' => 'Send Email',
+
+    'heading-text-mail' => 'Send Message Email',
+
+    'subject-text-mail' => 'Subject',
+
+    'text-mail' => 'Message',
+
+    'e-mail' => 'Email',
+
+    'confirm-text-mail' => 'Send',
+
+    'cancel-text-mail' => 'Cancel',
+
+>>>>>>> Stashed changes
     'member-type' => 'Member Type',
 
     'member-age' => 'Member Age',

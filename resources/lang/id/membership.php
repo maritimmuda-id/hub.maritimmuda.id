@@ -9,6 +9,23 @@ return [
 
     'regenerate-member-card' => 'Terbitkan Ulang Kartu Keanggota',
 
+<<<<<<< Updated upstream
+=======
+    'button-text-mail' => 'Kirim Email',
+
+    'heading-text-mail' => 'Kirim Pesan Email',
+
+    'subject-text-mail' => 'Subjek',
+
+    'text-mail' => 'Pesan',
+
+    'e-mail' => 'Email',
+
+    'confirm-text-mail' => 'Kirim',
+
+    'cancel-text-mail' => 'Batal',
+
+>>>>>>> Stashed changes
     'member-type' => 'Tipe Anggota',
 
     'member-age' => 'Umur Anggota',

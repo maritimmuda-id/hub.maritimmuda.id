@@ -11,9 +11,15 @@ return [
 
     'user' => 'Administration Member',
 
-    'user-sidebar' => 'Administratio... :adm',
+    'user-sidebar-adm' => 'Administratio... :adm',
+
+    'developer' => 'Developer',
+
+    'user-sidebar-dev' => 'Developer... :dev',
 
     'find-member' => 'Find Member',
+
+    'product' => 'Product',
 
     'membership' => 'Membership',
 

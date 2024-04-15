@@ -87,6 +87,67 @@
             </div>
         </div>
     </div>
+    <!-- Dibawah merupahan setting untuk seumur hidup, tolong ubah "//" menjadi komen -->
+    <!-- <div class="bg-white max-w-[210mm] h-[120mm] px-16">
+        <div class="relative">
+            <img class="absolute top-0 left-0" src="https://res.cloudinary.com/maritimmudawda/image/upload/v1713174935/id_card_maritim_fix_1-1-SEMURHIDUP_hpzjv0_bgshx1.png" alt="">
+        </div>
+        <div class="relative">
+            // Foto
+            <img
+                class="absolute top-0 left-0 rounded-full mt-[45px] ml-[44px] w-[185px]"
+                src="{{ $user->photo_thumb_link }}"
+                alt=""
+            />
+
+            <div class="absolute mt-[163px] ml-[243px] leading-none">
+                <div class="tracking-[-0.070em] font-bold text-[28px]">
+                    {{ Str::limit($user->name ?? 'Nama Lengkap Anggota', 22) }}
+                </div>
+                <div class="mt-[6px] tracking-[-0.08em] font-semibold text-[#106C9F] text-[22px]">
+                    {{ $user->member_type ?: 'Jenis Keanggotaan' }}
+                </div>
+            </div>
+
+            // QR Code
+            @empty ($user->id)
+                <img
+                    class="absolute top-0 mt-[213px] ml-[539px] w-[71px] h-[71px]"
+                    src="https://res.cloudinary.com/zhanang19/image/upload/v1632832748/Crunchify.com-QRCode-gray-color_olqkuu.png"
+                    alt=""
+                >
+            @else
+                {{ $user->generateQrCode() }}
+            @endempty
+
+            // Blur TTD
+            @empty ($user->id)
+                <div class="absolute mt-[295px] ml-[494px] w-[150px] h-[75px] bg-white/45 backdrop-blur-[4px]"></div>
+            @endempty
+
+            <div class="tracking-[0.033em] font-semibold text-[13px]">
+                // No. Anggota
+                <div class="absolute mt-[289px] ml-[37px]">
+                    {{ $user->uid ?? 'AABBCCDDDD' }}
+                </div>
+
+                // Provinsi
+                <div class="absolute mt-[334px] ml-[37px] leading-[1.35]">
+                    <div>{{ $user->province->name ?? 'Nama Provinsi' }}</div>
+                </div>
+
+                // Berlaku
+                <div class="absolute mt-[289px] ml-[183px]">
+                    Seumur Hidup
+                </div>
+
+                // Peminatan/Keahlian
+                <div class="absolute mt-[289px] ml-[326px] w-[180px]">
+                    {{ $user->firstExpertise->name }}
+                </div>
+            </div>
+        </div>
+    </div> -->
     <div class="bg-white max-w-[210mm] px-16">
         <div class="relative">
             <img class="absolute top-0 left-0" src="https://res.cloudinary.com/zhanang19/image/upload/v1632706004/backside_wnlnft.png" alt="">
