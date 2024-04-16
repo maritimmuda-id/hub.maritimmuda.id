@@ -15,7 +15,11 @@
         ->from('users')
         ->join('memberships', 'memberships.user_id', '=', 'users.id')
         ->where('users.id', '=', $user->id, )
-        ->whereDate('memberships.expired_at', '>=', now());
+        ->whereDate('memberships.expired_at', '>=', now())
+        ->whereRaw('memberships.id = (
+            SELECT MAX(id) FROM memberships
+            WHERE memberships.user_id = users.id
+        )');
     })->exists())
     <div class="card p-3 m-4" style="border: none;">
         <div class="card-header" style="border-bottom: none;">
@@ -43,7 +47,11 @@
         ->from('users')
         ->join('memberships', 'memberships.user_id', '=', 'users.id')
         ->where('users.id', '=', $user->id)
-        ->whereDate('memberships.expired_at', '<', now());
+        ->whereDate('memberships.expired_at', '<', now())
+        ->whereRaw('memberships.id = (
+            SELECT MAX(id) FROM memberships
+            WHERE memberships.user_id = users.id
+        )');
     })->exists())
     <div class="card p-3 m-4" style="border: none;">
         <div class="card-header" style="border: none;">

@@ -15,6 +15,11 @@ class UserPolicy
         return $authenticatedUser?->is_admin ?? false;
     }
 
+    public function viewDev(?User $authenticatedUser): bool
+    {
+        return $authenticatedUser && in_array($authenticatedUser->is_admin, [2, 3]);
+    }
+
     public function view(?User $authenticatedUser, User $user): bool
     {
         return $authenticatedUser?->is_admin ?? false;

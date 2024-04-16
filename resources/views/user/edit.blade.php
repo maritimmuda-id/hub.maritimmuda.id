@@ -39,7 +39,7 @@
                                     :label="trans('profile.uid-label')"
                                 />
                             </div>
-                        @endif                                           
+                        @endif
                         <div class="col-md-6">
                             <x-form-input
                                 name="name"
@@ -149,10 +149,10 @@
                                     @csrf
                                     <div class="form-group">
                                         @bind($user)
-                                            <x-form-input id="user_email" name="email" disabled :label="trans('profile.email-label')"/>
+                                            <x-form-input id="user_email" name="email" :label="trans('profile.email-label')" readonly/>
                                         @endbind
                                         <label for="subjectMessage">{{ __('membership.subject-text-mail') }}</label>
-                                        <input class="form-control" id="subjectMessage" name="subject-message" rows="4" required></input>
+                                        <input class="form-control mb-3" id="subjectMessage" name="subject-message" rows="4" required></input>
                                         <label for="emailMessage">{{ __('membership.text-mail') }}</label>
                                         <textarea class="form-control" id="emailMessage" name="message" rows="4" required></textarea>
                                     </div>
@@ -182,23 +182,22 @@
                                 position: 'top-end'
                             });
                         }
-                
+
                         // Handler untuk mengirim email
                         @if(session('email_sent'))
                             var userEmail = $('#user_email').val(); // Mengambil nilai email dari session
                             showSuccessMessage(userEmail);
                         @endif
                     });
-                </script>                                
-                <script>
+                    
                     // Menonaktifkan tombol setelah diklik
                     function disableButtons() {
                         var sendButton = document.getElementById("sendButton");
                         var cancelButton = document.getElementById("cancelButton");
-                        
+
                         sendButton.disabled = true;
                         cancelButton.disabled = true;
-                        
+
                         sendButton.classList.add("disabled");
                         cancelButton.classList.add("disabled");
                     }

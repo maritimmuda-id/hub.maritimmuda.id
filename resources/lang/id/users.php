@@ -31,6 +31,8 @@ return [
 
     'email-label' => 'Email',
 
+    'role-label' => 'Peran Administrasi',
+
     'province-name-label' => 'Provinsi',
 
     'first-expertise-name-label' => 'Bidang Keahlian Pertama',

@@ -20,11 +20,33 @@
                 <x-nav-link
                     :href="route('user.index')"
                     :active="request()->routeIs('user.*')"
-                    :label="trans('navigation.user-sidebar', ['adm' => '<span class=\'admin\'><i class=\'fas fa-key\'></i> Admin</span>'])"
+                    :label="trans('navigation.user-sidebar-adm', ['adm' => '<span class=\'admin\'><i class=\'fas fa-key\'></i> Admin</span>'])"
                     icon="fas fa-users"
                 />
             </li>
         @endcan
+        @can('viewDev', \App\Models\User::class)
+            <li class="c-sidebar-nav-item">
+                <x-nav-link
+                    :href="route('developer')"
+                    :active="request()->routeIs('developer')"
+                    :label="trans('navigation.user-sidebar-dev', ['dev' => '<span class=\'developer\'><i class=\'fas fa-code\'></i> Developer</span>'])"
+                    icon="fas fa-laptop-code"
+                />
+            </li>
+        @endcan
+        @can('find-member')
+        <li class="c-sidebar-nav-item">
+            <x-nav-link
+                :href="route('store')"
+                :active="request()->routeIs('store')"
+                :label="trans('navigation.product')"
+                icon="fas fa-shopping-cart"
+            />
+        </li>
+        @endcan
+        <br>
+        <h6 class="ml-3 mb-0 text-uppercase" style="font-size: 12px;"><b>@lang('navigation.membership')</b></h6>
         @can('find-member')
             <li class="c-sidebar-nav-item">
                 <x-nav-link
@@ -35,18 +57,6 @@
                 />
             </li>
         @endcan
-        @can('find-member')
-        <li class="c-sidebar-nav-item">
-            <x-nav-link
-                :href="route('store')"
-                :active="request()->routeIs('store')"
-                :label="'Produk'"
-                icon="fas fa-shopping-cart"
-            />
-        </li>
-        @endcan
-        <br>
-        <h6 class="ml-3 mb-0 text-uppercase" style="font-size: 12px;"><b>@lang('navigation.membership')</b></h6>
         @can('viewAny', \App\Models\Event::class)
             <li class="c-sidebar-nav-item">
                 <x-nav-link

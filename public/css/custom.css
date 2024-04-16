@@ -16,6 +16,25 @@ canvas {
     cursor: not-allowed;
 }
 
+@media (min-width: 768px) {
+    .flex-custom {
+        flex: 0 0 50%;
+        max-width: 49%;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite alternate;
+}
 
 .btn-warning {
     background-color: #ffcb3d;
@@ -37,10 +56,43 @@ canvas {
     color: #6c757d;
 }
 
+.table-admin {
+    font-size: 10px;
+    color: #3c4b64;
+    background-color: #ffcb3d;
+    padding: 3px 10px 3px 10px;
+    border-radius: 15px;
+}
+
+.table-developer {
+    font-size: 10px;
+    color: #ffffff;
+    background-color: #d95353;
+    padding: 3px 10px 3px 10px;
+    border-radius: 15px;
+}
+
+.table-superadmin {
+    font-size: 10px;
+    color: #ffffff;
+    background-color: #13abc3;
+    padding: 3px 10px 3px 10px;
+    border-radius: 15px;
+}
+
 .c-sidebar-nav-item .admin {
     font-size: 10px;
     color: #3c4b64;
     background-color: #ffcb3d;
+    padding: 3px 10px 3px 10px;
+    margin-left: 10px;
+    border-radius: 15px;
+}
+
+.c-sidebar-nav-item .developer {
+    font-size: 10px;
+    color: #ffffff;
+    background-color: #d95353;
     padding: 3px 10px 3px 10px;
     margin-left: 10px;
     border-radius: 15px;

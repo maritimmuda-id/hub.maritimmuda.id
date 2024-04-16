@@ -11,9 +11,15 @@ return [
 
     'user' => 'Administrasi Anggota',
 
-    'user-sidebar' => 'Administrasi ... :adm',
+    'user-sidebar-adm' => 'Administrasi... :adm',
+
+    'developer' => 'Pengembang',
+
+    'user-sidebar-dev' => 'Pengemb... :dev',
 
     'find-member' => 'Cari Anggota',
+
+    'product' => 'Produk',
 
     'membership' => 'Keanggotaan',
 

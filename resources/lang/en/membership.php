@@ -17,6 +17,8 @@ return [
 
     'text-mail' => 'Message',
 
+    'e-mail' => 'Email',
+
     'confirm-text-mail' => 'Send',
 
     'cancel-text-mail' => 'Cancel',

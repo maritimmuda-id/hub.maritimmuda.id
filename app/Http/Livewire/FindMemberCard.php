@@ -86,7 +86,9 @@ class FindMemberCard extends Component
         $user = User::query()->firstWhere('uuid', $userUuid);
 
         if ($user) {
-            $memberships = Membership::where('user_id', $user->id)->get();
+            $memberships = Membership::where('user_id', $user->id)
+            ->whereRaw('id = (SELECT MAX(id) FROM memberships WHERE user_id = ' . $user->id . ')')
+            ->get();
 
             $this->emit('openModal', [
                 'uid' => $user->uid,
@@ -112,19 +114,6 @@ class FindMemberCard extends Component
 
         return;
     }
-
-    // public function showMemberhip(?string $userId): void
-    // {
-    //     $memberhips = Membership::query()->firstWhere('user_id', $userId);
-
-    //     if ($memberhips) {
-    //         $this->emit('openModal', [
-    //             'user_id' => $memberhips->user_id,
-    //         ]);
-    //     }
-
-    //     return;
-    // }
 
     protected function updating($propertyName, $value): void
     {

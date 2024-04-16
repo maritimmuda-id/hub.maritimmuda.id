@@ -10,4 +10,8 @@ return [
     'job-posts-label' => 'Job Posts',
 
     'welcome-label' => 'Welcome,',
+
+    'announcement' => 'Announcement',
+
+    'no-announcement' => 'No announcement available.',
 ];

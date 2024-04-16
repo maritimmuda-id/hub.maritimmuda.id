@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\JobPost;
 use App\Models\Scholarship;
 use App\Models\User;
+use App\Models\Announcement;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -89,6 +90,8 @@ class ViewDashboardController
             $userCounts[$month] = $userCount;
         }
 
+        $announcement = Announcement::latest()->first();
+
         // // Mendapatkan tanggal hari ini
         // $today = Carbon::now();
 
@@ -122,6 +125,6 @@ class ViewDashboardController
         // }
         // $monthlyCounts  = array_reverse($monthlyCounts);
 
-        return view('dashboard', compact('user', 'widgets','months', 'membersCount'));
+        return view('dashboard', compact('user', 'widgets','months', 'membersCount', 'announcement'));
     }
 }

@@ -17,6 +17,8 @@ return [
 
     'text-mail' => 'Pesan',
 
+    'e-mail' => 'Email',
+
     'confirm-text-mail' => 'Kirim',
 
     'cancel-text-mail' => 'Batal',

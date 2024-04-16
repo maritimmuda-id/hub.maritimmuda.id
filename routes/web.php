@@ -15,6 +15,8 @@ use App\Http\Controllers\{
     ViewMemberCardController,
     MakeAdminController,
     StoreController,
+    AnnouncementController,
+    DeveloperController,
 };
 use App\Http\Controllers\Profile\{
     ChangePasswordController,
@@ -122,6 +124,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ]);
 
     Route::post('send.email', [EmailExpiredController::class, 'sendEmail'])->name('send.email');
+    Route::post('send.broadcast', [EmailExpiredController::class, 'sendBroadcast'])->name('send.broadcast');
+
+    Route::put('/announcement', [AnnouncementController::class, 'update'])->name('announcement.update');
+    Route::delete('/announcement', [AnnouncementController::class, 'delete'])->name('announcement.delete');
+
+    Route::get('developer', [DeveloperController::class, 'index'])->name('developer');
 });
 
 require __DIR__.'/auth.php';

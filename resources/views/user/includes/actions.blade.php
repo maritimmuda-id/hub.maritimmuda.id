@@ -28,7 +28,7 @@
         </button>
     </x-form>
 @endif
-@if(Gate::check('impersonate', $user) || (Auth::user() && Auth::user()->is_admin == 3))
+@if(Gate::check('impersonate', $user) || $user->id !== Auth::id() && (Auth::user() && Auth::user()->is_admin == 3))
     <a class="btn btn-sm btn-warning" style="margin:1.25px 0;" href="{{ route('impersonate', $user) }}">
         <i class="fas fa-user-secret"></i> {{ __('Impersonate') }}
     </a>
