@@ -9,8 +9,11 @@ return [
 
     'regenerate-member-card' => 'Regenerate Member Card',
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
     'button-text-mail' => 'Send Email',
 
     'heading-text-mail' => 'Send Message Email',
@@ -19,13 +22,19 @@ return [
 
     'text-mail' => 'Message',
 
+<<<<<<< HEAD
     'e-mail' => 'Email',
 
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
     'confirm-text-mail' => 'Send',
 
     'cancel-text-mail' => 'Cancel',
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
     'member-type' => 'Member Type',
 
     'member-age' => 'Member Age',

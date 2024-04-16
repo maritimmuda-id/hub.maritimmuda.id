@@ -50,4 +50,6 @@ return [
     'cannot-delete-current-user' => 'Can\'t delete current user',
 
     'export-table' => 'Export Table to XLSX',
+
+    'broadcast' => 'Broadcast message to all',
 ];

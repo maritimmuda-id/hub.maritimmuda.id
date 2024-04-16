@@ -24,6 +24,7 @@
             <div class="card-body">
                 @bind($user)
                     <div class="row">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                         <div class="col-md-6">
                             <x-form-input
@@ -33,6 +34,8 @@
                             />
                         </div>
 =======
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                         @if(auth()->user()->is_admin == 2 || auth()->user()->is_admin == 3)
                             <div class="col-md-6">
                                 <x-form-input
@@ -48,8 +51,12 @@
                                     :label="trans('profile.uid-label')"
                                 />
                             </div>
+<<<<<<< HEAD
                         @endif
 >>>>>>> Stashed changes
+=======
+                        @endif                                           
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                         <div class="col-md-6">
                             <x-form-input
                                 name="name"
@@ -130,22 +137,26 @@
                 </div>
             </div>
             <div class="card-footer" style="border: none;">
-                @can('verify-member', $user)
-                    <x-form :action="route('user.verify', $user)" onsubmit="return confirm('{{ __('Are you sure?') }}');" style="display: inline-block;">
-                        <button type="submit" class="btn btn-sm btn-primary" style="margin:1.25px 0;">
-                            <i class="fas fa-user-check"></i>&nbsp;&nbsp;{{ __('membership.verify-and-generate-member-card') }}
-                        </button>
-                    </x-form>
-                @endcan
-                @if ($user->uid !== null)
+                @if (!App\Models\Membership::where('user_id', $user->id)->exists())
+                    @can('verify-member', $user)
+                        <x-form :action="route('user.verify', $user)" onsubmit="return confirm('{{ __('Are you sure?') }}');" style="display: inline-block;">
+                            <button type="submit" class="btn btn-sm btn-primary" style="margin:1.25px 0;">
+                                <i class="fas fa-user-check"></i>&nbsp;&nbsp;{{ __('membership.verify-and-generate-member-card') }}
+                            </button>
+                        </x-form>
+                    @endcan
+                @else
                     <x-form :action="route('user.verify', $user)" onsubmit="return confirm('{{ __('Are you sure?') }}');" style="display: inline-block;">
                         <button type="submit" class="btn btn-sm btn-primary" style="margin:1.25px 0;">
                             <i class="fas fa-user-check"></i>&nbsp;&nbsp;{{ __('membership.regenerate-member-card') }}
                         </button>
                     </x-form>
                 @endif
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                 <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#emailModal">
                     <i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ __('membership.button-text-mail') }}
                 </button>
@@ -160,10 +171,17 @@
                                     @csrf
                                     <div class="form-group">
                                         @bind($user)
+<<<<<<< HEAD
                                             <x-form-input id="user_email" name="email" :label="trans('profile.email-label')" readonly/>
                                         @endbind
                                         <label for="subjectMessage">{{ __('membership.subject-text-mail') }}</label>
                                         <input class="form-control mb-3" id="subjectMessage" name="subject-message" rows="4" required></input>
+=======
+                                            <x-form-input id="user_email" name="email" disabled :label="trans('profile.email-label')"/>
+                                        @endbind
+                                        <label for="subjectMessage">{{ __('membership.subject-text-mail') }}</label>
+                                        <input class="form-control" id="subjectMessage" name="subject-message" rows="4" required></input>
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                                         <label for="emailMessage">{{ __('membership.text-mail') }}</label>
                                         <textarea class="form-control" id="emailMessage" name="message" rows="4" required></textarea>
                                     </div>
@@ -193,22 +211,38 @@
                                 position: 'top-end'
                             });
                         }
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                         // Handler untuk mengirim email
                         @if(session('email_sent'))
                             var userEmail = $('#user_email').val(); // Mengambil nilai email dari session
                             showSuccessMessage(userEmail);
                         @endif
                     });
+<<<<<<< HEAD
                     
+=======
+                </script>                                
+                <script>
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                     // Menonaktifkan tombol setelah diklik
                     function disableButtons() {
                         var sendButton = document.getElementById("sendButton");
                         var cancelButton = document.getElementById("cancelButton");
+<<<<<<< HEAD
 
                         sendButton.disabled = true;
                         cancelButton.disabled = true;
 
+=======
+                        
+                        sendButton.disabled = true;
+                        cancelButton.disabled = true;
+                        
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                         sendButton.classList.add("disabled");
                         cancelButton.classList.add("disabled");
                     }
@@ -218,7 +252,10 @@
                         disableButtons();
                     });
                 </script>
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
             </div>
         </div>
     </div>

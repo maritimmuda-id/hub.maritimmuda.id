@@ -159,14 +159,19 @@
             <h4 class="d-inline" id="plural-table-name">
                 <b>@lang('users.plural-name')</b>
             </h4>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             <div class="card-header-actions">
+=======
+            <div class="card-header-actions ml-3">
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                 <button class="btn btn-sm btn-info" onclick="exportToXlsx()"><i class="fas fa-download"></i> @lang('users.export-table')</button>
 =======
             <div class="card-header-actions ml-3">
                 <button class="btn btn-sm btn-info" onclick="exportToXlsx()"><i class="fas fa-download"></i> <span class="d-none d-sm-inline-block">@lang('users.export-table')</span></button>
             </div>
             <div class="card-header-actions">
+<<<<<<< HEAD
                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#broadcastModal"><i class="fas fa-paper-plane"></i> <span class="d-none d-sm-inline-block">@lang('users.broadcast')</span></button>
 >>>>>>> Stashed changes
             </div>
@@ -240,6 +245,10 @@
                     disableButtons();
                 });
             </script>
+=======
+                <button class="btn btn-sm btn-warning" onclick="exportToXlsx()"><i class="fas fa-bullhorn"></i> @lang('users.broadcast')</button>
+            </div>
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
         </div>
 
         <div class="card-body">
@@ -294,8 +303,11 @@
                         @endforeach
                     </x-form-select>
                 </div>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                 <div class="col-md-2">
                     <x-form-input
                         type="date"
@@ -315,10 +327,26 @@
                         :label="__('End date')"
                         :value="request('end_date')"
                     />
+<<<<<<< HEAD
                 </div>
 >>>>>>> Stashed changes
+=======
+                </div>                
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
             </div>
             {{ $dataTable->table() }}
+            <div class="row">
+                <div class="col-md-2">
+                    <!-- Dropdown untuk memilih jumlah baris -->
+                    <x-form-select name="length" class="form-control-sm" onchange="changeRowLength(this)">
+                        <option value="10">10</option>
+                        <option value="100">100</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="maximum" id="maximum-option">Maximum</option>
+                    </x-form-select>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -332,7 +360,7 @@
 
         $(function () {
             var throttled;
-            $("[name=search]").on('keyup change paste cut', function (e) {
+            $("[name=search], [name=status], [name=province_id], [name=expertise_id], [name=start_date], [name=end_date]").on('keyup change paste cut', function (e) {
                 if (throttled) {
                     clearTimeout(throttled);
                 }
@@ -341,12 +369,22 @@
                     console.log(e.type);
                     refreshDatatable();
                 }, 1000);
-            })
-
-            $("[name=status], [name=province_id], [name=expertise_id]").on('change', function (e) {
-                refreshDatatable();
             });
         });
+
+        function refreshDatatable () {
+            // Mendapatkan nilai input untuk filter
+            const status = $('[name=status]').val();
+            const keyword = $('[name=search]').val();
+            const expertiseId = $('[name=expertise_id]').val();
+            const provinceId = $('[name=province_id]').val();
+            const startDate = $('[name=start_date]').val();
+            const endDate = $('[name=end_date]').val();
+
+            // Mengirim permintaan Ajax dengan data filter yang diperbarui
+            window.{{ config('datatables-html.namespace') }}["users-table"].ajax.url('{{ route("user.index") }}?status=' + status + '&keyword=' + keyword + '&expertise_id=' + expertiseId + '&province_id=' + provinceId + '&start_date=' + startDate + '&end_date=' + endDate).load();
+        }
+
 
         function exportToXlsx() {
             const table = document.getElementById("users-table");
@@ -383,9 +421,9 @@
             // Find column indices to exclude
             const headerRow = table.querySelector("thead tr");
             Array.from(headerRow.children).forEach((th, index) => {
-            if (excludedColumns.includes(th.textContent.trim())) {
-                indices.push(index);
-            }
+                if (excludedColumns.includes(th.textContent.trim())) {
+                    indices.push(index);
+                }
             });
 
             return indices;
@@ -394,9 +432,32 @@
         function removeColumns(table, indices) {
             // Remove columns from the table
             Array.from(table.rows).forEach(row => {
-            indices.sort((a, b) => b - a); // Sort in descending order to avoid index issues
-            indices.forEach(index => row.deleteCell(index));
+                indices.sort((a, b) => b - a); // Sort in descending order to avoid index issues
+                indices.forEach(index => row.deleteCell(index));
             });
         }
+
+        function changeRowLength(select) {
+            const length = select.value;
+            let pageSize = length;
+
+            // Jika opsi "Maximum" dipilih, atur jumlah baris yang ditampilkan sesuai jumlah yang disajikan oleh DataTables
+            if (length === 'maximum') {
+                const info = $('#users-table_info').text();
+                const entriesText = info.split(' ')[5]; // Ambil teks yang mengandung jumlah entri yang ditampilkan
+                pageSize = parseInt(entriesText);
+            }
+
+            const dataTable = window.{{ config('datatables-html.namespace') }}["users-table"];
+            dataTable.page.len(pageSize).draw();
+
+            // Mengubah inner HTML dari elemen dengan id "maximum-option"
+            if (length === 'maximum') {
+                $('#maximum-option').text(pageSize);
+            } else {
+                $('#maximum-option').text('Maximum');
+            }
+        }
+
     </script>
 @endpush

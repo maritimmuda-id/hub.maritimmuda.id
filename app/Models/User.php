@@ -55,6 +55,7 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         'bio',
         'locale',
         'is_admin',
+        'uid',
     ];
 
     protected $hidden = [
@@ -66,7 +67,7 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
         'gender' => Gender::class,
         'email_verified_at' => 'datetime',
         'date_of_birth' => 'date',
-        'is_admin' => 'boolean',
+        'is_admin' => 'int',
     ];
 
     public function getActivitylogOptions(): LogOptions

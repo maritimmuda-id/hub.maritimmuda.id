@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html;
 use Carbon\Carbon;
@@ -83,9 +84,15 @@ class UserController
                     // this means that this one will be their first membership
 <<<<<<< Updated upstream
                     if ($status == UserStatus::RequestIdentityCardVerification) {
-                        $query->whereDoesntHave('memberships');
+                        $query->where(function($query) {
+                            $query->whereDoesntHave('memberships')
+                                ->orWhereHas('memberships', function($q) {
+                                    $q->whereDate('expired_at', '<', now()); // Menggunakan now() untuk mendapatkan tanggal hari ini
+                                });
+                        });
                         $query->whereRelation('media', 'collection_name', 'identity_card');
                     } elseif ($status == UserStatus::HaveAnIdentityCard) {
+<<<<<<< HEAD
                         $query->whereNotNull('uid');
 =======
                     if ($status == UserStatus::NoVerify) {
@@ -119,11 +126,28 @@ class UserController
                                     )');
                             });
 >>>>>>> Stashed changes
+=======
+                        $query->whereNotNull('uid')
+                        ->whereExists(function ($subquery) {
+                              $subquery->select(DB::raw(1))
+                                       ->from('memberships')
+                                       ->whereRaw('memberships.user_id = users.id')
+                                       ->whereDate('memberships.expired_at', '>=', now());
+                          });
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
                     } elseif ($status == UserStatus::UserAdmin) {
                         $query->where('is_admin', 1);
+                    } elseif ($status == UserStatus::UserDeveloper) {
+                        $query->where('is_admin', 2);
+                    } elseif ($status == UserStatus::Superadmin) {
+                        $query->where('is_admin', 3);
                     }
 
                     // TODO: Add query to filter by `request renewal` status
+
+                    if (! empty($startDate = $request->input('start_date')) && ! empty($endDate = $request->input('end_date'))) {
+                        $query->whereBetween('created_at', [$startDate, $endDate]);
+                    }
                 })
                 ->addColumn('province_name', function (User $row) {
                     return $row->province?->name ?? '-';
@@ -230,10 +254,13 @@ class UserController
             // $monthName = $startDate->format('F Y');
             $count_created = User::whereBetween('created_at', [$startDate, $endDate])->count();
             $count_verify = Membership::whereBetween('verified_at', [$startDate, $endDate])->count();
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             $user_count_created = User::whereNull('uid')->whereNotNull('email_verified_at')->count();
             $user_count_verify = User::whereNotNull('uid')->count();
 =======
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
             $user_count_created = User::whereNotNull('email_verified_at')
                 ->where(function ($query) {
                     $query->whereNotExists(function ($subquery) {
@@ -252,6 +279,7 @@ class UserController
                 ->whereExists(function ($query) {
                     $query->select(DB::raw(1))
                         ->from('memberships')
+<<<<<<< HEAD
                         ->whereColumn('memberships.user_id', 'users.id')
                         ->whereDate('memberships.expired_at', '>=', now())
                         ->whereRaw('memberships.id = (
@@ -261,6 +289,12 @@ class UserController
                 })
                 ->count();
 >>>>>>> Stashed changes
+=======
+                        ->whereColumn('memberships.user_id', 'users.id') 
+                        ->whereDate('memberships.expired_at', '>=', now()); 
+                })
+                ->count();        
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
             $user_count_notmail = User::whereNull('email_verified_at')->count();
 
             $monthlyCountsCreated[] = $count_created;
@@ -276,9 +310,12 @@ class UserController
         $userCountsVerify  = array_reverse($userCountsVerify);
         $userCountsNotMail  = array_reverse($userCountsNotMail);
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'user_count', 'monthlyCountsCreated', 'monthlyCountsVerify', 'userCountsCreated', 'userCountsVerify', 'userCountsNotMail'));
 =======
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
@@ -290,8 +327,12 @@ class UserController
 
         $users = $users->get();
 
+<<<<<<< HEAD
         return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'user_count', 'monthlyCountsCreated', 'monthlyCountsVerify', 'userCountsCreated', 'userCountsVerify', 'userCountsNotMail', 'users', 'totalUsers'));
 >>>>>>> Stashed changes
+=======
+        return view('user.index', compact('dataTable', 'provinces', 'expertises', 'userStatusFilters', 'months', 'user_count', 'monthlyCountsCreated', 'monthlyCountsVerify', 'userCountsCreated', 'userCountsVerify', 'userCountsNotMail', 'users'));
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
     }
 
     public function edit(User $user): View

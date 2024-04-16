@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Mail\ExpiredNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
 
 class EmailExpiredController
 {
@@ -19,19 +22,28 @@ class EmailExpiredController
 
     public function sendEmail(Request $request)
     {
+<<<<<<< HEAD
         $userEmail = $request->input('email');
+=======
+        $userEmail = auth()->user()->email; 
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
 
         $subject = $request->input('subject-message');
         $message = $request->input('message');
 
         Mail::raw($message, function ($mail) use ($userEmail, $subject) {
+<<<<<<< HEAD
             $mail->to($userEmail)->subject("[MESSAGE] " . $subject);
+=======
+            $mail->to($userEmail)->subject($subject);
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
         });
 
         session()->flash('email_sent', true);
         session()->flash('success', 'Email berhasil terkirim ke ' . $userEmail . '!');
         return redirect()->back();
     }
+<<<<<<< HEAD
 
     // public function sendBroadcast(Request $request)
     // {
@@ -77,4 +89,6 @@ class EmailExpiredController
         return redirect()->back();
     }
 
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
 }

@@ -10,14 +10,18 @@
     $user = Auth::user();
 @endphp
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 @if ($user && $user->uid !== null)
 =======
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
 @if ($user && $user->uid !== null && $user->memberships()->whereExists(function ($query) use ($user) {
     $query->select(DB::raw(1))
         ->from('users')
         ->join('memberships', 'memberships.user_id', '=', 'users.id')
         ->where('users.id', '=', $user->id)
+<<<<<<< HEAD
         ->whereDate('memberships.expired_at', '>=', now())
         ->whereRaw('memberships.id = (
             SELECT MAX(id) FROM memberships
@@ -25,6 +29,10 @@
         )');
     })->exists())
 >>>>>>> Stashed changes
+=======
+        ->whereDate('memberships.expired_at', '>=', now());
+    })->exists())
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
     <div class="card p-3 m-4" style="border: none;">
         <div class="card-header" style="border-bottom: none;">
             <h4 class="d-inline pb-3">
@@ -46,18 +54,25 @@
             {!! $dataTable->table() !!}
         </div>
     </div>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
 @elseif ($user && $user->uid !== null && $user->memberships()->whereExists(function ($query) use ($user) {
     $query->select(DB::raw(1))
         ->from('users')
         ->join('memberships', 'memberships.user_id', '=', 'users.id')
         ->where('users.id', '=', $user->id)
+<<<<<<< HEAD
         ->whereDate('memberships.expired_at', '<', now())
         ->whereRaw('memberships.id = (
             SELECT MAX(id) FROM memberships
             WHERE memberships.user_id = users.id
         )');
+=======
+        ->whereDate('memberships.expired_at', '<', now());
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
     })->exists())
     <div class="card p-3 m-4" style="border: none;">
         <div class="card-header" style="border: none;">
@@ -77,7 +92,10 @@
     <div class="d-flex justify-content-center">
         <img class="img-fluid" src="{{ asset('/img/Feeling sorry-pana.svg') }}" style="width:35%;" alt="">
     </div>
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
 @else
     <div class="card p-3 m-4" style="border: none;">
         <div class="card-header" style="border: none;">

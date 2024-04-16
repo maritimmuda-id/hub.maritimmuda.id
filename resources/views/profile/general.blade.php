@@ -108,7 +108,6 @@
                                         </x-slot>
                                     </x-form-input>
                                 </div>
-
                                 <div class="col-md-6">
                                     <x-form-input
                                         name="name"
@@ -209,6 +208,36 @@
                                         :label="trans('profile.bio-label')"
                                     />
                                 </div>
+                                <div class="col-md-6">
+                                    <x-form-input
+                                        name="tanggal_verifikasi"
+                                        :label="'tanggal verifikasi anggota'"
+                                        :value="$user->membership?->verified_at ? $user->membership->verified_at->format('d M Y') : '-'"
+                                        readonly
+                                    />
+                                </div>                                
+                                <div class="col-md-6">
+                                    <x-form-input
+                                        name="tanggal_kadaluarsa"
+                                        :label="'tanggal kadaluarsa anggota'"
+                                        :value="$user->membership?->expired_at ? $user->membership->expired_at->format('d M Y') : '-'"
+                                        readonly
+                                    />
+                                </div>
+                                {{-- <div class="card-body">
+                                    <div class="card p-3">
+                                        <dl class="row">
+                                            <dt class="col-sm-5">@lang('membership.verified-date')</dt>
+                                            <dd class="col-sm-7">
+                                                {{ $user->membership?->verified_at?->format('d M Y') ?? '-' }}
+                                            </dd>
+                                            <dt class="col-sm-5">@lang('membership.expired-date')</dt>
+                                            <dd class="col-sm-7">
+                                                {{ $user->membership?->expired_at?->format('d M Y') ?? '-' }}
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div> --}}
                             </div>
                         </div>
                     @endbind

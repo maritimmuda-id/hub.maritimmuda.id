@@ -12,11 +12,15 @@ canvas {
     margin: none;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
 .disabled {
     cursor: not-allowed;
 }
 
+<<<<<<< HEAD
 @media (min-width: 768px) {
     .flex-custom {
         flex: 0 0 50%;
@@ -36,6 +40,8 @@ canvas {
 .animate-bounce {
     animation: bounce 1s infinite alternate;
 }
+=======
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
 
 .btn-warning {
     background-color: #ffcb3d;
@@ -113,6 +119,10 @@ canvas {
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+}
+
+.dataTable-custom {
+    border: 1px solid #ddd;
 }
 
 .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle, .c-sidebar .c-sidebar-nav-link.c-active {

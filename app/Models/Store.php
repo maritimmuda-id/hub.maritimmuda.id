@@ -13,4 +13,12 @@ class Store extends Model
     protected $keyType = "int";
     public $incrementing = true;
     public $timestamps = true;
+
+    protected $fillable = [
+        'name',
+        'category',
+        'link',
+        'price',
+        'image'
+    ];
 }

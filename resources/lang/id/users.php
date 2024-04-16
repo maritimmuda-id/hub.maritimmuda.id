@@ -50,4 +50,6 @@ return [
     'cannot-delete-current-user' => 'Tidak dapat menghapus anggota saat ini',
 
     'export-table' => 'Ekspor Tabel ke XLSX',
+
+    'broadcast' => 'Siarkan pesan ke semua',
 ];

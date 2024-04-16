@@ -104,7 +104,7 @@
                     @lang('navigation.logout')
                 </a>
             </li>
-            <li class="c-sidebar-nav-item">
+            {{-- <li class="c-sidebar-nav-item">
                 <div class="c-nav-account pt-3 pb-3">
                     <div class="row ml-3 mr-3 align-items-center">
                         <img class="c-avatar-img" style="width:20%; height:20%;" src="{{ auth()->user()->photo_thumb_link }}" alt="{{ auth()->user()->email }}">
@@ -149,7 +149,7 @@
                         </script>
                     </div>
                 </div>
-            </li>
+            </li> --}}
         @endauth
     </ul>
 </div>

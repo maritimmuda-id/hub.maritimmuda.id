@@ -12,7 +12,14 @@ final class UserStatus extends Enum
 
     const RequestRenewalMembership = 4;
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+    const UserDeveloper = 5;
+
+    const Superadmin = 6;
+
+>>>>>>> 0a477e3c772f9f1360ba4db642e866c65598accd
     // const RequestRenewalMembership = 3;
 =======
     const HaveAnIdentityCard = 5;
