@@ -16,23 +16,42 @@
                         <i class="fas fa-cog"></i> <span class="d-none d-sm-inline-block">@lang('product.product-setting')</span>
                     </a>
                 @endif
-            </div>
-            <div class=" pl-0 pt-4 col-md-3">
-                <form action="{{ route('search') }}" method="GET" id="searchForm">
-                    <x-form-input type="search" name="search" id="default-search" placeholder="{{ __('product.filter-search-label') }}" value="{{ $search ?? '' }}" />
-                    <!-- <button type="submit">Search</button> -->
-                </form>
-            </div>
-            <!-- <script>
-                document.getElementById('default-search').addEventListener('input', function() {
-                    document.getElementById('searchForm').submit();
-                });
-            </script> -->
+            </div>          
+        <div class="pl-0 pt-4 col-md-3">
+            <form action="{{ route('search') }}" method="GET" id="searchForm">
+                <x-form-input type="search" name="search" id="default-search" placeholder="{{ __('product.filter-search-label') }}" value="{{ old('search') }}" />
+            </form>
+        </div>            
         </div>
-
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var searchInput = document.getElementById('default-search');
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(typingTimer);
+                    typingTimer = setTimeout(doneTyping, doneTypingInterval);
+                });
+        
+                function doneTyping() {
+                    var searchText = searchInput.value.trim(); 
+                    if (searchText !== '') {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', '{{ route("search") }}?search=' + searchText, true);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                document.getElementById('searchResults').innerHTML = xhr.responseText;
+                            }
+                        };
+                        xhr.send();
+                    } else {
+                        document.getElementById('searchResults').innerHTML = '';
+                    }
+                }
+            });
+        </script>
+            
         <section class="py-2 px-4">
             <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-                @forelse ($product as $item) <!-- Use forelse to handle empty product array -->
+                @forelse ($product as $item) 
                     <div class="col">
                         <div class="card border" style="border-radius: 15px;">
                             <img src="{{ asset('media/' . $item->image) }}" class="card-img-top" alt="Gambar Produk {{ $item->name }}" style="border-radius: 15px 15px 0 0;">
@@ -46,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                @empty <!-- Display a message if there are no products -->
+                @empty 
                     <div class="col">
                         <p>No products found.</p>
                     </div>

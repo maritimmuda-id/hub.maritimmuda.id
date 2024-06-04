@@ -30,6 +30,13 @@
                 @endforeach
             </x-form-select>
         </div>
+        <div class="col-md-3">
+            <x-form-select name="orderBy" wire:model="orderBy">
+                <option value="" disabled>@lang('member.filter-newold-label')</option>
+                <option value="desc">@lang('member.filter-new')</option>
+                <option value="asc">@lang('member.filter-old')</option>
+            </x-form-select>
+        </div>
     </form>
     <div class="row">
         @forelse ($users as $user)

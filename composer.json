@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "bensampo/laravel-enum": "^3.4",
+        "cloudinary-labs/cloudinary-laravel": "^2.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.3",
         "lab404/laravel-impersonate": "^1.7",

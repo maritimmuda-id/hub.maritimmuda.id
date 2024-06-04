@@ -13,6 +13,12 @@ return [
 
     'filter-expertise-placeholder' => 'Semua Bidang Keahlian',
 
+    'filter-newold-label' => 'Filter berdasarkan waktu',
+
+    'filter-new' => 'Urutan Terbaru',
+
+    'filter-old' => 'Urutan Terlama',
+
     'filter-button-label' => 'Filter',
 
     'filter-no-results-text' => 'Tidak ada anggota ditemukan',

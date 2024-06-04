@@ -337,7 +337,6 @@
                         <div>
                             <p>{{ trans('profile.payment-is-required') }}</p><br>
                             <div style="background-color:yellow; padding:25px;">
-                                <strike>{{ trans('profile.discon') }}</strike>
                                 <b><h1>{{ trans('profile.price') }}</h1><b>
                             </div><br>
                             <b><h4>{{ trans('profile.maritimmuda-bank') }}</h4><b>

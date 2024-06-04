@@ -13,6 +13,12 @@ return [
 
     'filter-expertise-placeholder' => 'All Expertise',
 
+    'filter-newold-label' => 'Filter by Time',
+
+    'filter-new' => 'Latest Order',
+
+    'filter-old' => 'Longest Order',
+
     'filter-button-label' => 'Filter',
 
     'filter-no-results-text' => 'No members found',

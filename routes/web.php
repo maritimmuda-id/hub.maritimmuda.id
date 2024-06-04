@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\{
-    AdminShopController,
     AdminStoreController,
-    EmailExpiredController,
     EventController,
     FindMemberController,
     JobPostController,
@@ -17,6 +15,7 @@ use App\Http\Controllers\{
     StoreController,
     AnnouncementController,
     DeveloperController,
+    SendEmailController,
 };
 use App\Http\Controllers\Profile\{
     ChangePasswordController,
@@ -123,8 +122,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'destroy' => 'store.destroy',
     ]);
 
-    Route::post('send.email', [EmailExpiredController::class, 'sendEmail'])->name('send.email');
-    Route::post('send.broadcast', [EmailExpiredController::class, 'sendBroadcast'])->name('send.broadcast');
+    Route::post('send.email', [SendEmailController::class, 'sendEmail'])->name('send.email');
+    Route::post('send.broadcast', [SendEmailController::class, 'sendBroadcast'])->name('send.broadcast');
 
     Route::put('/announcement', [AnnouncementController::class, 'update'])->name('announcement.update');
     Route::delete('/announcement', [AnnouncementController::class, 'delete'])->name('announcement.delete');

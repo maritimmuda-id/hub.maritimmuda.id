@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventStoreRequest;
 use App\Http\Requests\EventUpdateRequest;
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html;
 
@@ -99,6 +101,8 @@ class EventController
                 ->toMediaCollection('poster');
         }
 
+        $this->sendBroadcast($event);
+
         toast(__(':resource created', ['resource' => trans('events.singular-name')]), 'success');
 
         return redirect()->route('event.index');
@@ -137,6 +141,8 @@ class EventController
                 ->toMediaCollection('poster');
         }
 
+        $this->sendBroadcast($event);
+
         toast(__(':resource updated', ['resource' => trans('events.singular-name')]), 'success');
 
         return redirect()->route('event.index');
@@ -151,5 +157,23 @@ class EventController
         toast(__(':resource deleted', ['resource' => trans('events.singular-name')]), 'success');
 
         return redirect()->route('event.index');
+    }
+
+    public function sendBroadcast(Event $event) 
+    {
+        $emails = User::pluck('email')->toArray();
+        $subject = 'New Event Created: ' . $event->name; 
+        $imagePath = $event->poster;
+        $message = 'A new event has been added. Click the link below :' . PHP_EOL . $event->external_url . PHP_EOL . "to join this event";
+
+        Mail::raw($message, function ($mail) use ($emails, $subject, $imagePath) {
+            $mail->to($emails)->subject("[BROADCAST] " . $subject);
+            if ($imagePath !== null) {
+                $attachmentPath = storage_path('app/public/' . $imagePath);
+                $mail->attach($attachmentPath); 
+            } else {
+                $imagePath = null; 
+            }
+        });
     }
 }

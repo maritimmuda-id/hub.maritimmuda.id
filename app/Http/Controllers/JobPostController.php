@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\JobPostStoreRequest;
 use App\Http\Requests\JobPostUpdateRequest;
 use App\Models\JobPost;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html\Builder;
 
@@ -89,6 +91,8 @@ class JobPostController
                 ->toMediaCollection('poster');
         }
 
+        $this->sendBroadcast($jobPost);
+
         toast(__(':resource created', ['resource' => trans('events.singular-name')]), 'success');
 
         return redirect()->route('job-post.index');
@@ -127,6 +131,8 @@ class JobPostController
                 ->toMediaCollection('poster');
         }
 
+        $this->sendBroadcast($jobPost);
+
         toast(__(':resource updated', ['resource' => trans('events.singular-name')]), 'success');
 
         return redirect()->route('job-post.index');
@@ -142,4 +148,21 @@ class JobPostController
 
         return redirect()->route('job-post.index');
     }
+
+    public function sendBroadcast(JobPost $jobPost)
+    {
+        $emails = User::pluck('email')->toArray();
+        $subject = 'New Job Post Created: ' . $jobPost->position_title; 
+        $imagePath = $jobPost->poster;
+        $message = 'A new job has been added. Click the link below :' . PHP_EOL . $jobPost->link . PHP_EOL . "to view this job post"; 
+
+        Mail::raw($message, function ($mail) use ($emails, $subject, $imagePath) {
+            $mail->to($emails)->subject("[BROADCAST] " . $subject);
+            if ($imagePath !== null) {
+                $attachmentPath = storage_path('app/public/' . $imagePath);
+                $mail->attach($attachmentPath);
+            }
+        });
+    }
+
 }

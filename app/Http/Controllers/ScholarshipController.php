@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ScholarshipStoreRequest;
 use App\Http\Requests\ScholarshipUpdateRequest;
 use App\Models\Scholarship;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html\Builder;
 
@@ -89,6 +91,8 @@ class ScholarshipController
             ->toMediaCollection('poster');
         }
 
+        $this->sendBroadcast($scholarship);
+
         toast(__(':resource created', ['resource' => trans('scholarships.singular-name')]), 'success');
 
         return redirect()->route('scholarship.index');
@@ -127,6 +131,8 @@ class ScholarshipController
             ->toMediaCollection('poster');
         }
 
+        $this->sendBroadcast($scholarship);
+
         toast(__(':resource updated', ['resource' => trans('scholarships.singular-name')]), 'success');
 
         return redirect()->route('scholarship.index');
@@ -141,5 +147,21 @@ class ScholarshipController
         toast(__(':resource deleted', ['resource' => trans('scholarships.singular-name')]), 'success');
 
         return redirect()->route('scholarship.index');
+    }
+
+    public function sendBroadcast(Scholarship $scholarship) 
+    {
+        $emails = User::pluck('email')->toArray();
+        $subject = 'New Scholarship Created: ' . $scholarship->name; 
+        $imagePath = $scholarship->poster;
+        $message = 'A new scholarship has been added. Click the link below :' . PHP_EOL . $scholarship->registration_link . PHP_EOL . "to register for this scholarship";
+
+        Mail::raw($message, function ($mail) use ($emails, $subject, $imagePath) {
+            $mail->to($emails)->subject("[BROADCAST] " . $subject);
+            if ($imagePath !== null) {
+                $attachmentPath = storage_path('app/public/' . $imagePath);
+                $mail->attach($attachmentPath); 
+            }
+        });
     }
 }

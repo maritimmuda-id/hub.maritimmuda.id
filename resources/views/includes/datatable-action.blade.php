@@ -4,8 +4,17 @@
     </a>
 @endif
 @if(request()->route()->getName() == 'user.index' && $user->is_admin == 3)
-    <i class="fas fa-exclamation"></i> {{ __('Superadmin-warning') }} <i class="fas fa-exclamation"></i>
+    @if($user->is_admin == 3)
+        <i class="fas fa-exclamation"></i> {{ __('Superadmin-warning') }} <i class="fas fa-exclamation"></i>
+    @endif
 @else
+    @if(request()->route()->getName() != 'user.index')
+        @if(($canEdit ?? true) && isset($editLink))
+        <a class="btn btn-sm btn-warning" style="margin:1.25px 0;" href="{{ $editLink }}">
+            <i class="fas fa-paper-plane"></i> {{ __('Broadcast') }}
+        </a>
+        @endif
+    @endif
     @if(($canEdit ?? true) && isset($editLink))
     <a class="btn btn-sm btn-info" style="margin:1.25px 0;" href="{{ $editLink }}">
         <i class="fas fa-edit"></i> {{ __('Edit') }}

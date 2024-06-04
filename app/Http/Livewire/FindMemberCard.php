@@ -21,11 +21,19 @@ class FindMemberCard extends Component
         'province' => ['except' => ''],
         'expertise' => ['except' => ''],
         'search' => ['except' => ''],
+        'orderBy' => ['except' => ''],
     ];
 
     public array $provinces = [];
 
     public array $expertises = [];
+
+    public ?string $orderBy = 'desc';
+
+    public function changeOrder($orderBy)
+    {
+        $this->orderBy = $orderBy;
+    }
 
     public ?string $search = null;
 
@@ -44,6 +52,7 @@ class FindMemberCard extends Component
         $this->expertises = Expertise::query()
             ->pluck('name', 'id')
             ->toArray();
+        
 
         $this->query = User::query()
             ->with([
@@ -55,7 +64,7 @@ class FindMemberCard extends Component
 
     public function render(): View
     {
-        $this->query->orderBy('created_at', 'desc');
+        $this->query->orderBy('created_at', $this->orderBy);
 
         if ($this->search) {
             $this->query->where('name', 'like', "%{$this->search}%");
@@ -117,7 +126,7 @@ class FindMemberCard extends Component
 
     protected function updating($propertyName, $value): void
     {
-        if (in_array($propertyName, ['search', 'province', 'expertise'])) {
+        if (in_array($propertyName, ['search', 'province', 'expertise','orderBy'])) {
             $this->resetPage();
         }
     }

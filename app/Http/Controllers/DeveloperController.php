@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Developer;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
 class DeveloperController
@@ -10,7 +11,8 @@ class DeveloperController
     public function index()
     {
         Gate::authorize('viewDev', User::class);
-        
-        return view('developer.index');
+        $developers = Developer::all(); 
+
+        return view('developer.index', compact('developers'));
     }
 }

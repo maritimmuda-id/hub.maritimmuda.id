@@ -211,7 +211,7 @@ return [
 
     'maritimmuda-bank-id' => '106001001018308',
 
-    'price' => 'Rp. 30,000,00-/year',
+    'price' => 'Rp. 50,000,00-/year',
 
     'discon' => 'Rp. 50,000,00-/year',
 

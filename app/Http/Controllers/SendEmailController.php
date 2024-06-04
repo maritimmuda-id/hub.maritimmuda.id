@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
-class EmailExpiredController
+class SendEmailController
 {
     public function __invoke(Request $request)
     {
@@ -76,5 +76,4 @@ class EmailExpiredController
         session()->flash('success', 'Broadcast berhasil terkirim!');
         return redirect()->back();
     }
-
 }
