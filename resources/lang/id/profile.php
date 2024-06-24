@@ -197,23 +197,23 @@ return [
 
     'identity-card-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah KTP untuk keperluan verifikasi.',
 
-    'member-card-is-being-processed' => 'Permintaan kartu tanda anggota Anda sedang dalam proses verifikasi, biasanya akan membutuhkan waktu 2-5 hari kerja. Terimakasih.',
+    'member-card-is-being-processed' => 'Permintaan kartu tanda anggota Anda sedang dalam proses verifikasi, biasanya akan membutuhkan waktu 1-2 hari kerja. Terimakasih.',
 
     'payment-label' => 'Upload Bukti Konfirmasi Pembayaran',
 
     'payment-help-text' => 'Lakukan pembayaran melalui transfer bank BRI a.n Perkumpulan Maritim Muda Nusantara 106001001018308',
 
-    'upload-payment-confirm' => 'Upload Bukti Konfirmasi Pembayaran',
+    'upload-payment-confirm' => 'Upload Bukti Pembayaran / Pendaftaran MSIB 7 (jpg/png)',
 
-    'payment-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah bukti pembayaran.',
+    'payment-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah bukti pembayaran, kecuali:',
 
     'maritimmuda-bank' => 'BRI a.n Perkumpulan Maritim Muda Nusantara',
 
     'maritimmuda-bank-id' => '106001001018308',
 
-    'price' => 'Rp. 50,000,00-/tahun',
+    'price' => 'Rp 50.000/tahun',
 
-    'discon' => 'Rp. 50,000,00-/tahun',
+    'discon' => 'Rp. 50.000/tahun',
 
     'update-payment-success' => 'Upload bukti pembayaran berhasil',
 
@@ -226,4 +226,6 @@ return [
     'member-label' => 'Anggota',
 
     'profile-label' => 'Profil',
+
+    'info-2' => 'Gratis bagi Mahasiswa Pendaftar MSIB 7 di Maritim Muda Nusantara, dibuktikan dengan screenshoot halaman lamaran pada website kampus merdeka (1 Mei - 25 Juni 2024)'
 ];

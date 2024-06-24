@@ -197,23 +197,23 @@ return [
 
     'identity-card-is-required' => 'To create your membership card, you must upload your identity card first for verification purpose.',
 
-    'member-card-is-being-processed' => 'Your membership card request is currently in the verification process, normally it will need 2-5 working days. Thanks.',
+    'member-card-is-being-processed' => 'Your membership card request is currently in the verification process, normally it will need 1-2 working days. Thanks.',
 
     'payment-label' => 'Upload The Payment Confirmation Receipt',
 
     'payment-help-text' => 'Please make payment via bank transfer BRI a.n Perkumpulan Maritim Muda Nusantara 106001001018308',
 
-    'upload-payment-confirm' => 'Upload The Payment Confirmation Receipt',
+    'upload-payment-confirm' => 'Upload the Proof of Payment / MSIB 7 Registration (jpg/png)',
 
-    'payment-is-required' => 'To create a membership card, you must upload the payment confirmation receipt',
+    'payment-is-required' => 'To create a membership card, you must upload the payment confirmation receipt, except:',
 
     'maritimmuda-bank' => 'BRI a.n Perkumpulan Maritim Muda Nusantara',
 
     'maritimmuda-bank-id' => '106001001018308',
 
-    'price' => 'Rp. 50,000,00-/year',
+    'price' => 'Rp 50.000/year',
 
-    'discon' => 'Rp. 50,000,00-/year',
+    'discon' => 'Rp 50.000/year',
 
     'update-payment-success' => 'Upload payment confirmation successfully',
 
@@ -226,4 +226,6 @@ return [
     'member-label' => 'Member',
 
     'profile-label' => 'Profile',
+
+    'info-2' => 'Free for students registering for MSIB 7 at Maritim Muda Nusantara, proven by screenshoot application page on Kampus Merdeka website (1 May - 25 June 2024)'
 ];

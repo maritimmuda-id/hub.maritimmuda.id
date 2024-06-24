@@ -330,6 +330,8 @@
                     html: `
                         <div>
                             <p>{{ trans('profile.payment-is-required') }}</p><br>
+                            <h6>{{trans('profile.info-2')}}</h6>
+                            <br>
                             <div style="background-color:yellow; padding:25px;">
                                 <b><h1>{{ trans('profile.price') }}</h1><b>
                             </div><br>
