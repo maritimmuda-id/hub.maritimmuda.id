@@ -23,6 +23,6 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <img class="img-fluid" src="{{ asset('/img/Mail-amico.svg') }}" style="width:35%;" alt="">
+        <img class="img-fluid" src="{{ asset('/img/logo-300.png') }}" style="width:35%;" alt="">
     </div>
 @endsection

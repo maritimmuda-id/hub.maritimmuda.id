@@ -18,6 +18,7 @@ class Developer extends Model
         'github_link',
         'instagram_link',
         'linkedin_link',
+        'order',
     ];
     
     public function getIncrementing()

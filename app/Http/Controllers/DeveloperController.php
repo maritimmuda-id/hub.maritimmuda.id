@@ -11,8 +11,9 @@ class DeveloperController
     public function index()
     {
         Gate::authorize('viewDev', User::class);
-        $developers = Developer::all(); 
+        $developers = Developer::orderBy('order')->get();
 
         return view('developer.index', compact('developers'));
     }
 }
+

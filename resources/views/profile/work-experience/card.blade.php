@@ -1,18 +1,23 @@
-<div class="card">
-    <div class="card-body row">
-        <div class="col-md-10">
-            <form wire:submit.prevent="save" class="card border-primary">
-                <div class="card-header">
-                    @if ($model)
-                        @lang('Edit :resource', [
-                            'resource' => trans('profile.work-experience.singular-name')
-                        ])
-                    @else
-                        @lang('Create :resource', [
-                            'resource' => trans('profile.work-experience.singular-name')
-                        ])
-                    @endif
-                </div>
+<div class="card p-3 m-4" style="border: none;">
+    <div class="card-body row" style="border: none;">
+        <div class="col-md-10">  
+            <div class="card-header pt-0 pl-0" style="border: none;">
+                <h4>
+                    <b>
+                        @if ($model)
+                            @lang('Edit :resource', [
+                                'resource' => trans('profile.work-experience.singular-name')
+                            ])
+                        @else
+                            @lang('Create :resource', [
+                                'resource' => trans('profile.work-experience.singular-name')
+                            ])
+                        @endif
+                    </b>
+                </h4>
+            </div>
+            <form wire:submit.prevent="save" class="card">
+
                 <div class="card-body row">
                     @wire('defer')
                         <div class="col-md-6">
@@ -45,7 +50,7 @@
                         </div>
                     @endwire
                 </div>
-                <div class="card-footer">
+                <div class="card-footer" style="border: none;">
                     <x-save-button />
                     <x-reset-button wire:click.prevent="resetForm" />
                 </div>

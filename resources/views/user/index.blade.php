@@ -131,29 +131,6 @@
         </script>
     </div>
 
-    <div class="row mt-4 ml-4 mr-4 d-flex justify-content-between align-items-stretch">
-        <div class="card mb-0 d-flex justify-content-between align-items-center" style="border: none; flex: 0 0 50%; max-width: 49%; background-color: #13abc3; color: white;">
-            <div class="row col-15 col-lg-10 d-flex justify-content-between align-items-center">
-                <div class="mt-5 mb-5 col-lg-7">
-                    <h1 class="p-0 col-lg-10" style="font-size: 25px;">@lang('dashboard.welcome-label') <br><b>{{ Illuminate\Support\Str::limit(auth()->user()->name, 15, '...') }}! </b></h1>
-                </div>
-                <div class="p-3 d-sm-none d-md-block" style="width:40%; height:40%;">
-                    <img src="{{ asset('/img/Welcome aboard-pana.svg') }}" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card mb-0 d-flex justify-content-between align-items-center" style="border: none; flex: 0 0 50%; max-width: 49%; background-color: #ffcb3d;">
-            <div class="row col-15 col-lg-10 d-flex justify-content-between align-items-center">
-                <div class="mt-5 mb-5 col-lg-7">
-                    <h1 style="font-size: 25px;"><b>@lang('discount.discount-label')</b></h1>
-                </div>
-                <div class="p-3 d-sm-none d-md-block" style="width:40%; height:40%;">
-                    <img src="{{ asset('/img/Discount-amico.svg') }}" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="card m-4" style="border: none;">
         <div class="card-header pt-4" style="border-bottom: none;">
             <h4 class="d-inline" id="plural-table-name">

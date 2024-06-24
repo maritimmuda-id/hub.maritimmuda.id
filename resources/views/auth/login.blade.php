@@ -5,7 +5,7 @@
         <div class="card-group">
             <div class="card mx-auto" style="width:40%; border: none;">
                 <div class="card-body d-flex justify-content-center align-items-center">
-                    <img class="img-fluid pt-md-4 pb-md-4 pl-md-4" src="{{ asset('/img/My password-amico.png') }}" alt="" />
+                    <img class="img-fluid pt-md-4 pb-md-4 pl-md-4" src="{{ asset('/img/logo-300.png') }}" alt="" />
                 </div>
             </div>
             <div class="card p-4" style="border: none;">

@@ -1,11 +1,5 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="pt-4">
-        <h1 class="d-inline p-4">
-            <b><i class="fas fa-user"></i> @lang('profile.profile-label')</b>
-        </h1>
-    </div>
-
     <div class="nav-tabs-boxed m-4" style="border: none;">
         @include('profile.includes.tabs')
 

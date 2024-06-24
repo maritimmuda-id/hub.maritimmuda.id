@@ -5,7 +5,7 @@
         <div class="card-group">
             <div class="card mx-auto" style="width:40%; border: none;">
                 <div class="card-body d-flex justify-content-center align-items-center">
-                    <img class="img-fluid pt-md-4 pb-md-4 pl-md-4" src="{{ asset('/img/Forgot password-amico.png') }}" alt="" />
+                    <img class="img-fluid pt-md-4 pb-md-4 pl-md-4" src="{{ asset('/img/logo-300.png') }}" alt="" />
                 </div>
             </div>
             <div class="card p-4" style="border: none;">
@@ -23,16 +23,18 @@
                             tabindex="1" autofocus />
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <button type="submit" tabindex="2" class="btn btn-primary px-4">
                                     {{ trans('forgot-password.submit-button') }}
                                 </button>
                             </div>
-                            <div class="col-6 text-right">
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 text-right">
                                 @if(Route::has('login'))
-                                <a class="btn btn-link my-1 p-0" href="{{ route('login') }}" tabindex="8">
-                                {{ trans('login.backto-login') }}
-                                </a>
+                                <button type="button" class="btn btn-link my-1 p-0" tabindex="8" onclick="window.location='{{ route('login') }}'">
+                                    {{ trans('login.backto-login') }}
+                                </button>
                                 @endif
                             </div>
                         </div>

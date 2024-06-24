@@ -2,6 +2,14 @@
 
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    .card-img-top-fixed {
+        width: 100%; /* Ensure it takes the full width of the card */
+        height: 250px; /* Set a fixed height */
+        object-fit: cover; /* Ensure the image covers the box while maintaining aspect ratio */
+    }
+</style>
 <div class="pt-4">
     <h1 class="d-inline p-4">
         <b><i class="fas fa-laptop-code"></i> @lang('navigation.developer')</b>
@@ -11,18 +19,6 @@
     <div class="card-header pb-0" style="border-bottom: none;">
         <h4 class="d-inline pb-3">
             <b>@lang('developer.github-repo')</b>
-        </h4>
-        <div class="pl-0 pt-4">
-            <p>- Maritim Muda Nusantara (maritimmuda.id): <a href="https://github.com/maritimmuda-id/maritimmuda.id" target="_blank">https://github.com/maritimmuda-id/maritimmuda.id</a></p>
-            <p>- Hub Maritim Muda (hub.maritimmuda.id): <a href="https://github.com/maritimmuda-id/hub.maritimmuda.id" target="_blank">https://github.com/maritimmuda-id/hub.maritimmuda.id</a></p>
-        </div>
-    </div>
-</div>
-
-<div class="card p-3 m-4" style="border: none;">
-    <div class="card-header pb-0" style="border-bottom: none;">
-        <h4 class="d-inline pb-3">
-            <b>@lang('developer.account')</b>
         </h4>
         <div class="pl-0 pt-4">
             <p>- Maritim Muda Nusantara (maritimmuda.id): <a href="https://github.com/maritimmuda-id/maritimmuda.id" target="_blank">https://github.com/maritimmuda-id/maritimmuda.id</a></p>
@@ -46,18 +42,27 @@
     <div class="row row-cols-1 row-cols-md-5 g-4 ml-2 mr-2">
         @foreach ($developers as $developer)
         <div class="col">
-            <div class="card border-0 shadow">
-                <img src="{{ asset('media/' . $developer->image) }}" class="card-img-top" alt="{{ $developer->name }}">
+            <div class="card border-0">
+                <img src="{{ asset('media/' . $developer->image) }}" class="card-img-top card-img-top-fixed" alt="{{ $developer->name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $developer->name }}</h5>
-                    <p class="badge 
-                        @if ($developer->role == 'Fullstack Developer') bg-purple text-light
-                            @elseif($developer->role == 'Maritim')
+                    <p class="badge
+                        @if ($developer->role == 'maritimmuda.id')
+                            bg-secondary text-dark
+                        @elseif($developer->role == 'geoparksyouth.net')
                             bg-warning text-dark
-                            @elseif($developer->role == 'Becdex')
+                        @elseif($developer->role == 'becdex.com')
                             bg-primary text-light
-                            @elseif($developer->role == 'TheBlue')
+                        @elseif($developer->role == 'geomuda.id')
                             bg-danger text-light
+                        @elseif($developer->role == 'iyel.or.id')
+                            
+                        @elseif($developer->role == 'theblueeconomist.org')
+                            bg-dark text-light
+                        @elseif($developer->role == 'ibec.stei.ac.id')
+                            bg-success text-light
+                        @elseif($developer->role == 'nexgen')
+                            bg-purple text-light
                         @endif
                         ">
                         {{ $developer->role }}
@@ -72,5 +77,5 @@
         </div>
         @endforeach
     </div> 
-    </section>
+</section>
 @endsection

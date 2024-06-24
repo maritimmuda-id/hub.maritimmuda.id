@@ -298,7 +298,7 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
     public function getMemberCardPreview(): string
     {
         return $this->membership?->getMemberCardPreview()
-            ?: 'https://res.cloudinary.com/zhanang19/image/upload/v1635006351/id_card_maritim_fix_2-1_nh9ay1.png';
+            ?: 'https://res.cloudinary.com/maritimmudawda/image/upload/v1713174935/id_card_maritim_fix_1-1-SEMURHIDUP_hpzjv0_bgshx1.png';
     }
 
     public function generateQrCode(): HtmlString

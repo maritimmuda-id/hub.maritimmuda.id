@@ -47,10 +47,10 @@
                                 <img class="img-fluid" style="width:50px" src="{{ asset('img/logo-kemenko-marves.png') }}" alt="Kementerian Koordinator Bidang Kemaritiman dan Investasi" loading="lazy">
                             </a>
                             <a href="https://www.kkp.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
-                                <img class="img-fluid" style="width:47px" src="{{ asset('img/logo-kkp.png') }}" alt="Kementerian Kelautan dan Perikanan" loading="lazy">
+                                <img class="img-fluid" style="width:47px;" src="{{ asset('img/logo-kkp.png') }}" alt="Kementerian Kelautan dan Perikanan" loading="lazy">
                             </a>
                             <a href="https://www.kemenpora.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
-                                <img class="img-fluid" style="width:40px" src="{{ asset('img/logo-kemenpora.png') }}" alt="Kementerian Pemuda dan Olahraga" loading="lazy">
+                                <img class="img-fluid" style="width:40px; padding-left: 7px;" src="{{ asset('img/logo-kemenpora.png') }}" alt="Kementerian Pemuda dan Olahraga" loading="lazy">
                             </a>
                             <a href="https://www.kemdikbud.go.id/" class="text-decoration-none" target="_blank" rel="noopener">
                                 <img class="img-fluid" style="width:60px" src="{{ asset('img/logo-kemendikbud.png') }}" alt="Kementerian Pemuda dan Olahraga" loading="lazy">

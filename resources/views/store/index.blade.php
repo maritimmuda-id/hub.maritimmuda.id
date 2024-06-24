@@ -66,8 +66,21 @@
                         </div>
                     </div>
                 @empty 
-                    <div class="col">
-                        <p>No products found.</p>
+                    <div class="col text-center">
+                        <img src="{{ asset('/img/no-image.jpg') }}" alt="No Products Available" style="max-width: 100%; height: auto;">
+                        <p>Produk belum tersedia</p>
+                    </div>
+                    <div class="col text-center">
+                        <img src="{{ asset('/img/no-image.jpg') }}" alt="No Products Available" style="max-width: 100%; height: auto;">
+                        <p>Produk belum tersedia</p>
+                    </div>
+                    <div class="col text-center">
+                        <img src="{{ asset('/img/no-image.jpg') }}" alt="No Products Available" style="max-width: 100%; height: auto;">
+                        <p>Produk belum tersedia</p>
+                    </div>
+                    <div class="col text-center">
+                        <img src="{{ asset('/img/no-image.jpg') }}" alt="No Products Available" style="max-width: 100%; height: auto;">
+                        <p>Produk belum tersedia</p>
                     </div>
                 @endforelse
             </div>
