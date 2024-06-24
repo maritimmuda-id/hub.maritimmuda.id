@@ -24,7 +24,9 @@
 <body id="page" class="font-sans">
     <div class="bg-white max-w-[210mm] h-[120mm] px-16">
         <div class="relative">
-            <img class="absolute top-0 left-0" src="https://res.cloudinary.com/zhanang19/image/upload/v1632832674/id_card_maritim_fix_1-1_hpzjv0.png" alt="">
+            {{-- depan / front --}}
+            {{-- <img class="absolute top-0 left-0" src="https://res.cloudinary.com/zhanang19/image/upload/v1632832674/id_card_maritim_fix_1-1_hpzjv0.png" alt=""> --}}
+            <img class="absolute top-0 left-0" src="https://res.cloudinary.com/maritimmudawda/image/upload/v1719211195/id_card_maritim_fix_1-1-DEPAN_atap8d.png" alt="">
         </div>
         <div class="relative">
             <!-- Foto -->
@@ -150,7 +152,9 @@
     </div> -->
     <div class="bg-white max-w-[210mm] px-16">
         <div class="relative">
-            <img class="absolute top-0 left-0" src="https://res.cloudinary.com/zhanang19/image/upload/v1632706004/backside_wnlnft.png" alt="">
+            {{-- belakang / back --}}
+            {{-- <img class="absolute top-0 left-0" src="https://res.cloudinary.com/zhanang19/image/upload/v1632706004/backside_wnlnft.png" alt=""> --}}
+            <img class="absolute top-0 left-0" src="https://res.cloudinary.com/maritimmudawda/image/upload/v1719211156/id_card_maritim_fix_1-1-BELAKANG_pdcnas.png" alt="">
         </div>
     </div>
 </body>
