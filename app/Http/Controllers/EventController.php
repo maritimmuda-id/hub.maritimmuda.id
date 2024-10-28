@@ -75,6 +75,11 @@ class EventController
         return view('event.index', compact('dataTable'));
     }
 
+    public function api(Request $request): JsonResponse{
+        $events = Event::all();
+        return response()->json($events);
+    }
+
     public function create(): View
     {
         Gate::authorize('create', Event::class);

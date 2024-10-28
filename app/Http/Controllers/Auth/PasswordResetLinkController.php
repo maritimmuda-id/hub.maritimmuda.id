@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 
@@ -34,5 +35,31 @@ class PasswordResetLinkController
                     ? back()->with('status', __($status))
                     : back()->withInput($request->only('email'))
                             ->withErrors(['email' => __($status)]);
+    }
+
+    public function apiForgotPassword(Request $request): JsonResponse
+    {
+        // Validasi request
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        // Mengirim link reset password
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        // Cek status pengiriman link dan memberikan respons sesuai
+        if ($status == Password::RESET_LINK_SENT) {
+            return response()->json([
+                'message' => __($status)
+            ], 200);
+        }
+
+        return response()->json([
+            'errors' => [
+                'email' => __($status)
+            ]
+        ], 422);
     }
 }

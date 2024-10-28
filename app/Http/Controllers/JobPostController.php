@@ -65,6 +65,11 @@ class JobPostController
         return view('job-post.index', compact('dataTable'));
     }
 
+    public function apiJobPost(Request $request): JsonResponse{
+        $jobpost = JobPost::all();
+        return response()->json($jobpost);
+    }
+
     public function create(): View
     {
         Gate::authorize('create', JobPost::class);

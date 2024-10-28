@@ -65,6 +65,11 @@ class ScholarshipController
         return view('scholarship.index', compact('dataTable'));
     }
 
+    public function apiScholar(Request $request): JsonResponse{
+        $scholarship = Scholarship::all();
+        return response()->json($scholarship);
+    }
+
     public function create(): View
     {
         Gate::authorize('create', Scholarship::class);
