@@ -31,6 +31,12 @@ class AuthenticatedSessionController
         // Attempt to authenticate the user
         $request->authenticate();
 
+        if (is_null(Auth::user()->email_verified_at)) {
+            return response()->json([
+                'message' => 'Email not verified. Please verify your email to log in.',
+            ], 400);
+        }
+
         // Regenerate the session to avoid session fixation
         // $request->session()->regenerate();
 

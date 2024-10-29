@@ -18,6 +18,7 @@ class Research extends Model implements Sortable
     use SortableTrait;
 
     protected $fillable = [
+        'user_id',
         'name',
         'role',
         'institution_name',

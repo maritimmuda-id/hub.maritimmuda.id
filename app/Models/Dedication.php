@@ -18,6 +18,7 @@ class Dedication extends Model implements Sortable
     use SortableTrait;
 
     protected $fillable = [
+        'user_id',
         'name',
         'role',
         'institution_name',

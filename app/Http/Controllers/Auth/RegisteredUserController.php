@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Validator;
 
 class RegisteredUserController
 {
@@ -52,7 +53,7 @@ class RegisteredUserController
 
         return redirect(RouteServiceProvider::HOME);
     }
-    
+
     public function apiStore(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [

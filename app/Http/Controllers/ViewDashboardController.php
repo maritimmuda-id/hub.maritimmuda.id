@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Announcement;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
@@ -126,5 +127,81 @@ class ViewDashboardController
         // $monthlyCounts  = array_reverse($monthlyCounts);
 
         return view('dashboard', compact('user', 'widgets','months', 'membersCount', 'announcement'));
+    }
+
+    public function apiDashboard(Request $request): JsonResponse
+    {
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+
+        $ttl = (int) CarbonInterval::minutes(30)->totalSeconds;
+
+        $membersCount = Cache::remember('DashboardUserCount', $ttl, function () {
+            return User::query()->count();
+        });
+        $eventsCount = Cache::remember('DashboardEventCount', $ttl, function () {
+            return Event::query()->count();
+        });
+        $scholarshipsCount = Cache::remember('DashboardScholarshipCount', $ttl, function () {
+            return Scholarship::query()->count();
+        });
+        $jobPostsCount = Cache::remember('DashboardJobPostCount', $ttl, function () {
+            return JobPost::query()->count();
+        });
+
+        $widgets = [
+            [
+                'label' => trans('dashboard.users-label'),
+                'value' => $membersCount,
+                'icon' => 'fas fa-user-friends',
+                'action' => Gate::check('viewAny', \App\Models\User::class) ? route('user.index') : route('find-member'),
+            ],
+            [
+                'label' => trans('dashboard.events-label'),
+                'value' => $eventsCount,
+                'icon' => 'fas fa-calendar-alt',
+                'action' => route('event.index'),
+            ],
+            [
+                'label' => trans('dashboard.scholarships-label'),
+                'value' => $scholarshipsCount,
+                'icon' => 'fas fa-money-bill-alt',
+                'action' => route('scholarship.index'),
+            ],
+            [
+                'label' => trans('dashboard.job-posts-label'),
+                'value' => $jobPostsCount,
+                'icon' => 'fas fa-briefcase',
+                'action' => route('job-post.index'),
+            ],
+        ];
+
+        $months = [];
+        $currentMonth = Carbon::now();
+
+        for ($i = 0; $i < 12; $i++) {
+            $months[] = $currentMonth->format('F Y');
+            $currentMonth->subMonth();
+        }
+
+        $userCounts = [];
+        foreach ($months as $month) {
+            $parsedDate = Carbon::createFromFormat('F Y', $month);
+            $startDate = $parsedDate->startOfMonth();
+            $endDate = $parsedDate->endOfMonth();
+
+            $userCount = User::whereBetween('created_at', [$startDate, $endDate])->count();
+            $userCounts[$month] = $userCount;
+        }
+
+        $announcement = Announcement::latest()->first();
+
+        return response()->json([
+            'user' => $user,
+            'widgets' => $widgets,
+            'months' => $months,
+            'userCounts' => $userCounts,
+            'announcement' => $announcement,
+        ]);
     }
 }

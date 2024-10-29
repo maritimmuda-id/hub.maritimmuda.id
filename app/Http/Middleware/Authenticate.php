@@ -18,4 +18,13 @@ class Authenticate extends Middleware
             return route('login');
         }
     }
+
+    protected function unauthenticated($request, array $guards)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Unauthorized - Token is missing or invalid'], 401);
+        }
+
+        return redirect()->guest(route('login'));
+    }
 }
