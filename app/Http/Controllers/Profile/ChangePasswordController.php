@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 
 class ChangePasswordController
 {
