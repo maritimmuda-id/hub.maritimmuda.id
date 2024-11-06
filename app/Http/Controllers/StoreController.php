@@ -13,6 +13,15 @@ class StoreController
         return view('store.index', ['product' => $product]);
     }
 
+    public function indexApi()
+    {
+        $products = Store::all(); // You don't need `->get()->all()`, just `->all()`
+        return response()->json([
+            'success' => true,
+            'data' => $products
+        ]);
+    }
+
     public function search(Request $request)
     {
         $search = $request->search;

@@ -122,4 +122,5 @@ Route::middleware(['auth:sanctum', 'check.token.verified'])->group(function (){
     Route::get('events', [EventController::class, 'api']);
     Route::get('scholarships', [ScholarshipController::class, 'apiScholar']);
     Route::get('job-posts', [JobPostController::class, 'apiJobPost']);
+    Route::get('store', [StoreController::class, 'indexApi']);
 });
