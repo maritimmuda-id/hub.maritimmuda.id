@@ -153,7 +153,7 @@ return [
 
     'photo-label' => 'Foto',
 
-    'photo-help-text' => 'Pas foto ukuran 3x4',
+    'photo-help-text' => 'Pas foto ukuran 3x4. Max 100KB',
 
     'identity-card-label' => 'KTP',
 
