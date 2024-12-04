@@ -67,6 +67,10 @@ class ScholarshipController
 
     public function apiScholar(Request $request): JsonResponse{
         $scholarship = Scholarship::all();
+
+	$scholarship->append(['poster_link'])
+	    ->makeHidden('media');
+
         return response()->json($scholarship);
     }
 

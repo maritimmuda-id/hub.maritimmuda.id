@@ -157,7 +157,7 @@ return [
 
     'identity-card-label' => 'KTP',
 
-    'identity-card-help-text' => 'KTP diperlukan untuk verifikasi data anggota. Sistem otomatis memberi <em>watermark</em> untuk mencegah penyalahgunaan KTP. <a href=":href" target="_blank">Baca anjuran <strong>Kementerian Kominfo</strong> mengenai pemberian <em>watermark</em> pada KTP di postingan ini.</a> Max 50KB',
+    'identity-card-help-text' => 'KTP diperlukan untuk verifikasi data anggota. Sistem otomatis memberi <em>watermark</em> untuk mencegah penyalahgunaan KTP. <a href=":href" target="_blank">Baca anjuran <strong>Kementerian Kominfo</strong> mengenai pemberian <em>watermark</em> pada KTP di postingan ini.</a> Format file jpg/jpeg/png  .Max 50KB',
 
     'province-label' => 'Organisasi Daerah',
 
@@ -199,9 +199,9 @@ return [
 
     'member-card-is-being-processed' => 'Permintaan kartu tanda anggota Anda sedang dalam proses verifikasi, biasanya akan membutuhkan waktu 1-2 hari kerja. Terimakasih.',
 
-    'payment-label' => 'Upload Bukti Konfirmasi Pembayaran',
+    'payment-label' => 'Kartu Tanda Mahasiswa / Kartu Nama',
 
-    'payment-help-text' => 'Lakukan pembayaran melalui transfer bank BRI a.n Perkumpulan Maritim Muda Nusantara 106001001018308',
+    'payment-help-text' => 'Format file jpg/jpeg/png. Max 200KB',
 
     'upload-payment-confirm' => 'Upload Bukti Pembayaran / Pendaftaran MSIB 7 (jpg/png)',
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Requests\GeneralProfileUpdateRequest;
 use App\Models\Expertise;
 use App\Models\Province;
+use App\Models\Membership;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
@@ -29,6 +30,21 @@ class GeneralProfileController
         /** @var \App\Models\User $user */
         $user = $request->user();
 
+	$user->load('membership');
+
+	//$user->setAttribute('photo', $user->getFirstMedia('photo')->getUrl());
+	$user->append(['photo_link', 'identity_card_link', 'payment_link', 'member-card-preview_link', 'member-card-document_link'])
+	    ->makeHidden('media');
+
+	$membershipData = $user->membership ? $user->membership->toArray() : [
+	    'verified_at' => null,
+	    'expired_at' => null,
+	];
+
+	$qrCodeHtml = $user->generateQrCode();
+	$qrCodeSvg = (string) $qrCodeHtml;
+	$qrCodeDataUrl = 'data:image/svg+xml;base64,' . base64_encode($qrCodeSvg);
+
         // Get provinces and expertises data
         $provinces = Province::query()->pluck('name', 'id');
         $expertises = Expertise::query()->pluck('name', 'id');
@@ -36,6 +52,8 @@ class GeneralProfileController
         // Return a JSON response with the user and related data
         return response()->json([
             'user' => $user,
+	    'membership' => $membershipData,
+	    'qr_code_url' => $qrCodeDataUrl,
             'provinces' => $provinces,
             'expertises' => $expertises,
         ]);

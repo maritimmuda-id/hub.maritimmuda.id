@@ -20,7 +20,7 @@ class VerifyMembershipController
     public function apiVerifyMembership(?string $id): JsonResponse
     {
         $user = User::query()
-            ->where('uid', $id)
+            ->where('id', $id)
             ->whereHas('membership', function ($query) {
                 $query->whereNotNull('verified_at') // Keanggotaan harus diverifikasi
                       ->where('expired_at', '>', now()); // Keanggotaan belum kedaluwarsa

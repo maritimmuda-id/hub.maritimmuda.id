@@ -28,6 +28,7 @@ class GeneralProfileUpdateRequest extends FormRequest
             'gender' => ['required', new EnumValue(Gender::class, false)],
             'photo' => ['nullable', 'image', 'max:1024'],
             'identity_card' => ['nullable', 'image', 'max:4096'],
+	    'payment_confirm' => ['nullable', 'image', 'max:4096'],
             'place_of_birth' => ['nullable', 'string', 'max:200'],
             'date_of_birth' => ['nullable', 'date', 'before:today'],
             'first_expertise_id' => ['required', Rule::exists((new Expertise())->getTable(), 'id')],

@@ -77,6 +77,10 @@ class EventController
 
     public function api(Request $request): JsonResponse{
         $events = Event::all();
+
+	$events->append(['poster_link'])
+	    ->makeHidden('media');
+
         return response()->json($events);
     }
 

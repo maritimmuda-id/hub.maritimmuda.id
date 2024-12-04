@@ -63,8 +63,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('mail', SendEmailController::class);
 
-Route::get('/user/{id}/membership-status', [VerifyMembershipController::class, 'apiVerifyMembership']);
-
 Route::get('/user/{email}/check-uid', [VerifyMembershipController::class, 'apiVerifyUid']);
 
 Route::post('/register', [RegisteredUserController::class, 'apiStore']);
@@ -78,7 +76,7 @@ Route::middleware(['auth:sanctum', 'check.token.verified'])->group(function (){
     
     Route::group(['prefix' => '/profile'], function (){
         Route::get('/general', [GeneralProfileController::class, 'apiEdit']);
-        Route::patch('/general', [GeneralProfileController::class, 'apiUpdate']);
+        Route::post('/general', [GeneralProfileController::class, 'apiUpdate']);
 
         Route::patch('/change-password', [ChangePasswordController::class, 'apiChangePass']);
 
@@ -119,6 +117,7 @@ Route::middleware(['auth:sanctum', 'check.token.verified'])->group(function (){
     });
     
     Route::get('find-member', [FindMemberController::class, 'apiMember']);
+    Route::get('/user/{email}/find-member', [FindMemberController::class, 'apiVerifyUid']);
     Route::get('events', [EventController::class, 'api']);
     Route::get('scholarships', [ScholarshipController::class, 'apiScholar']);
     Route::get('job-posts', [JobPostController::class, 'apiJobPost']);

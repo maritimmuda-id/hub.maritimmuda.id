@@ -95,11 +95,11 @@
                                         class="w-100"
                                         :label="trans('profile.payment-label')"
                                     >
-                                        <x-slot name="help">
-                                            <small class="form-text text-muted">
-                                                @lang('profile.payment-help-text')
-                                            </small>
-                                        </x-slot>
+					<x-slot name="help">
+					    <small class="form-text text-muted">
+					       @lang('profile.payment-help-text')
+					    </small>
+					</x-slot>
                                     </x-form-input>
                                 </div>
                                 <div class="col-md-6">

@@ -301,6 +301,18 @@ class User extends Authenticatable implements HasMedia, HasLocalePreference, Mus
             ?: 'https://res.cloudinary.com/maritimmudawda/image/upload/v1713174935/id_card_maritim_fix_1-1-SEMURHIDUP_hpzjv0_bgshx1.png';
     }
 
+    public function getMemberCardPreviewLinkAttribute(): string
+    {
+	return $this->membership?->getMemberCardPreview()
+	    ?: 'https://res.cloudinary.com/maritimmudawda/image/upload/v1713174935/id_card_maritim_fix_1-1-SEMURHIDUP_hpzjv0_bgshx1.png';
+    }
+
+    public function getMemberCardDocumentLinkAttribute(): string
+    {
+	return $this->membership?->getMemberCardDocumentLinkAttribute()
+	    ?: 'https://res.cloudinary.com/maritimmudawda/image/upload/v1713174935/id_card_mariti_fix_1-1-SEMURHIDUP_hpzjv0_bgshx1.png';
+    }
+
     public function generateQrCode(): HtmlString
     {
         return new HtmlString(str_replace(

@@ -67,6 +67,10 @@ class JobPostController
 
     public function apiJobPost(Request $request): JsonResponse{
         $jobpost = JobPost::all();
+
+	$jobpost->append(['poster_link'])
+	    ->makeHidden('media');
+
         return response()->json($jobpost);
     }
 

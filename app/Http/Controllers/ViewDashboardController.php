@@ -187,8 +187,8 @@ class ViewDashboardController
         $userCounts = [];
         foreach ($months as $month) {
             $parsedDate = Carbon::createFromFormat('F Y', $month);
-            $startDate = $parsedDate->startOfMonth();
-            $endDate = $parsedDate->endOfMonth();
+            $startDate = $parsedDate->startOfMonth()->format('Y-m-d H:i:s');
+            $endDate = $parsedDate->endOfMonth()->format('Y-m-d H:i:s');
 
             $userCount = User::whereBetween('created_at', [$startDate, $endDate])->count();
             $userCounts[$month] = $userCount;
