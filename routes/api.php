@@ -63,6 +63,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('mail', SendEmailController::class);
 
+Route::get('/user/{id}/membership-status', [VerifyMembershipController::class, 'apiVerifyMembership']);
+
 Route::get('/user/{email}/check-uid', [VerifyMembershipController::class, 'apiVerifyUid']);
 
 Route::post('/register', [RegisteredUserController::class, 'apiStore']);
