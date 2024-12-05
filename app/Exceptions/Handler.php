@@ -42,6 +42,15 @@ class Handler extends ExceptionHandler
             //
         });
 
+     $this->renderable(function (AuthenticationException $e, $request){
+          /** @var \Illuminate\Http\Request $request */
+          if ($request->expectsJson()) {
+               return response()->json(['message' => 'Unauthorized - Token is missing or invalid'], 401);
+          }
+   
+          return redirect()->guest(route('login'));
+     });
+
 	$this->renderable(function (NotFoundHttpException $e, $request) {
 	     if ($request->is('api/*')) {
 		return response()->json([

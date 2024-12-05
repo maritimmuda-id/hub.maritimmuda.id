@@ -19,12 +19,12 @@ class Authenticate extends Middleware
         }
     }
 
-    protected function unauthenticated($request, array $guards)
-    {
-        if ($request->expectsJson()) {
-            return response()->json(['message' => 'Unauthorized - Token is missing or invalid'], 401);
-        }
+    // protected function unauthenticated($request, array $guards)
+    // {
+    //     if ($request->expectsJson()) {
+    //         return response()->json(['message' => 'Unauthorized - Token is missing or invalid'], 401);
+    //     }
 
-        return redirect()->guest(route('login'));
-    }
+    //     return redirect()->guest(route('login'));
+    // }
 }

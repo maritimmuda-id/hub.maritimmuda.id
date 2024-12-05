@@ -30,20 +30,25 @@ class GeneralProfileController
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-	$user->load('membership');
+        $user->load('membership');
 
-	//$user->setAttribute('photo', $user->getFirstMedia('photo')->getUrl());
-	$user->append(['photo_link', 'identity_card_link', 'payment_link', 'member-card-preview_link', 'member-card-document_link'])
-	    ->makeHidden('media');
+        //$user->setAttribute('photo', $user->getFirstMedia('photo')->getUrl());
+        $user->append(['photo_link', 'identity_card_link', 'payment_link', 'member-card-preview_link', 'member-card-document_link'])
+            ->makeHidden('media');
 
-	$membershipData = $user->membership ? $user->membership->toArray() : [
-	    'verified_at' => null,
-	    'expired_at' => null,
-	];
+        $membershipData = [
+            'verified_at' => null,
+            'expired_at' => null,
+        ];
 
-	$qrCodeHtml = $user->generateQrCode();
-	$qrCodeSvg = (string) $qrCodeHtml;
-	$qrCodeDataUrl = 'data:image/svg+xml;base64,' . base64_encode($qrCodeSvg);
+        $qrCodeDataUrl = '';
+        if ($user->membership){
+            // $membershipData = $user->membership->toArray();
+
+            $qrCodeHtml = $user->generateQrCode();
+            $qrCodeSvg = (string) $qrCodeHtml;
+            $qrCodeDataUrl = 'data:image/svg+xml;base64,' . base64_encode($qrCodeSvg);
+        }
 
         // Get provinces and expertises data
         $provinces = Province::query()->pluck('name', 'id');
