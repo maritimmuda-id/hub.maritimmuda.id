@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Membership;
 use Illuminate\Http\JsonResponse;
 
 class VerifyMembershipController
@@ -20,12 +21,18 @@ class VerifyMembershipController
     public function apiVerifyMembership(?string $id): JsonResponse
     {
         $user = User::query()
-            ->where('uid', $id)
-            ->whereHas('membership', function ($query) {
-                $query->whereNotNull('verified_at') // Keanggotaan harus diverifikasi
-                      ->where('expired_at', '>', now()); // Keanggotaan belum kedaluwarsa
-            })
-            ->first();
+        ->where('uid', $id)
+        ->whereHas('membership', function ($query) {
+            $query->whereNotNull('verified_at') // Keanggotaan harus diverifikasi
+                ->where('expired_at', '>', now()); // Keanggotaan belum kedaluwarsa
+        })
+        ->first();
+
+        $user->load('membership');
+
+        //$user->setAttribute('photo', $user->getFirstMedia('photo')->getUrl());
+        $user->append(['photo_link', 'identity_card_link', 'payment_link', 'member-card-preview_link', 'member-card-document_link'])
+            ->makeHidden('media');
 
         if (!$user) {
             return response()->json([
