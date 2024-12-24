@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'discount-label' => 'Get discount membership price',
+    'discount-label' => 'New! Young Maritime Connect Available on Play Store January 01, 2025',
 ];

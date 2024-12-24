@@ -41,7 +41,7 @@ return [
 
     'photo-label' => 'Foto',
 
-    'payment-label' => 'Pembayaran',
+    'payment-label' => 'Kartu Tanda Mahasiswa / Kartu Nama',
 
     'identity-card-label' => 'KTP',
 

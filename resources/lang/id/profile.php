@@ -205,7 +205,7 @@ return [
 
     'upload-payment-confirm' => 'Upload Bukti Pembayaran / Pendaftaran MSIB 7 (jpg/png)',
 
-    'payment-is-required' => 'Untuk membuat kartu tanda anggota, Anda harus mengunggah bukti pembayaran, kecuali:',
+    'payment-is-required' => 'Untuk membuat Kartu Tanda Anggota, Anda harus mengunggah Foto Profil, Kartu Tanda Penduduk, dan Kartu Tanda Mahasiswa/Kartu Nama',
 
     'maritimmuda-bank' => 'BRI a.n Perkumpulan Maritim Muda Nusantara',
 

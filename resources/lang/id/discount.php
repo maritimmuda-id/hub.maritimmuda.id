@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'discount-label' => 'Dapatkan potongan harga keanggotaan',
+    'discount-label' => 'Baru! Maritim Muda Connect Tersedia di Play Store Tanggal 01 Januari 2025',
 ];

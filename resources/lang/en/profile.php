@@ -199,13 +199,13 @@ return [
 
     'member-card-is-being-processed' => 'Your membership card request is currently in the verification process, normally it will need 1-2 working days. Thanks.',
 
-    'payment-label' => 'Upload The Payment Confirmation Receipt',
+    'payment-label' => 'Student ID Card / Business Card',
 
-    'payment-help-text' => 'Please make payment via bank transfer BRI a.n Perkumpulan Maritim Muda Nusantara 106001001018308',
+    'payment-help-text' => 'Format file jpg/jpeg/png. Max 200KB',
 
     'upload-payment-confirm' => 'Upload the Proof of Payment / MSIB 7 Registration (jpg/png)',
 
-    'payment-is-required' => 'To create a membership card, you must upload the payment confirmation receipt, except:',
+    'payment-is-required' => 'To create a Membership Card, you must upload a Profile Photo, Resident Identity Card, and Student Identity Card/Business Card.',
 
     'maritimmuda-bank' => 'BRI a.n Perkumpulan Maritim Muda Nusantara',
 

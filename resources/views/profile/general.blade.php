@@ -317,7 +317,7 @@
             $('#btn-create-member-card-from-payment').on('click', function () {
                 Swal.fire({
                     text: "{{ trans('profile.payment-is-required') }}",
-                    showConfirmButton: true,
+                    showConfirmButton: false,
                     confirmButtonText: "{{ trans('profile.upload-payment-confirm') }}",
                     confirmButtonAriaLabel: "{{ trans('profile.upload-payment-confirm') }}",
                     showCancelButton: true,
@@ -329,14 +329,7 @@
                     icon: "warning",
                     html: `
                         <div>
-                            <p>{{ trans('profile.payment-is-required') }}</p><br>
-                            <h6>{{trans('profile.info-2')}}</h6>
-                            <br>
-                            <div style="background-color:yellow; padding:25px;">
-                                <b><h1>{{ trans('profile.price') }}</h1><b>
-                            </div><br>
-                            <b><h4>{{ trans('profile.maritimmuda-bank') }}</h4><b>
-                            <h3>{{ trans('profile.maritimmuda-bank-id') }}</h3>
+                            <p>{{ trans('profile.payment-is-required') }}</p>
                         </div>
                     `,
                 })

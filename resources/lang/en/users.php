@@ -41,7 +41,7 @@ return [
 
     'photo-label' => 'Photo',
 
-    'payment-label' => 'Payment',
+    'payment-label' => 'Student ID Card / Business Card',
 
     'identity-card-label' => 'Identity Card',
 
