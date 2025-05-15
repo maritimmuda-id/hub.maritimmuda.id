@@ -88,13 +88,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/users/{user}/verify', [VerifyUserController::class, '__invoke'])
         ->name('user.verify');
     Route::post('/users/{user}/make-admin', [MakeAdminController::class, 'makeAdmin'])
-    ->name('user.make-admin');
+        ->name('user.make-admin');
     Route::post('/users/{user}/make-deladmin', [MakeAdminController::class, 'deleteAdmin'])
-    ->name('user.make-deladmin');
+        ->name('user.make-deladmin');
     Route::post('/users/{user}/make-developer', [MakeAdminController::class, 'makeDeveloper'])
-    ->name('user.make-developer');
+        ->name('user.make-developer');
     Route::post('/users/{user}/make-deldeveloper', [MakeAdminController::class, 'deleteDeveloper'])
-    ->name('user.make-deldeveloper');
+        ->name('user.make-deldeveloper');
     Route::resource('users', UserController::class)
         ->except(['create', 'store', 'show'])
         ->names('user');
@@ -131,4 +131,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('developer', [DeveloperController::class, 'index'])->name('developer');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -14,7 +14,9 @@ class VerifyUserController
 
         if (is_null($user->membership)) {
             DB::transaction(
-                fn () => $this->prepareMembershipData($user),
+                function () use ($user) {
+                    $this->prepareMembershipData($user);
+                },
                 3
             );
 

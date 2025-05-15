@@ -31,12 +31,7 @@ class GenerateMemberCardJob implements ShouldQueue
 
     public function handle(): void
     {
-        retry(
-            callback: fn () => $this->capture(),
-            times: 3,
-            sleepMilliseconds: 1000,
-            when: fn (\Exception $e) => $e instanceof CouldNotTakeBrowsershot,
-        );
+        retry(3, fn () => $this->capture(), 1000, fn (\Exception $e) => $e instanceof CouldNotTakeBrowsershot);
 
         $this->user->membership->addMedia($this->getPreviewPath())
             ->toMediaCollection('member-card-preview');

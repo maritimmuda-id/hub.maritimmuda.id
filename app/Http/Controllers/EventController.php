@@ -36,7 +36,9 @@ class EventController
                         'deleteLink' => route('event.destroy', $row),
                     ]);
                 })
-                ->editColumn('type', fn (Event $row) => $row->type->description)
+                ->editColumn('type', function (Event $row) {
+                    return $row->type->description;
+                })
                 ->editColumn('start_date', function (Event $row) {
                     return $row->start_date->format('d F Y H:i');
                 })

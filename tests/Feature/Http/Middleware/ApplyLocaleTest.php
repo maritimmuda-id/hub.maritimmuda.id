@@ -16,7 +16,9 @@ class ApplyLocaleTest extends TestCase
     {
         parent::setUp();
 
-        Route::middleware(ApplyLocale::class)->get('test', fn () => 'ok');
+        Route::middleware(ApplyLocale::class)->get('test', function () {
+            return 'ok';
+        });
     }
 
     /** @test */

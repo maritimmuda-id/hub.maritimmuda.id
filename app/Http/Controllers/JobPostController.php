@@ -36,7 +36,9 @@ class JobPostController
                         'deleteLink' => route('job-post.destroy', $row),
                     ]);
                 })
-                ->editColumn('type', fn (JobPost $row) => $row->type->description)
+                ->editColumn('type', function (JobPost $row) {
+                    return $row->type->description;
+                })
                 ->editColumn('application_closed_at', function (JobPost $row) {
                     return $row->application_closed_at->format('d F Y H:i');
                 })
@@ -152,9 +154,9 @@ class JobPostController
     public function sendBroadcast(JobPost $jobPost)
     {
         $emails = User::pluck('email')->toArray();
-        $subject = 'New Job Post Created: ' . $jobPost->position_title; 
+        $subject = 'New Job Post Created: ' . $jobPost->position_title;
         $imagePath = $jobPost->poster;
-        $message = 'A new job has been added. Click the link below :' . PHP_EOL . $jobPost->link . PHP_EOL . "to view this job post"; 
+        $message = 'A new job has been added. Click the link below :' . PHP_EOL . $jobPost->link . PHP_EOL . "to view this job post";
 
         Mail::raw($message, function ($mail) use ($emails, $subject, $imagePath) {
             $mail->to($emails)->subject("[BROADCAST] " . $subject);
@@ -164,5 +166,4 @@ class JobPostController
             }
         });
     }
-
 }

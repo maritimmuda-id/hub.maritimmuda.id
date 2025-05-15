@@ -19,8 +19,7 @@ class SendBatchNotificationJob implements ShouldQueue
         public string $notificationClass,
         public $args,
         public int $chunk = 100
-    ) {
-    }
+    ) {}
 
     public function handle(): void
     {
